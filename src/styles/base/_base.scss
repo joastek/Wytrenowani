@@ -28,8 +28,10 @@ body {
   //       rgb(var(--background-end-rgb))
   //     )
   //     rgb(var(--background-start-rgb));
+
   margin: 0;
   font-size: 62.5%;
   place-items: center;
   background: #000427;
+  transition: background;
 }

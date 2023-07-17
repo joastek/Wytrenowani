@@ -7,6 +7,7 @@ import switchOn from "../../../public/SwitchON.png";
 import switchOff from "../../../public/SwitchOff.png";
 import sunIcon from "../../../public/sun.png";
 import moonIcon from "../../../public/moon.png";
+import Switch from "@mui/material/Switch";
 const Navigation = () => {
   const [switcherLang, setSwitcherLang] = useState(false);
   const [switcherThem, setSwitcherThem] = useState(false);
@@ -46,11 +47,7 @@ const Navigation = () => {
           <div className="flex p-6 ">
             {" "}
             <Image src={sunIcon} alt="sun" />
-            <Image
-              src={switcherThem ? switchOn : switchOff}
-              alt="switcher"
-              onClick={handleSwitchThem}
-            />
+            <Switch onChange={handleSwitchThem} color="secondary" />
             <Image src={moonIcon} alt="moon" />
           </div>
         </div>
