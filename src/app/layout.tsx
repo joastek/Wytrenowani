@@ -2,6 +2,7 @@ import "@/styles/base/_base.scss";
 import type { Metadata } from "next";
 import { Poppins } from "next/font/google";
 import Providers from "@/components/provider";
+
 const inter = Poppins({
   subsets: ["latin"],
   weight: ["400"],

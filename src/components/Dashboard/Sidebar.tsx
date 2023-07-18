@@ -1,9 +1,10 @@
-import Image from "next/image";
+"use client";
+import "@/styles/function.scss";
 import Link from "next/link";
+import { useState } from "react";
 import { IconType } from "react-icons";
 import { BsCalculator } from "react-icons/bs";
-import { AiOutlineHome } from "react-icons/ai";
-import { IconBaseProps } from "react-icons";
+import { AiOutlineHome, AiOutlineArrowLeft } from "react-icons/ai";
 
 interface SidebarItem {
   name: string;
@@ -19,38 +20,48 @@ export default function Sidebar() {
     },
     {
       name: "Kalkulator",
-      href: "/dashboard/calculator",
+      href: "/dashboard/about",
       icon: BsCalculator,
     },
     {
       name: "Trening",
-      href: "/dashboard/training",
+      href: "/about",
       icon: AiOutlineHome,
     },
   ];
+  const [isCollapsedSidebar, setSidebarCollapsed] = useState<boolean>(false);
+  const handletoogleSidebarCollapsed = () => {
+    setSidebarCollapsed((prev) => !prev);
+  };
 
   return (
     <>
-      {" "}
-      <div>
-        <aside className="h-screen bg-white w-64">
-          {" "}
-          <ul>
-            {sidebarItems.map(({ name, href, icon: Icon }) => (
-              <li className="text-xl flex" key={name}>
-                <Link href={href}>
-                  <Icon className=" flex" />
-                  <span>{name}</span>
-                </Link>
-              </li>
-            ))}
+      <div className="relative bg-white  ease-out">
+        <button className="btn">
+          <AiOutlineArrowLeft
+            className="h-12 w-12"
+            onClick={handletoogleSidebarCollapsed}
+          />
+        </button>{" "}
+        <div>
+          <aside className="sidebar" data-collapse={isCollapsedSidebar}>
+            <ul>
+              {sidebarItems.map(({ name, href, icon: Icon }) => (
+                <li className="text-xl " key={name}>
+                  <Link href={href} className="">
+                    <Icon className=" " />
+                    <div className="sidebar_name ">{name}</div>
+                  </Link>
+                </li>
+              ))}
 
-            <li></li>
-            <li></li>
-            <li></li>
-            <li></li>
-          </ul>
-        </aside>
+              <li></li>
+              <li></li>
+              <li></li>
+              <li></li>
+            </ul>
+          </aside>
+        </div>
       </div>
     </>
   );
