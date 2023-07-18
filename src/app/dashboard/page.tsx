@@ -1,5 +1,12 @@
+import Sidebar from "@/components/Dashboard/Sidebar";
+
 const dashboard = () => {
-  return <> test</>;
+  return (
+    <>
+      {" "}
+      <Sidebar />
+    </>
+  );
 };
 
 export default dashboard;

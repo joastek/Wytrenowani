@@ -31,10 +31,14 @@ const Navigation = () => {
 
   return (
     <>
-      <div className="  text-white  w-full">
-        <Image src={bgColor} alt="tło" className="w-full -top-8 absolute z-0" />
-        <div className="z-20 absolute right-32 top-8 text-white  flex text-2xl">
-          <div className="flex p-6">
+      <div className=" w-full   ">
+        <Image
+          src={bgColor}
+          alt="tło"
+          className="w-full -top-8  z-20 absolute"
+        />
+        <div className="  text-white  flex justify-end  space-x-0.5 self-end dark:bg-secondary ">
+          <div className="flex p-6 z-40">
             {" "}
             PL
             <Image
@@ -44,7 +48,7 @@ const Navigation = () => {
             />
             EN
           </div>
-          <div className="flex p-6 ">
+          <div className="flex p-6 z-40">
             {" "}
             <Image src={sunIcon} alt="sun" />
             <Switch onChange={handleSwitchThem} color="secondary" />

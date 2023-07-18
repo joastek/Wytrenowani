@@ -1,8 +1,8 @@
 import "@/styles/base/_base.scss";
 import type { Metadata } from "next";
-import { Ultra } from "next/font/google";
+import { Poppins } from "next/font/google";
 import Providers from "@/components/provider";
-const inter = Ultra({
+const inter = Poppins({
   subsets: ["latin"],
   weight: ["400"],
 });
@@ -23,6 +23,7 @@ export default function RootLayout({
         {" "}
         <meta charSet="UTF-8" />
       </head>
+
       <Providers>
         <body className={inter.className}>{children}</body>
       </Providers>

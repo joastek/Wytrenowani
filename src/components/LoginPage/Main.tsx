@@ -7,7 +7,7 @@ const LoginPage = () => {
     <>
       {" "}
       <Navigation />
-      <div className="  flex  w-full h-96 text-white mt-36 p-36">
+      <div className="  flex  w-full h-96 text-white p-36 dark:bg-secondary">
         <div className="m-auto ">
           <div className="text-8xl flex">
             Wy
@@ -15,7 +15,7 @@ const LoginPage = () => {
             <div className="text-secondary">ren</div>
             owani
           </div>
-          <div className="block text-2xl text-center dark:text-red-900">
+          <div className="block text-2xl text-center">
             Twój trener,dietetyk i notatnik - w jednym
           </div>
           <LoginButtons />
