@@ -1,11 +1,15 @@
+import { SidebarProvider } from "@/components/Dashboard/SideBarContext";
 import DashboardLayout from "@/components/Dashboard/dashboardLayout";
 
 const dashboard = () => {
   return (
     <>
-      <DashboardLayout>
-        <div className="w-96 h-64 bg-slate-400 ">tesstastastat</div>
-      </DashboardLayout>{" "}
+      <SidebarProvider>
+        <DashboardLayout>
+          {" "}
+          <div className="w-24 h-64 bg-slate-400 ">tesstastastat</div>{" "}
+        </DashboardLayout>{" "}
+      </SidebarProvider>
     </>
   );
 };

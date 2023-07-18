@@ -1,10 +1,11 @@
 "use client";
-import "@/styles/function.scss";
+import "@/styles/globals.css";
 import Link from "next/link";
-import { useState } from "react";
+import { useContext } from "react";
 import { IconType } from "react-icons";
 import { BsCalculator } from "react-icons/bs";
 import { AiOutlineHome, AiOutlineArrowLeft } from "react-icons/ai";
+import { SidebarContext } from "./SideBarContext";
 
 interface SidebarItem {
   name: string;
@@ -29,18 +30,15 @@ export default function Sidebar() {
       icon: AiOutlineHome,
     },
   ];
-  const [isCollapsedSidebar, setSidebarCollapsed] = useState<boolean>(false);
-  const handletoogleSidebarCollapsed = () => {
-    setSidebarCollapsed((prev) => !prev);
-  };
-
+  const { isCollapsedSidebar, toggleSidebarcollapse } =
+    useContext(SidebarContext);
   return (
     <>
       <div className="relative bg-white  ease-out">
         <button className="btn">
           <AiOutlineArrowLeft
             className="h-12 w-12"
-            onClick={handletoogleSidebarCollapsed}
+            onClick={toggleSidebarcollapse}
           />
         </button>{" "}
         <div>
@@ -48,9 +46,13 @@ export default function Sidebar() {
             <ul>
               {sidebarItems.map(({ name, href, icon: Icon }) => (
                 <li className="text-xl " key={name}>
-                  <Link href={href} className="">
-                    <Icon className=" " />
-                    <div className="sidebar_name ">{name}</div>
+                  <Link
+                    href={href}
+                    className="flex"
+                    data-collapse={isCollapsedSidebar}
+                  >
+                    <Icon className="m-4 " />
+                    <div className="sidebar__name ">{name}</div>
                   </Link>
                 </li>
               ))}

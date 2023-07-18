@@ -21,22 +21,44 @@
   margin: 0;
 }
 body * {
-  // background-color: theme('colors.secondary');
   @apply transition-colors duration-500;
 }
 body {
-  //   color: rgb(var(--foreground-rgb));
-  //   background: linear-gradient(
-  //       to bottom,
-  //       transparent,
-  //       rgb(var(--background-end-rgb))
-  //     )
-  //     rgb(var(--background-start-rgb));
   @apply transition-colors duration-500;
   margin: 0;
   font-size: 62.5%;
   place-items: center;
   background: #000427;
   transition: background;
-  // background-color: theme('colors.secondary');
+}
+.sidebar {
+  width: 17rem;
+  height: 100%;
+  background-color: white;
+  padding: 1rem;
+  transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.1);
+  overflow: hidden;
+}
+[data-collapse="true"] {
+  width: 5.4rem;
+}
+[data-collapse="true"] .sidebar__name {
+  display: none;
+}
+.btn {
+  position: absolute;
+  right: 0;
+  top: 4.7rem;
+  border: none;
+
+  width: 1.5rem;
+  height: 1.5rem;
+
+  border-radius: 50%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  cursor: pointer;
+  transform: translateX(50%);
+  font-size: 1.1rem;
 }
