@@ -1,28 +1,38 @@
 "use client";
-import { useState } from "react";
-const dashboard = () => {
-  const [mass, setMass] = useState<number>();
-  const [height, setHeight] = useState<number>();
+import React, { useEffect } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import {
+  setMass,
+  setHeight,
+  setGender,
+  setAge,
+  calculateResult,
+} from "@/slice/bodyFatCalculator";
+import { RootState } from "@/types/type";
+const Dashboard: React.FC = () => {
+  const dispatch = useDispatch();
+  const { mass, height, gender, age, result, progress } = useSelector(
+    (state: RootState) => state.bmiCalculator
+  );
 
-  const calculateBMI = () => {
-    if (mass && height) {
-      const bmi = mass / (height * height);
-      return bmi.toFixed(2); // Zaokrąglamy do dwóch miejsc po przecinku
-    }
-    return "";
-  };
+  useEffect(() => {
+    dispatch(calculateResult());
+  }, [mass, height, age, gender]);
+
   return (
     <>
-      <div className=" h-screen bg-slate-400 flex justify-center items-center max-w-screen-2xl m-auto">
+      <div className="h-64 bg-slate-400">
         <label htmlFor="mass">Masa ciała</label>
-
+        <div className="text-3xl flex">
+          {mass && height ? (mass / (height * height)).toFixed(2) : ""}
+        </div>
         <input
           type="number"
           id="mass"
           name="number"
           className="h-24 w-24 text-5xl"
-          value={mass}
-          onChange={(e) => setMass(parseFloat(e.target.value))}
+          value={mass || ""}
+          onChange={(e) => dispatch(setMass(parseFloat(e.target.value)))}
         />
         <label htmlFor="height">Wzrost</label>
         <input
@@ -30,8 +40,8 @@ const dashboard = () => {
           id="height"
           name="number"
           className="h-24 w-24 text-5xl"
-          value={height}
-          onChange={(e) => setHeight(parseFloat(e.target.value))}
+          value={height || ""}
+          onChange={(e) => dispatch(setHeight(parseFloat(e.target.value)))}
         />
         <label htmlFor="number">wiek</label>
         <input
@@ -39,24 +49,27 @@ const dashboard = () => {
           id="number"
           name="number"
           className="h-24 w-24 text-5xl"
+          value={age || ""}
+          onChange={(e) => dispatch(setAge(parseInt(e.target.value)))}
         />
         <label htmlFor="gender">Płeć</label>
-        <select id="gender">
-          <option>Mężczyzna</option>
-          <option>Kobieta</option>
+        <select
+          id="gender"
+          value={gender}
+          onChange={(e) => dispatch(setGender(parseInt(e.target.value)))}
+        >
+          <option value={1}>Mężczyzna</option>
+          <option value={0}>Kobieta</option>
         </select>
-        <label htmlFor="PAL">Aktywność</label>
-        <select id="PAL">
-          <option>Siedzący tryb życia</option>
-          <option>Mała aktywnośc</option>
-          <option>Umiarkowana aktywność</option>
-          <option>Wysoka aktywność</option>
-          <option>Bardzo wysoka aktywność</option>
-        </select>
-        <div className="text-3xl block"> Wynik BMR:{calculateBMI()}</div>
+        <div>Wynik: {result}</div>
+        <progress
+          value={parseFloat(result)}
+          max="40"
+          className="w-full"
+        ></progress>
       </div>
     </>
   );
 };
 
-export default dashboard;
+export default Dashboard;
