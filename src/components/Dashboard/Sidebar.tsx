@@ -34,7 +34,7 @@ export default function Sidebar() {
     useContext(SidebarContext);
   return (
     <>
-      <div className="relative bg-white  ease-out">
+      <div className="absolute bg-white  ease-out h-screen">
         <button className="btn">
           <AiOutlineArrowLeft
             className="h-12 w-12"
@@ -42,7 +42,7 @@ export default function Sidebar() {
           />
         </button>{" "}
         <div>
-          <aside className="sidebar" data-collapse={isCollapsedSidebar}>
+          <aside className="sidebar " data-collapse={isCollapsedSidebar}>
             <ul>
               {sidebarItems.map(({ name, href, icon: Icon }) => (
                 <li className="text-xl " key={name}>
@@ -56,11 +56,6 @@ export default function Sidebar() {
                   </Link>
                 </li>
               ))}
-
-              <li></li>
-              <li></li>
-              <li></li>
-              <li></li>
             </ul>
           </aside>
         </div>

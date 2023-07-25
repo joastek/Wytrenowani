@@ -3,7 +3,7 @@ import Sidebar from "./Sidebar";
 
 const DashboardLayout = ({ children }: { children: ReactNode }) => {
   return (
-    <div className="flex h-screen relative">
+    <div>
       <Sidebar />
       <main>{children}</main>;
     </div>

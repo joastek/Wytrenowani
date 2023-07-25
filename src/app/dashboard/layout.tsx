@@ -10,13 +10,11 @@ export default function DashboardLayout1({
 }) {
   return (
     <>
-      {" "}
       <Provider store={store}>
         <SidebarProvider>
           <DashboardLayout>{children}</DashboardLayout>
-        </SidebarProvider>{" "}
+        </SidebarProvider>
       </Provider>
-      , document.getElementById("root") ,
     </>
   );
 }

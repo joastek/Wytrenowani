@@ -38,7 +38,8 @@ const bmiCalculatorSlice = createSlice({
       if (mass && height && age) {
         const result =
           1.39 * parseFloat(calculateBMI()) + 0.16 * age - 10.34 * gender - 9;
-        const mappedResult = Math.min(40, Math.max(0, result + 10));
+        const mappedResult =
+          (Math.min(40, Math.max(0, result + 10)) / 40) * 100;
         state.result = result.toFixed(2);
         state.progress = mappedResult;
       } else {
