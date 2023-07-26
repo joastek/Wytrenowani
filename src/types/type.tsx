@@ -3,7 +3,7 @@ export interface BMIState {
   height: number | null;
   gender: number;
   age: number | null;
-  result: string;
+  result: number;
   progress: number;
 }
 export interface RootState {

@@ -10,14 +10,21 @@ import {
   calculateResult,
 } from "@/slice/bodyFatCalculator";
 import { RootState } from "@/types/type";
+import {
+  goodResult,
+  neutralResult,
+  sadResult,
+} from "@/components/Dashboard/fatResult";
 const Dashboard: React.FC = () => {
   const dispatch = useDispatch();
   const { mass, height, gender, age, result, progress } = useSelector(
     (state: RootState) => state.bmiCalculator
   );
   const getProgressBarColor = (value: number) => {
-    if (value <= 15) {
+    if (value <= 10) {
       return "#00f"; // Niebieski
+    } else if (value <= 18) {
+      return "#006400"; // Żółty
     } else if (value <= 24) {
       return "#ff0"; // Żółty
     } else {
@@ -79,10 +86,18 @@ const Dashboard: React.FC = () => {
           animate={{ width: `${progress}%` }}
           transition={{ duration: 1.5, type: "tween" }}
           style={{
-            background: getProgressBarColor(progress),
+            background: getProgressBarColor(result),
           }}
           className="  h-6"
         ></motion.div>
+
+        {result > 0
+          ? result <= 15
+            ? goodResult()
+            : result <= 25
+            ? neutralResult()
+            : sadResult()
+          : null}
       </div>
     </>
   );
