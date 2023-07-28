@@ -15,7 +15,7 @@ import {
   neutralResult,
   sadResult,
 } from "@/components/Dashboard/fatResult";
-const Dashboard: React.FC = () => {
+const Calculator: React.FC = () => {
   const dispatch = useDispatch();
   const { mass, height, gender, age, result, progress } = useSelector(
     (state: RootState) => state.bmiCalculator
@@ -103,4 +103,4 @@ const Dashboard: React.FC = () => {
   );
 };
 
-export default Dashboard;
+export default Calculator;

@@ -21,12 +21,12 @@ export default function Sidebar() {
     },
     {
       name: "Kalkulator",
-      href: "/dashboard/about",
+      href: "/dashboard/Calculator",
       icon: BsCalculator,
     },
     {
       name: "Trening",
-      href: "/about",
+      href: "/dashboard/TrainingPlan",
       icon: AiOutlineHome,
     },
   ];
