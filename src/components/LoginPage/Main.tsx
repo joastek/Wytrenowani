@@ -6,8 +6,8 @@ const LoginPage = () => {
   return (
     <>
       {" "}
-      <Navigation />
-      <div className="  flex  w-full h-96 text-white p-36 dark:bg-secondary">
+      <div className="  flex  w-full  text-white  dark:bg-secondary h-screen">
+        <Navigation />
         <div className="m-auto ">
           <div className="text-8xl flex">
             Wy

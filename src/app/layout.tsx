@@ -26,7 +26,20 @@ export default function RootLayout({
       </head>
 
       <Providers>
-        <body className={inter.className}>{children}</body>
+        <body className={inter.className}>
+          {" "}
+          <div className="gradient-bg">
+            <div className="gradients-container">
+              <div className="g1"></div>
+              <div className="g2"></div>
+              <div className="g3"></div>
+              <div className="g4"></div>
+              <div className="g5"></div>
+              <div className="interactive"></div>
+            </div>{" "}
+          </div>
+          {children}
+        </body>
       </Providers>
     </html>
   );

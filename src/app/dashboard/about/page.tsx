@@ -38,10 +38,10 @@ const Dashboard: React.FC = () => {
 
   return (
     <>
-      <div className="flex justify-center items-center  flex-col h-screen">
-        <div className="h-64 w-full bg-slate-400 p-4 flex justify-center items-center">
+      <div className="flex justify-center items-center  flex-col ">
+        <div className="h-64  justify-center items-center relative ">
           <label htmlFor="mass">Masa ciała</label>
-          <div className="text-3xl flex">
+          <div className="text-3xl ">
             {mass && height ? (mass / (height * height)).toFixed(2) : ""}
           </div>
           <input
@@ -80,16 +80,16 @@ const Dashboard: React.FC = () => {
             <option value={0}>Kobieta</option>
           </select>
           <div>Wynik: {result}</div>
+          <motion.div
+            initial={{ width: 0 }}
+            animate={{ width: `${progress}%` }}
+            transition={{ duration: 1.5, type: "tween" }}
+            style={{
+              background: getProgressBarColor(result),
+            }}
+            className="  h-6  absolute bottom-0 w-96"
+          ></motion.div>
         </div>
-        <motion.div
-          initial={{ width: 0 }}
-          animate={{ width: `${progress}%` }}
-          transition={{ duration: 1.5, type: "tween" }}
-          style={{
-            background: getProgressBarColor(result),
-          }}
-          className="  h-6"
-        ></motion.div>
 
         {result > 0
           ? result <= 15

@@ -31,13 +31,13 @@ const Navigation = () => {
 
   return (
     <>
-      <div className=" w-full   ">
-        <Image
+      <div className=" w -screen absolute right-0 ">
+        {/* <Image
           src={bgColor}
           alt="tło"
           className="w-full -top-8  z-20 absolute"
-        />
-        <div className="  text-white  flex justify-end  space-x-0.5 self-end dark:bg-secondary ">
+        /> */}
+        <div className="  text-white  flex justify-end  space-x-0.5 self-end">
           <div className="flex p-6 z-40">
             {" "}
             PL
