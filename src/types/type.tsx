@@ -7,5 +7,12 @@ export interface BMIState {
   progress: number;
 }
 export interface RootState {
+  trainingList: any;
   bmiCalculator: BMIState;
+}
+
+export interface trainingState {
+  trainingList: {
+    value: any;
+  };
 }
