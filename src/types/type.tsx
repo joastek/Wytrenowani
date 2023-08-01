@@ -16,3 +16,8 @@ export interface trainingState {
     value: any;
   };
 }
+export interface TrainingData {
+  id: number;
+  username: string;
+
+}
