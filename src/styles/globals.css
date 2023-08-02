@@ -38,7 +38,7 @@ body {
   @apply transition-colors duration-500;
   margin: 0;
   font-size: 62.5%;
-  place-items: center;
+
   /* background: #000427; */
   transition: background;
 }

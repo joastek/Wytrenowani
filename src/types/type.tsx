@@ -15,9 +15,18 @@ export interface trainingState {
   trainingList: {
     value: any;
   };
+  trainingSet: {
+    value: any;
+  };
 }
 export interface TrainingData {
   id: number;
   username: string;
+}
 
+export interface TrainingSet {
+  id: number;
+  seriesName: string;
+  series: number;
+  reps: number;
 }
