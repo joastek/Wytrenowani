@@ -54,18 +54,19 @@ const TrainingPlan = () => {
     );
     handleAddTypeOfTrening();
   };
-  const handleAddSet = () => {
+  const handleAddSet = (trainingId: any) => {
     const lastSetId =
       trainingSet.length > 0 ? trainingSet[trainingSet.length - 1].id : 0;
     dispatch(
       addSet({
-        id: lastSetId + 1, // Assign a new id when adding a user
+        id: lastSetId + 1,
         seriesName: seriesName,
         series: series,
         reps: reps,
+        trainingId, // Dodajemy identyfikator treningu, do którego przypisujemy zestaw
       })
     );
-    handleAddTypeOfTrening();
+    // handleAddTypeOfTrening(); // Możesz zakomentować tę linię, aby okno dialogowe nie zamykało się po dodaniu zestawu
   };
   return (
     <>
@@ -137,7 +138,22 @@ const TrainingPlan = () => {
                 </div>
 
                 <div className="block">
-                  <Button variant="contained" onClick={handleAddSet}>
+                  {trainingSet.map((set: any) => {
+                    if (set.trainingId === training.id) {
+                      // Sprawdzamy, czy zestaw należy do tego treningu
+                      return (
+                        <div key={set.id}>
+                          <h1>{set.seriesName}</h1>
+                        </div>
+                      );
+                    } else {
+                      return null;
+                    }
+                  })}
+                  <Button
+                    variant="contained"
+                    onClick={() => handleAddSet(training.id)}
+                  >
                     <AddIcon />
                   </Button>
                   <TextField
@@ -148,14 +164,7 @@ const TrainingPlan = () => {
                       setSeriesName(event.target.value);
                     }}
                   />
-                  {training.sets.map((set: any) => {
-                    return (
-                      <div key={set.id}>
-                        {" "}
-                        <h1>{set.seriesName}</h1>
-                      </div>
-                    );
-                  })}
+
                   {/* <input
                     type="text"
                     placeholder="new UserName..."
