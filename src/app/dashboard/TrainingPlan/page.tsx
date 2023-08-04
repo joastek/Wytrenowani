@@ -16,6 +16,7 @@ import DeleteIcon from "@mui/icons-material/Delete";
 import TextField from "@mui/material/TextField";
 import FormController from "@/components/TrainingPlan/FormControl";
 
+import SeriesController from "@/components/TrainingPlan/seriesControl";
 const TrainingPlan = () => {
   const dispatch = useDispatch();
   const trainingList = useSelector(
@@ -114,16 +115,20 @@ const TrainingPlan = () => {
         </div>
         <div className="p-4">
           {trainingList.map((training: any) => {
+            const setsForTraining = trainingSet.filter(
+              (set: any) => set.trainingId === training.id
+            );
+            // Pobieramy zestawy przypisane do tego treningu
             return (
               <div
                 key={training.id}
-                className=" w-[65rem] h-[4rem] m-auto bg-white mb-[1rem] relative"
+                className=" w-[65rem]  m-auto bg-white mb-[1rem] relative rounded-lg"
               >
-                <div className="flex ">
+                <div className="flex w-full bg-slate-400 rounded-t-lg">
                   {" "}
                   <h1>{training.name}</h1>
                   <h1>{training.selectedOption}</h1>
-                  <div className="right-0 absolute">
+                  <div className="ml-auto">
                     {" "}
                     <IconButton
                       aria-label="delete"
@@ -142,8 +147,19 @@ const TrainingPlan = () => {
                     if (set.trainingId === training.id) {
                       // Sprawdzamy, czy zestaw należy do tego treningu
                       return (
-                        <div key={set.id}>
+                        <div key={set.id} className="flex">
                           <h1>{set.seriesName}</h1>
+                          <h1>{set.series}</h1>
+                          <h1>{set.reps}</h1>
+                          <IconButton
+                            aria-label="delete"
+                            size="large"
+                            onClick={() => {
+                              dispatch(deleteSet({ id: set.id }));
+                            }}
+                          >
+                            <DeleteIcon />
+                          </IconButton>
                         </div>
                       );
                     } else {
@@ -164,7 +180,7 @@ const TrainingPlan = () => {
                       setSeriesName(event.target.value);
                     }}
                   />
-
+                  <SeriesController setSeries={setSeries} setReps={setReps} />
                   {/* <input
                     type="text"
                     placeholder="new UserName..."
