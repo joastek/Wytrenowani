@@ -8,8 +8,8 @@ import AddIcon from "@mui/icons-material/Add";
 import Button from "@mui/material/Button";
 import TextField from "@mui/material/TextField";
 import FormController from "@/components/TrainingPlan/FormControl";
-import TrainingItem from "@/components/TrainingPlan/AddActivity";
-
+import TrainingItem from "@/components/TrainingPlan/strenghtActivity";
+import CardioActivity from "@/components/TrainingPlan/cardioActivity";
 const TrainingPlan = () => {
   const dispatch = useDispatch();
   const trainingList = useSelector(
@@ -23,13 +23,18 @@ const TrainingPlan = () => {
   const [name, setName] = useState("");
   const [username, setuserName] = useState("");
   const [selectedOption, setSelectedOption] = useState("");
-  ////
-
+  const StrengthTraining = ({ training, trainingSet }: any) => (
+    <TrainingItem training={training} trainingSet={trainingSet} />
+  );
+  const CardioTraining = ({ training, trainingSet }: any) => (
+    <CardioActivity training={training} trainingSet={trainingSet} />
+  );
   const handleAddNewTraining = () => {
     setAddNewTraining((prev) => !prev);
   };
   const handleAddTypeOfTrening = () => {
     setAddNewTraining(false);
+    setSelectedOption("");
   };
   const handleAddTraining = () => {
     const lastUserId =
@@ -43,6 +48,7 @@ const TrainingPlan = () => {
         sets: [],
       })
     );
+
     handleAddTypeOfTrening();
   };
 
@@ -63,10 +69,10 @@ const TrainingPlan = () => {
           {addNewTraining && (
             <>
               <div
-                className="fixed top-0 left-0 right-0 bottom-0 bg-black  backdrop-filter backdrop-blur-[2px] bg-opacity-30"
+                className="fixed top-0 left-0 right-0 bottom-0 bg-black  backdrop-filter backdrop-blur-[2px] bg-opacity-30 z-50"
                 onClick={handleAddNewTraining}
               />
-              <div className=" absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-[50rem] h-[10rem] bg-white z-50 p-12">
+              <div className=" absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-[50rem] h-[10rem] bg-white z-50 p-8 rounded-t-lg">
                 {" "}
                 <TextField
                   id="outlined-basic"
@@ -75,6 +81,7 @@ const TrainingPlan = () => {
                   onChange={(event: any) => {
                     setName(event.target.value);
                   }}
+                  sx={{ m: 2, width: "35ch" }}
                 />
                 <FormController onSelectOption={setSelectedOption} />
                 <Button
@@ -83,8 +90,9 @@ const TrainingPlan = () => {
                     handleAddTraining();
                     handleAddTypeOfTrening();
                   }}
+                  sx={{ m: 3, width: "5ch" }}
                 >
-                  <AddIcon /> trening
+                  <AddIcon />
                 </Button>
               </div>
             </>
@@ -97,11 +105,23 @@ const TrainingPlan = () => {
             );
 
             return (
-              <TrainingItem
-                key={training.id}
-                training={training}
-                trainingSet={setsForTraining}
-              />
+              <>
+                {" "}
+                <div key={training.id}>
+                  <StrengthTraining
+                    training={training}
+                    trainingSet={setsForTraining}
+                  />
+                </div>
+                {/* <div key={training.id}>
+                  {selectedOption === "Cardio" && (
+                    <CardioTraining
+                      training={training}
+                      trainingSet={setsForTraining}
+                    />
+                  )}
+                </div> */}
+              </>
             );
           })}
         </div>

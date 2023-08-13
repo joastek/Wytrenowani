@@ -20,6 +20,7 @@ export default function SeriesController({
     setRep(event.target.value as string);
     setReps(event.target.value as string);
   };
+
   const renderRepsItems = (maxValue: number) => {
     const items = [];
     for (let i = 1; i <= maxValue; i++) {
@@ -67,7 +68,7 @@ export default function SeriesController({
           value={rep}
           label="Rodzaj"
         >
-          {renderSeriesItems(30)}
+          {renderSeriesItems(12)}
         </Select>
       </FormControl>
     </>

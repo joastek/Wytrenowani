@@ -9,12 +9,14 @@ import AddIcon from "@mui/icons-material/Add";
 import TextField from "@mui/material/TextField";
 import SeriesController from "@/components/TrainingPlan/seriesControl";
 import { addSet, deleteSet } from "@/slice/trainingSet";
+import { MenuItem } from "@mui/material";
 
-const TrainingItem = ({ training, trainingSet }: any) => {
+const strenghtActivity = ({ training, trainingSet }: any) => {
   const dispatch = useDispatch();
   const [seriesName, setSeriesName] = useState("");
   const [series, setSeries] = useState("");
   const [reps, setReps] = useState("");
+
   const handleAddSet = (trainingId: any) => {
     const lastSetId =
       trainingSet.length > 0 ? trainingSet[trainingSet.length - 1].id : 0;
@@ -24,9 +26,15 @@ const TrainingItem = ({ training, trainingSet }: any) => {
         seriesName: seriesName,
         series: series,
         reps: reps,
+
         trainingId, // Dodajemy identyfikator treningu, do którego przypisujemy zestaw
       })
     );
+    const newRepMenuItems = Array.from({ length: Number(reps) }, (_, index) => (
+      <MenuItem key={index + 1} value={(index + 1).toString()}>
+        {index + 1}
+      </MenuItem>
+    ));
   };
   return (
     <div
@@ -34,8 +42,11 @@ const TrainingItem = ({ training, trainingSet }: any) => {
       className=" w-[65rem]  m-auto bg-white mb-[1rem] relative rounded-lg"
     >
       <div className="flex w-full bg-slate-400 rounded-t-lg">
-        <h1>{training.name}</h1>
-        <h1>{training.selectedOption}</h1>
+        <div className="block">
+          <h1 className="ml-0"> {training.name}</h1>
+          <h2>{training.selectedOption}</h2>
+        </div>
+
         <div className="ml-auto">
           <IconButton
             aria-label="delete"
@@ -56,7 +67,7 @@ const TrainingItem = ({ training, trainingSet }: any) => {
               <div key={set.id} className="flex">
                 <h1>{set.seriesName}</h1>
                 <h1>{set.series}</h1>
-                <h1>{set.reps}</h1>
+                {set.repMenuItems}
                 <IconButton
                   aria-label="delete"
                   size="large"
@@ -89,4 +100,4 @@ const TrainingItem = ({ training, trainingSet }: any) => {
   );
 };
 
-export default TrainingItem;
+export default strenghtActivity;

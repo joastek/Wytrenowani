@@ -1,4 +1,5 @@
 import * as React from "react";
+import { useState } from "react";
 import FormControl from "@mui/material/FormControl";
 import InputLabel from "@mui/material/InputLabel";
 import Select, { SelectChangeEvent } from "@mui/material/Select";
@@ -17,7 +18,7 @@ export default function FormController({
   return (
     <>
       {" "}
-      <FormControl className="w-[12rem]">
+      <FormControl sx={{ m: 2, width: "35ch" }}>
         <InputLabel id="demo-simple-select-label">Rodzaj</InputLabel>
         <Select
           labelId="demo-simple-select-label"
