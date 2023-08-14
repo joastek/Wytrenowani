@@ -34,18 +34,13 @@ const CardioActivity = ({ training, trainingSet }: any) => {
         trainingId, // Dodajemy identyfikator treningu, do którego przypisujemy zestaw
       })
     );
-    const newRepMenuItems = Array.from({ length: Number(reps) }, (_, index) => (
-      <MenuItem key={index + 1} value={(index + 1).toString()}>
-        {index + 1}
-      </MenuItem>
-    ));
   };
   return (
     <div
       key={training.id}
-      className=" w-[65rem]  m-auto bg-white mb-[1rem] relative rounded-lg"
+      className=" w-[65rem]  m-auto bg-red-500 mb-[1rem] relative rounded-lg"
     >
-      <div className="flex w-full bg-slate-400 rounded-t-lg">
+      <div className="flex w-full bg-black rounded-t-lg">
         <div className="block">
           <h1 className="ml-0"> {training.name}</h1>
           <h2>{training.selectedOption}</h2>

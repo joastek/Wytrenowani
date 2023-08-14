@@ -4,16 +4,27 @@ import FormControl from "@mui/material/FormControl";
 import InputLabel from "@mui/material/InputLabel";
 import Select, { SelectChangeEvent } from "@mui/material/Select";
 import MenuItem from "@mui/material/MenuItem";
+import CardioActivity from "./cardioActivity";
+import strenghtActivity from "./strenghtActivity";
 export default function FormController({
   onSelectOption,
 }: {
-  onSelectOption: (option: string) => void;
+  onSelectOption: (option: string, id: any) => void;
 }) {
-  const [age, setAge] = React.useState("");
+  const [age, setAge] = useState("");
 
   const handleChange = (event: SelectChangeEvent) => {
-    setAge(event.target.value as string);
-    onSelectOption(event.target.value as string);
+    const selectedValue = event.target.value as string;
+
+    setAge(selectedValue);
+
+    if (selectedValue === "Trening siłowy") {
+      onSelectOption(selectedValue, strenghtActivity);
+    } else if (selectedValue === "Cardio") {
+      onSelectOption(selectedValue, CardioActivity);
+    } else if (selectedValue === "Stretching") {
+      onSelectOption(selectedValue, strenghtActivity);
+    }
   };
   return (
     <>

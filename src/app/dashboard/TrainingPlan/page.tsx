@@ -23,12 +23,10 @@ const TrainingPlan = () => {
   const [name, setName] = useState("");
   const [username, setuserName] = useState("");
   const [selectedOption, setSelectedOption] = useState("");
-  const StrengthTraining = ({ training, trainingSet }: any) => (
-    <TrainingItem training={training} trainingSet={trainingSet} />
-  );
-  const CardioTraining = ({ training, trainingSet }: any) => (
-    <CardioActivity training={training} trainingSet={trainingSet} />
-  );
+  const [selectedTrainingType, setSelectedTrainingType] = useState("");
+  const [strengthTrainingId, setStrengthTrainingId] = useState(0);
+  const [cardioTrainingId, setCardioTrainingId] = useState(0);
+  const [stretchingTrainingId, setStretchingTrainingId] = useState(0);
   const handleAddNewTraining = () => {
     setAddNewTraining((prev) => !prev);
   };
@@ -48,7 +46,40 @@ const TrainingPlan = () => {
         sets: [],
       })
     );
-
+    if (selectedTrainingType === "Trening siłowy") {
+      dispatch(
+        addTraining({
+          id: strengthTrainingId + 1,
+          name: name,
+          username: username,
+          selectedOption: selectedOption,
+          sets: [],
+        })
+      );
+      setStrengthTrainingId((prevId) => prevId + 1);
+    } else if (selectedTrainingType === "Cardio") {
+      dispatch(
+        addTraining({
+          id: cardioTrainingId + 1,
+          name: name,
+          username: username,
+          selectedOption: selectedOption,
+          sets: [],
+        })
+      );
+      setCardioTrainingId((prevId) => prevId + 1);
+    } else if (selectedTrainingType === "Stretching") {
+      dispatch(
+        addTraining({
+          id: stretchingTrainingId + 1,
+          name: name,
+          username: username,
+          selectedOption: selectedOption,
+          sets: [],
+        })
+      );
+      setStretchingTrainingId((prevId) => prevId + 1);
+    }
     handleAddTypeOfTrening();
   };
 
@@ -105,23 +136,26 @@ const TrainingPlan = () => {
             );
 
             return (
-              <>
-                {" "}
-                <div key={training.id}>
-                  <StrengthTraining
+              <div key={training.id}>
+                {training.selectedOption === "Trening siłowy" && (
+                  <TrainingItem
                     training={training}
                     trainingSet={setsForTraining}
                   />
-                </div>
-                {/* <div key={training.id}>
-                  {selectedOption === "Cardio" && (
-                    <CardioTraining
-                      training={training}
-                      trainingSet={setsForTraining}
-                    />
-                  )}
-                </div> */}
-              </>
+                )}
+                {training.selectedOption === "Cardio" && (
+                  <CardioActivity
+                    training={training}
+                    trainingSet={setsForTraining}
+                  />
+                )}
+                {training.selectedOption === "Stretching" && (
+                  <TrainingItem
+                    training={training}
+                    trainingSet={setsForTraining}
+                  />
+                )}
+              </div>
             );
           })}
         </div>
