@@ -38,9 +38,9 @@ const CardioActivity = ({ training, trainingSet }: any) => {
   return (
     <div
       key={training.id}
-      className=" w-[65rem]  m-auto bg-red-500 mb-[1rem] relative rounded-lg"
+      className=" w-[65rem]  m-auto bg-white  mb-[1rem] relative rounded-lg"
     >
-      <div className="flex w-full bg-black rounded-t-lg">
+      <div className="flex w-full  bg-green-500 rounded-t-lg">
         <div className="block">
           <h1 className="ml-0"> {training.name}</h1>
           <h2>{training.selectedOption}</h2>
@@ -66,7 +66,8 @@ const CardioActivity = ({ training, trainingSet }: any) => {
               <div key={set.id} className="flex">
                 <h1>{set.seriesName}</h1>
                 <h1>{set.series}</h1>
-                {set.repMenuItems}
+                <div className="block"> {set.repMenuItems}</div>
+
                 <IconButton
                   aria-label="delete"
                   size="large"

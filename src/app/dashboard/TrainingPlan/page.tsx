@@ -129,7 +129,7 @@ const TrainingPlan = () => {
             </>
           )}
         </div>
-        <div className="p-4">
+        <div className="">
           {trainingList.map((training: any) => {
             const setsForTraining = trainingSet.filter(
               (set: any) => set.trainingId === training.id

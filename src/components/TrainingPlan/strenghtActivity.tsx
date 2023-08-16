@@ -26,7 +26,11 @@ const strenghtActivity = ({ training, trainingSet }: any) => {
         seriesName: seriesName,
         series: series,
         reps: reps,
-
+        repMenuItems: Array.from({ length: Number(reps) }, (_, index) => (
+          <MenuItem key={index + 1} value={(index + 1).toString()}>
+            {index + 1}
+          </MenuItem>
+        )),
         trainingId, // Dodajemy identyfikator treningu, do którego przypisujemy zestaw
       })
     );
