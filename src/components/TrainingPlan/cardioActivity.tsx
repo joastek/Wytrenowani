@@ -94,7 +94,7 @@ const CardioActivity = ({ training, trainingSet }: any) => {
             setSeriesName(event.target.value);
           }}
         />
-        <SeriesController setSeries={setSeries} setReps={setReps} />
+        {/* <SeriesController setSeries={setSeries} setReps={setReps} /> */}
       </div>
     </div>
   );
