@@ -15,6 +15,12 @@ import {
   neutralResult,
   sadResult,
 } from "@/components/Dashboard/fatResult";
+import FormControl from "@mui/material/FormControl";
+import InputLabel from "@mui/material/InputLabel";
+import Select, { SelectChangeEvent } from "@mui/material/Select";
+import MenuItem from "@mui/material/MenuItem";
+import TextField from "@mui/material/TextField";
+
 const Calculator: React.FC = () => {
   const dispatch = useDispatch();
   const { mass, height, gender, age, result, progress } = useSelector(
@@ -44,57 +50,74 @@ const Calculator: React.FC = () => {
           <div className="text-3xl ">
             {mass && height ? (mass / (height * height)).toFixed(2) : ""}
           </div>
-          <input
+          <TextField
             type="number"
-            id="mass"
-            name="number"
-            className="h-24 w-24 text-5xl"
+            id="outlined-basic"
+            label="Masa ciała (kg)"
             value={mass || ""}
+            variant="outlined"
             onChange={(e) => dispatch(setMass(parseFloat(e.target.value)))}
           />
-          <label htmlFor="height">Wzrost</label>
-          <input
+
+          <TextField
             type="number"
-            id="height"
-            name="number"
-            className="h-24 w-24 text-5xl"
+            id="outlined-basic"
+            label="Wzrost (m)"
             value={height || ""}
+            variant="outlined"
             onChange={(e) => dispatch(setHeight(parseFloat(e.target.value)))}
           />
-          <label htmlFor="number">wiek</label>
-          <input
+
+          <TextField
             type="number"
-            id="number"
-            name="number"
-            className="h-24 w-24 text-5xl"
+            id="outlined-basic"
+            label="Wiek"
             value={age || ""}
+            variant="outlined"
             onChange={(e) => dispatch(setAge(parseInt(e.target.value)))}
           />
-          <label htmlFor="gender">Płeć</label>
-          <select
+
+          <FormControl sx={{ m: 2, width: "35ch" }}>
+            <InputLabel id="demo-simple-select-label">Płeć</InputLabel>
+            <Select
+              labelId="demo-simple-select-label"
+              id="demo-simple-select"
+              value={gender}
+              label="Płeć"
+              onChange={(e: any) =>
+                dispatch(setGender(parseInt(e.target.value)))
+              }
+            >
+              <MenuItem value={1}>Mężczyzna</MenuItem>
+              <MenuItem value={0}>Kobieta</MenuItem>
+            </Select>
+          </FormControl>
+          {/* <select
             id="gender"
             value={gender}
             onChange={(e) => dispatch(setGender(parseInt(e.target.value)))}
           >
             <option value={1}>Mężczyzna</option>
             <option value={0}>Kobieta</option>
-          </select>
+          </select> */}
           <div>Wynik: {result}</div>
-          <motion.div
-            initial={{ width: 0 }}
-            animate={{ width: `${progress}%` }}
-            transition={{ duration: 1.5, type: "tween" }}
-            style={{
-              background: getProgressBarColor(result),
-            }}
-            className="  h-6  absolute bottom-0 w-96"
-          ></motion.div>
+          <div className=" bg-black w-full h-6  ">
+            <motion.div
+              initial={{ width: 0 }}
+              animate={{ width: `${progress * 2}%` }}
+              transition={{ duration: 1.5, type: "tween" }}
+              style={{
+                background: getProgressBarColor(result),
+              }}
+              className="   h-6   "
+            ></motion.div>
+          </div>
         </div>
 
         {result > 0
-          ? result <= 15
+          ? result <= 18
             ? goodResult()
-            : result <= 25
+            : result <= 24
             ? neutralResult()
             : sadResult()
           : null}
