@@ -5,7 +5,13 @@ import DeleteIcon from "@mui/icons-material/Delete";
 import Button from "@mui/material/Button";
 import AddIcon from "@mui/icons-material/Add";
 import TextField from "@mui/material/TextField";
-import { FormControl, InputLabel, MenuItem, Select } from "@mui/material";
+import {
+  FormControl,
+  InputLabel,
+  MenuItem,
+  Select,
+  Checkbox,
+} from "@mui/material";
 import { addSet, deleteSet } from "@/slice/trainingSet";
 import { deleteTraining } from "@/slice/trainingList";
 
@@ -42,7 +48,7 @@ const StrengthActivity = ({ training, trainingSet }: any) => {
     const selectedSeries = event.target.value as string;
     setSerie(selectedSeries);
     setSeries(selectedSeries);
-    // setRep(""); // Clear the rep value when series changes
+    setRep(""); // Clear the rep value when series changes
   };
 
   const handleChangeRep = (event: any) => {
@@ -74,29 +80,6 @@ const StrengthActivity = ({ training, trainingSet }: any) => {
     return items;
   };
 
-  const repsSelects = trainingSet
-    .filter((set: any) => set.trainingId === training.id)
-    .map((set: any) => (
-      <>
-        {" "}
-        <h1>{set.seriesName}</h1>
-        <div key={set.id} className="flex">
-          <h1>{set.series}</h1>
-          {set.repMenuItems}
-
-          <IconButton
-            aria-label="delete"
-            size="large"
-            onClick={() => {
-              dispatch(deleteSet({ id: set.id }));
-            }}
-          >
-            <DeleteIcon />
-          </IconButton>
-        </div>
-      </>
-    ));
-
   return (
     <div
       key={training.id}
@@ -122,11 +105,43 @@ const StrengthActivity = ({ training, trainingSet }: any) => {
       </div>
 
       <div className="block">
-        {Array.from({ length: selectedSeriesCount }).map((_, index) => (
-          <div key={index} className="block">
-            {repsSelects}
-          </div>
-        ))}
+        {trainingSet.map((set: any) => {
+          if (set.trainingId === training.id) {
+            // Generuj repMenuItems dla tego zestawu treningowego
+            const repsSelects = set.repMenuItems.map(
+              (repMenuItem: any, index: number) => (
+                <div key={index} className="flex">
+                  {repMenuItem}
+                </div>
+              )
+            );
+
+            return (
+              <div key={set.id} className="block">
+                <h1>{set.seriesName}</h1>
+
+                {Array.from({ length: selectedSeriesCount }).map((_, index) => (
+                  <div key={index} className="flex">
+                    {repsSelects}
+                  </div>
+                ))}
+
+                <IconButton
+                  aria-label="delete"
+                  size="large"
+                  onClick={() => {
+                    dispatch(deleteSet({ id: set.id }));
+                  }}
+                >
+                  <DeleteIcon />
+                </IconButton>
+              </div>
+            );
+          } else {
+            return null;
+          }
+        })}
+
         <Button variant="contained" onClick={() => handleAddSet(training.id)}>
           <AddIcon />
         </Button>
