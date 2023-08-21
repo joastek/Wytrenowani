@@ -229,3 +229,19 @@ body {
     transform: translateX(-50%) translateY(-10%);
   }
 }
+table {
+  border-collapse: collapse;
+  border-spacing: 0px;
+}
+table,
+th,
+td {
+  padding: 5px;
+  border: 1px solid black;
+}
+
+th {
+  margin-right: 1.2rem;
+  font-size: 1.2rem;
+  height: 6rem;
+}
