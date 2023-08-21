@@ -104,7 +104,7 @@ const StrengthActivity = ({ training, trainingSet }: any) => {
         </div>
       </div>
 
-      <div className="block">
+      <div className="block  h-[25rem] overflow-auto">
         {trainingSet.map((set: any) => {
           if (set.trainingId === training.id) {
             // Generuj repMenuItems dla tego zestawu treningowego

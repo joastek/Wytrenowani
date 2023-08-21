@@ -29,6 +29,11 @@ export default function Sidebar() {
       href: "/dashboard/TrainingPlan",
       icon: AiOutlineHome,
     },
+    {
+      name: "Jedzenie",
+      href: "/dashboard/Food",
+      icon: AiOutlineHome,
+    },
   ];
   const { isCollapsedSidebar, toggleSidebarcollapse } =
     useContext(SidebarContext);
