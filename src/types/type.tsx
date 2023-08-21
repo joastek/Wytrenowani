@@ -19,6 +19,14 @@ export interface trainingState {
     value: any;
   };
 }
+export interface FoodState {
+  FoodList: {
+    value: FoodSet[];
+  };
+  FoodSet: {
+    value: FoodSet[];
+  };
+}
 export interface TrainingData {
   id: number;
   username: string;
@@ -27,6 +35,14 @@ export interface TrainingData {
 export interface TrainingSet {
   id: number;
   seriesName: string;
+  series: number;
+  reps: number;
+}
+export interface FoodSet {
+  FoodSets: any;
+  FoodSet: any;
+  id: number;
+  FoodName: string;
   series: number;
   reps: number;
 }
