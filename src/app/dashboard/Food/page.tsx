@@ -1,8 +1,8 @@
 "use client";
 
 import { addFood, deleteFood } from "@/slice/FoodCalculator";
-import { useSelector } from "react-redux/es/hooks/useSelector";
-import { useDispatch } from "react-redux";
+import { useSelector, useDispatch } from "react-redux";
+
 import { useState } from "react";
 import { deleteTraining } from "@/slice/trainingList";
 import IconButton from "@mui/material/IconButton";
@@ -36,10 +36,13 @@ const Food = () => {
     );
   };
   let totalProtein = 0;
+  let totalCarbo = 0;
+  let totalFat = 0;
+  let totalCalories = 0;
 
   return (
     <>
-      <div className="flex justify-center items-center">
+      <div className="flex justify-center items-center bg-white">
         <div>
           <table>
             <thead>
@@ -66,11 +69,14 @@ const Food = () => {
                 if (training && training.protein !== undefined) {
                   // Dodaj wartość protein do sumy
                   totalProtein += parseFloat(training.protein || 0);
+                  totalCarbo += parseFloat(training.carbo || 0);
+                  totalFat += parseFloat(training.fat || 0);
+                  totalCalories += parseFloat(training.calories || 0);
 
                   return (
                     <tr key={training.id}>
                       <td>{training.FoodName}</td>
-                      <td>{training.protein || 0}</td>
+                      <td>{training.protein}</td>
                       <td>{training.carbo}</td>
                       <td>{training.fat}</td>
                       <td>{training.calories}</td>
@@ -81,7 +87,7 @@ const Food = () => {
               })}
             </tbody>
           </table>
-          <p>Suma białka: {totalProtein} g</p>
+
           <Button variant="contained" onClick={() => handleAddFood(FoodSet.id)}>
             <AddIcon />
           </Button>
@@ -130,6 +136,10 @@ const Food = () => {
             }}
             className="w-16"
           />
+          <p>Suma białka: {totalProtein} g</p>
+          <p>Suma wegli: {totalCarbo} g</p>
+          <p>Suma tłuszczy: {totalFat} g</p>
+          <p>Suma kcal: {totalCalories} g</p>
         </div>
       </div>
     </>

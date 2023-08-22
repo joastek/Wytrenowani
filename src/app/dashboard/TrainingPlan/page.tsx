@@ -1,8 +1,8 @@
 "use client";
 import { trainingState } from "@/types/type";
 import { addTraining } from "@/slice/trainingList";
-import { useSelector } from "react-redux/es/hooks/useSelector";
-import { useDispatch } from "react-redux";
+import { useSelector, useDispatch } from "react-redux";
+
 import { useState } from "react";
 import AddIcon from "@mui/icons-material/Add";
 import Button from "@mui/material/Button";
