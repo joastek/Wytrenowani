@@ -10,7 +10,7 @@ const store = configureStore({
     bmiCalculator: bmiCalculatorReducer,
     trainingList: trainingListReducer,
     trainingSet: TrainingSetReducer,
-    FoodCalculator: FoodCalculatorReducer,
+    foodSet: FoodCalculatorReducer,
   },
 });
 

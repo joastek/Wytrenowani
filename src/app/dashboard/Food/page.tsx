@@ -1,5 +1,5 @@
 "use client";
-import { FoodState } from "@/types/type";
+
 import { addFood, deleteFood } from "@/slice/FoodCalculator";
 import { useSelector } from "react-redux/es/hooks/useSelector";
 import { useDispatch } from "react-redux";
@@ -9,10 +9,11 @@ import IconButton from "@mui/material/IconButton";
 import Button from "@mui/material/Button";
 import AddIcon from "@mui/icons-material/Add";
 import TextField from "@mui/material/TextField";
+
 const Food = () => {
   const dispatch = useDispatch();
-  const FoodList = useSelector((state: FoodState) => state.FoodList.value);
-  const FoodSet = useSelector((state: FoodState) => state.FoodSet.value);
+  // const FoodList = useSelector((state: FoodState) => state.FoodList.value);
+  const FoodSet = useSelector((state: any) => state.foodSet.value);
   const [FoodName, setFoodName] = useState("");
   const [protein, setProtein] = useState("");
   const [carbo, setCarbo] = useState("");
@@ -20,8 +21,7 @@ const Food = () => {
   const [calories, setCalories] = useState("");
 
   const handleAddFood = (FoodId: any) => {
-    const lastUserId =
-      FoodList.length > 0 ? FoodList[FoodList.length - 1].id : 0;
+    const lastUserId = FoodSet.length > 0 ? FoodSet[FoodSet.length - 1].id : 0;
     dispatch(
       addFood({
         id: lastUserId,
@@ -30,15 +30,13 @@ const Food = () => {
         carbo: carbo,
         fat: fat,
         calories: calories,
-        // repMenuItems: Array.from({ length: Number(reps) }, (_, index) => (
-        //   <MenuItem key={index + 1} value={(index + 1).toString()}>
-        //     {index + 1}
-        //   </MenuItem>
-        // )),
-        FoodId, // Dodajemy identyfikator treningu, do którego przypisujemy zestaw
+
+        FoodId,
       })
     );
   };
+  let totalProtein = 0;
+
   return (
     <>
       <div className="flex justify-center items-center">
@@ -53,7 +51,7 @@ const Food = () => {
                 <th>Kcal</th>
               </tr>
             </thead>
-            <IconButton
+            {/* <IconButton
               aria-label="delete"
               size="large"
               onClick={() => {
@@ -61,33 +59,78 @@ const Food = () => {
               }}
             >
               {/* <DeleteIcon /> */}
-            </IconButton>
+            {/* </IconButton> */}
             <tbody>
-              <tr>
-                <td>testtttt</td>
-                <td>testtttt</td>
-              </tr>
+              {" "}
+              {FoodSet.map((training: any) => {
+                if (training && training.protein !== undefined) {
+                  // Dodaj wartość protein do sumy
+                  totalProtein += parseFloat(training.protein || 0);
+
+                  return (
+                    <tr key={training.id}>
+                      <td>{training.FoodName}</td>
+                      <td>{training.protein || 0}</td>
+                      <td>{training.carbo}</td>
+                      <td>{training.fat}</td>
+                      <td>{training.calories}</td>
+                    </tr>
+                  );
+                }
+                return null;
+              })}
             </tbody>
           </table>
+          <p>Suma białka: {totalProtein} g</p>
           <Button variant="contained" onClick={() => handleAddFood(FoodSet.id)}>
             <AddIcon />
           </Button>
           <TextField
             id="outlined-basic"
-            label="cardio"
+            label="Produkt"
             variant="outlined"
             onChange={(event) => {
               setFoodName(event.target.value);
             }}
+            className="w-16"
+          />
+          <TextField
+            id="outlined-basic"
+            label="Białko"
+            variant="outlined"
+            onChange={(event) => {
+              setProtein(event.target.value);
+            }}
+            className="w-16"
+          />
+          <TextField
+            id="outlined-basic"
+            label="Węglodowany"
+            variant="outlined"
+            onChange={(event) => {
+              setCarbo(event.target.value);
+            }}
+            className="w-16"
+          />
+          <TextField
+            id="outlined-basic"
+            label="Tłuszcze"
+            variant="outlined"
+            onChange={(event) => {
+              setFat(event.target.value);
+            }}
+            className="w-16"
+          />
+          <TextField
+            id="outlined-basic"
+            label="Kcal"
+            variant="outlined"
+            onChange={(event) => {
+              setCalories(event.target.value);
+            }}
+            className="w-16"
           />
         </div>
-        {FoodList.map((training: any) => {
-          // const setsForTraining = trainingSet.filter(
-          //   (set: any) => set.trainingId === training.id
-          // );
-
-          return <div key={training.id}></div>;
-        })}
       </div>
     </>
   );

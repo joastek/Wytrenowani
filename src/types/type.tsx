@@ -21,10 +21,10 @@ export interface trainingState {
 }
 export interface FoodState {
   FoodList: {
-    value: FoodSet[];
+    value: any;
   };
   FoodSet: {
-    value: FoodSet[];
+    value: any;
   };
 }
 export interface TrainingData {
