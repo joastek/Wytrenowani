@@ -19,11 +19,18 @@ export interface trainingState {
     value: any;
   };
 }
-export interface FoodState {
-  foodSet: {
+export interface breakfastState {
+  breakfastSet: {
     value: any;
   };
-  foodSetDinner: {
+}
+export interface lunchState {
+  lunchSet: {
+    value: any;
+  };
+}
+export interface dinnerState {
+  dinnerSet: {
     value: any;
   };
 }
@@ -38,7 +45,23 @@ export interface TrainingSet {
   series: number;
   reps: number;
 }
-export interface FoodSet {
+export interface breakfastSet {
+  FoodSets: any;
+  FoodSet: any;
+  id: number;
+  FoodName: string;
+  series: number;
+  reps: number;
+}
+export interface lunchSet {
+  FoodSets: any;
+  FoodSet: any;
+  id: number;
+  FoodName: string;
+  series: number;
+  reps: number;
+}
+export interface dinnerSet {
   FoodSets: any;
   FoodSet: any;
   id: number;

@@ -1,10 +1,15 @@
 "use client";
 
-import { addFood, deleteFood } from "@/slice/FoodCalculator/DinnerCalculator";
+import {
+  addBreakfast,
+  deleteBreakfast,
+} from "@/slice/FoodCalculator/BreakfastCalculator";
+import { addLunch } from "@/slice/FoodCalculator/LunchCalculator";
+import { addDinner } from "@/slice/FoodCalculator/DinnerCalculator";
 import { useSelector, useDispatch } from "react-redux";
 
 import { useState } from "react";
-import { FoodState } from "@/types/type";
+import { breakfastState, lunchState, dinnerState } from "@/types/type";
 import Button from "@mui/material/Button";
 import AddIcon from "@mui/icons-material/Add";
 import TextField from "@mui/material/TextField";
@@ -12,9 +17,12 @@ import TextField from "@mui/material/TextField";
 const Food = () => {
   const dispatch = useDispatch();
   // const FoodList = useSelector((state: FoodState) => state.FoodList.value);
-  const FoodSet = useSelector((state: FoodState) => state.foodSet.value);
+  const FoodSet = useSelector(
+    (state: breakfastState) => state.breakfastSet.value
+  );
+  const FoodSetLunch = useSelector((state: lunchState) => state.lunchSet.value);
   const FoodSetDinner = useSelector(
-    (state: FoodState) => state.foodSetDinner.value
+    (state: dinnerState) => state.dinnerSet.value
   );
   const [FoodName, setFoodName] = useState("");
   const [protein, setProtein] = useState("");
@@ -23,10 +31,10 @@ const Food = () => {
   const [calories, setCalories] = useState("");
 
   const handleAddFood = (FoodId: any) => {
-    const lastUserId = FoodSet.length > 0 ? FoodSet[FoodSet.length - 1].id : 0;
+    const breakfastId = FoodSet.length > 0 ? FoodSet[FoodSet.length - 1].id : 0;
     dispatch(
-      addFood({
-        id: lastUserId,
+      addBreakfast({
+        breakfastid: breakfastId,
         FoodName: FoodName,
         protein: protein,
         carbo: carbo,
@@ -36,11 +44,11 @@ const Food = () => {
         FoodId,
       })
     );
-    setFoodName("");
-    setProtein("");
-    setCarbo("");
-    setFat("");
-    setCalories("");
+    // setFoodName("");
+    // setProtein("");
+    // setCarbo("");
+    // setFat("");
+    // setCalories("");
   };
   /////dinner
   const [FoodNameDinner, setFoodNameDinner] = useState("");
@@ -50,12 +58,10 @@ const Food = () => {
   const [caloriesDinner, setCaloriesDinner] = useState("");
   const handleAddFoodDinner = (FoodIdDinner: any) => {
     const lastUserId =
-      FoodSetDinner.length > 0
-        ? FoodSetDinner[FoodSetDinner.length - 1].idDinner
-        : 0;
+      FoodSetDinner.length > 0 ? FoodSetDinner[FoodSetDinner.length - 1].id : 0;
     dispatch(
-      addFood({
-        idDinner: lastUserId,
+      addDinner({
+        id: lastUserId,
         FoodNameDinner: FoodNameDinner,
         proteinDinner: proteinDinner,
         carboDinner: carboDinner,
@@ -65,17 +71,45 @@ const Food = () => {
         FoodIdDinner,
       })
     );
-    setFoodNameDinner("");
-    setProteinDinner("");
-    setCarboDinner("");
-    setFatDinner("");
-    setCaloriesDinner("");
+    // setFoodNameDinner("");
+    // setProteinDinner("");
+    // setCarboDinner("");
+    // setFatDinner("");
+    // setCaloriesDinner("");
+  };
+  ///dinner
+  const [FoodNameLunch, setFoodNameLunch] = useState("");
+  const [proteinLunch, setProteinLunch] = useState("");
+  const [carboLunch, setCarboLunch] = useState("");
+  const [fatLunch, setFatLunch] = useState("");
+  const [caloriesLunch, setCaloriesLunch] = useState("");
+  const handleAddFoodLunch = (FoodIdLunch: any) => {
+    const lastUserId =
+      FoodSetLunch.length > 0 ? FoodSetLunch[FoodSetLunch.length - 1].id : 0;
+    dispatch(
+      addLunch({
+        id: lastUserId,
+        FoodNameLunch: FoodNameLunch,
+        proteinLunch: proteinLunch,
+        carboLunch: carboLunch,
+        fatLunch: fatLunch,
+        caloriesLunch: caloriesLunch,
+
+        FoodIdLunch,
+      })
+    );
+    // setFoodNameDinner("");
+    // setProteinDinner("");
+    // setCarboDinner("");
+    // setFatDinner("");
+    // setCaloriesDinner("");
   };
   let totalProtein = 0;
   let totalCarbo = 0;
   let totalFat = 0;
   let totalCalories = 0;
-
+  console.log(handleAddFood);
+  console.log(handleAddFoodDinner);
   return (
     <>
       <div className="flex justify-center items-center bg-white">
@@ -123,7 +157,7 @@ const Food = () => {
               <td colSpan={5}>
                 <Button
                   variant="contained"
-                  onClick={() => console.log(handleAddFood(FoodSetDinner.id))}
+                  onClick={() => handleAddFood(FoodSet.id)}
                 >
                   <AddIcon />
                 </Button>
@@ -176,6 +210,79 @@ const Food = () => {
               <tr>
                 <td colSpan={5}>obiod</td>
               </tr>
+              {FoodSetLunch.map((training: any) => {
+                // Dodaj wartość protein do sumy
+                totalProtein += parseFloat(training.proteinLunch || 0);
+                totalCarbo += parseFloat(training.carboLunch || 0);
+                totalFat += parseFloat(training.fatLunch || 0);
+                totalCalories += parseFloat(training.caloriesLunch || 0);
+
+                return (
+                  <tr key={training.id}>
+                    <td>{training.FoodNameLunch}</td>
+                    <td>{training.proteinLunch}</td>
+                    <td>{training.carboLunch}</td>
+                    <td>{training.fatLunch}</td>
+                    <td>{training.caloriesLunch}</td>
+                  </tr>
+                );
+              })}{" "}
+              <td colSpan={5}>
+                <Button
+                  variant="contained"
+                  onClick={() => handleAddFoodLunch(FoodSetLunch.id)}
+                >
+                  <AddIcon />
+                </Button>
+                <TextField
+                  id="outlined-basic"
+                  label="Produkt"
+                  variant="outlined"
+                  onChange={(event) => {
+                    setFoodNameLunch(event.target.value);
+                  }}
+                  className="w-16"
+                />
+                <TextField
+                  id="outlined-basic"
+                  label="Białko"
+                  variant="outlined"
+                  onChange={(event) => {
+                    setProteinLunch(event.target.value);
+                  }}
+                  className="w-16"
+                />
+                <TextField
+                  id="outlined-basic"
+                  label="Węglodowany"
+                  variant="outlined"
+                  onChange={(event) => {
+                    setCarboLunch(event.target.value);
+                  }}
+                  className="w-16"
+                />
+                <TextField
+                  id="outlined-basic"
+                  label="Tłuszcze"
+                  variant="outlined"
+                  onChange={(event) => {
+                    setFatLunch(event.target.value);
+                  }}
+                  className="w-16"
+                />
+                <TextField
+                  id="outlined-basic"
+                  label="Kcal"
+                  variant="outlined"
+                  onChange={(event) => {
+                    setCaloriesLunch(event.target.value);
+                  }}
+                  className="w-16"
+                />{" "}
+              </td>{" "}
+              <tr>
+                <td colSpan={5}>kolocja</td>
+              </tr>
               {FoodSetDinner.map((training: any) => {
                 // Dodaj wartość protein do sumy
                 totalProtein += parseFloat(training.proteinDinner || 0);
@@ -184,7 +291,7 @@ const Food = () => {
                 totalCalories += parseFloat(training.caloriesDinner || 0);
 
                 return (
-                  <tr key={training.idDinner}>
+                  <tr key={training.id}>
                     <td>{training.FoodNameDinner}</td>
                     <td>{training.proteinDinner}</td>
                     <td>{training.carboDinner}</td>
@@ -196,9 +303,7 @@ const Food = () => {
               <td colSpan={5}>
                 <Button
                   variant="contained"
-                  onClick={() =>
-                    console.log(handleAddFoodDinner(FoodSetDinner.id))
-                  }
+                  onClick={() => handleAddFoodDinner(FoodSetDinner.id)}
                 >
                   <AddIcon />
                 </Button>

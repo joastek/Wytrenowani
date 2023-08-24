@@ -1,17 +1,17 @@
 import { createSlice, createSelector } from "@reduxjs/toolkit";
 import { lunchSet } from "@/types/type";
 
-export const DinnerSetSlice = createSlice({
-  name: "dinnertSet",
+export const LunchSetSlice = createSlice({
+  name: "breakfastSet",
   initialState: { value: [] as lunchSet[] },
   reducers: {
-    addDinner: (state, action) => {
+    addLunch: (state, action) => {
       state.value.push(action.payload);
     },
-    deleteDinner: (state, action) => {
+    deleteLunch: (state, action) => {
       state.value = state.value.filter((food) => food.id !== action.payload.id);
     },
-    updateDinner: (state, action) => {
+    updateLunch: (state, action) => {
       state.value.map((food) => {
         if (food.id === action.payload.id) {
           food.FoodName = action.payload.seriesName;
@@ -24,6 +24,6 @@ export const DinnerSetSlice = createSlice({
   },
 });
 
-export const { addDinner, deleteDinner, updateDinner } = DinnerSetSlice.actions;
+export const { addLunch, deleteLunch, updateLunch } = LunchSetSlice.actions;
 
-export default DinnerSetSlice.reducer;
+export default LunchSetSlice.reducer;
