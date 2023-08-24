@@ -1,11 +1,10 @@
 "use client";
 
-import { addFood, deleteFood } from "@/slice/FoodCalculator";
+import { addFood, deleteFood } from "@/slice/FoodCalculator/DinnerCalculator";
 import { useSelector, useDispatch } from "react-redux";
 
 import { useState } from "react";
-import { deleteTraining } from "@/slice/trainingList";
-import IconButton from "@mui/material/IconButton";
+import { FoodState } from "@/types/type";
 import Button from "@mui/material/Button";
 import AddIcon from "@mui/icons-material/Add";
 import TextField from "@mui/material/TextField";
@@ -13,7 +12,10 @@ import TextField from "@mui/material/TextField";
 const Food = () => {
   const dispatch = useDispatch();
   // const FoodList = useSelector((state: FoodState) => state.FoodList.value);
-  const FoodSet = useSelector((state: any) => state.foodSet.value);
+  const FoodSet = useSelector((state: FoodState) => state.foodSet.value);
+  const FoodSetDinner = useSelector(
+    (state: FoodState) => state.foodSetDinner.value
+  );
   const [FoodName, setFoodName] = useState("");
   const [protein, setProtein] = useState("");
   const [carbo, setCarbo] = useState("");
@@ -34,6 +36,40 @@ const Food = () => {
         FoodId,
       })
     );
+    setFoodName("");
+    setProtein("");
+    setCarbo("");
+    setFat("");
+    setCalories("");
+  };
+  /////dinner
+  const [FoodNameDinner, setFoodNameDinner] = useState("");
+  const [proteinDinner, setProteinDinner] = useState("");
+  const [carboDinner, setCarboDinner] = useState("");
+  const [fatDinner, setFatDinner] = useState("");
+  const [caloriesDinner, setCaloriesDinner] = useState("");
+  const handleAddFoodDinner = (FoodIdDinner: any) => {
+    const lastUserId =
+      FoodSetDinner.length > 0
+        ? FoodSetDinner[FoodSetDinner.length - 1].idDinner
+        : 0;
+    dispatch(
+      addFood({
+        idDinner: lastUserId,
+        FoodNameDinner: FoodNameDinner,
+        proteinDinner: proteinDinner,
+        carboDinner: carboDinner,
+        fatDinner: fatDinner,
+        caloriesDinner: caloriesDinner,
+
+        FoodIdDinner,
+      })
+    );
+    setFoodNameDinner("");
+    setProteinDinner("");
+    setCarboDinner("");
+    setFatDinner("");
+    setCaloriesDinner("");
   };
   let totalProtein = 0;
   let totalCarbo = 0;
@@ -65,77 +101,156 @@ const Food = () => {
             {/* </IconButton> */}
             <tbody>
               {" "}
-              {FoodSet.map((training: any) => {
-                if (training && training.protein !== undefined) {
-                  // Dodaj wartość protein do sumy
-                  totalProtein += parseFloat(training.protein || 0);
-                  totalCarbo += parseFloat(training.carbo || 0);
-                  totalFat += parseFloat(training.fat || 0);
-                  totalCalories += parseFloat(training.calories || 0);
+              <tr>
+                <td colSpan={5}>sniadniae</td>
+              </tr>
+              {FoodSet.map((foodDinner: any) => {
+                totalProtein += parseFloat(foodDinner.protein || 0);
+                totalCarbo += parseFloat(foodDinner.carbo || 0);
+                totalFat += parseFloat(foodDinner.fat || 0);
+                totalCalories += parseFloat(foodDinner.calories || 0);
 
-                  return (
-                    <tr key={training.id}>
-                      <td>{training.FoodName}</td>
-                      <td>{training.protein}</td>
-                      <td>{training.carbo}</td>
-                      <td>{training.fat}</td>
-                      <td>{training.calories}</td>
-                    </tr>
-                  );
-                }
-                return null;
-              })}
+                return (
+                  <tr key={foodDinner.id}>
+                    <td>{foodDinner.FoodName}</td>
+                    <td>{foodDinner.protein}</td>
+                    <td>{foodDinner.carbo}</td>
+                    <td>{foodDinner.fat}</td>
+                    <td>{foodDinner.calories}</td>
+                  </tr>
+                );
+              })}{" "}
+              <td colSpan={5}>
+                <Button
+                  variant="contained"
+                  onClick={() => console.log(handleAddFood(FoodSetDinner.id))}
+                >
+                  <AddIcon />
+                </Button>
+                <TextField
+                  id="outlined-basic"
+                  label="Produkt"
+                  variant="outlined"
+                  onChange={(event) => {
+                    setFoodName(event.target.value);
+                  }}
+                  className="w-16"
+                />
+                <TextField
+                  id="outlined-basic"
+                  label="Białko"
+                  variant="outlined"
+                  onChange={(event) => {
+                    setProtein(event.target.value);
+                  }}
+                  className="w-16"
+                />
+                <TextField
+                  id="outlined-basic"
+                  label="Węglodowany"
+                  variant="outlined"
+                  onChange={(event) => {
+                    setCarbo(event.target.value);
+                  }}
+                  className="w-16"
+                />
+                <TextField
+                  id="outlined-basic"
+                  label="Tłuszcze"
+                  variant="outlined"
+                  onChange={(event) => {
+                    setFat(event.target.value);
+                  }}
+                  className="w-16"
+                />
+                <TextField
+                  id="outlined-basic"
+                  label="Kcal"
+                  variant="outlined"
+                  onChange={(event) => {
+                    setCalories(event.target.value);
+                  }}
+                  className="w-16"
+                />{" "}
+              </td>{" "}
+              <tr>
+                <td colSpan={5}>obiod</td>
+              </tr>
+              {FoodSetDinner.map((training: any) => {
+                // Dodaj wartość protein do sumy
+                totalProtein += parseFloat(training.proteinDinner || 0);
+                totalCarbo += parseFloat(training.carboDinner || 0);
+                totalFat += parseFloat(training.fatDinner || 0);
+                totalCalories += parseFloat(training.caloriesDinner || 0);
+
+                return (
+                  <tr key={training.idDinner}>
+                    <td>{training.FoodNameDinner}</td>
+                    <td>{training.proteinDinner}</td>
+                    <td>{training.carboDinner}</td>
+                    <td>{training.fatDinner}</td>
+                    <td>{training.caloriesDinner}</td>
+                  </tr>
+                );
+              })}{" "}
+              <td colSpan={5}>
+                <Button
+                  variant="contained"
+                  onClick={() =>
+                    console.log(handleAddFoodDinner(FoodSetDinner.id))
+                  }
+                >
+                  <AddIcon />
+                </Button>
+                <TextField
+                  id="outlined-basic"
+                  label="Produkt"
+                  variant="outlined"
+                  onChange={(event) => {
+                    setFoodNameDinner(event.target.value);
+                  }}
+                  className="w-16"
+                />
+                <TextField
+                  id="outlined-basic"
+                  label="Białko"
+                  variant="outlined"
+                  onChange={(event) => {
+                    setProteinDinner(event.target.value);
+                  }}
+                  className="w-16"
+                />
+                <TextField
+                  id="outlined-basic"
+                  label="Węglodowany"
+                  variant="outlined"
+                  onChange={(event) => {
+                    setCarboDinner(event.target.value);
+                  }}
+                  className="w-16"
+                />
+                <TextField
+                  id="outlined-basic"
+                  label="Tłuszcze"
+                  variant="outlined"
+                  onChange={(event) => {
+                    setFatDinner(event.target.value);
+                  }}
+                  className="w-16"
+                />
+                <TextField
+                  id="outlined-basic"
+                  label="Kcal"
+                  variant="outlined"
+                  onChange={(event) => {
+                    setCaloriesDinner(event.target.value);
+                  }}
+                  className="w-16"
+                />{" "}
+              </td>{" "}
             </tbody>
           </table>
 
-          <Button variant="contained" onClick={() => handleAddFood(FoodSet.id)}>
-            <AddIcon />
-          </Button>
-          <TextField
-            id="outlined-basic"
-            label="Produkt"
-            variant="outlined"
-            onChange={(event) => {
-              setFoodName(event.target.value);
-            }}
-            className="w-16"
-          />
-          <TextField
-            id="outlined-basic"
-            label="Białko"
-            variant="outlined"
-            onChange={(event) => {
-              setProtein(event.target.value);
-            }}
-            className="w-16"
-          />
-          <TextField
-            id="outlined-basic"
-            label="Węglodowany"
-            variant="outlined"
-            onChange={(event) => {
-              setCarbo(event.target.value);
-            }}
-            className="w-16"
-          />
-          <TextField
-            id="outlined-basic"
-            label="Tłuszcze"
-            variant="outlined"
-            onChange={(event) => {
-              setFat(event.target.value);
-            }}
-            className="w-16"
-          />
-          <TextField
-            id="outlined-basic"
-            label="Kcal"
-            variant="outlined"
-            onChange={(event) => {
-              setCalories(event.target.value);
-            }}
-            className="w-16"
-          />
           <p>Suma białka: {totalProtein} g</p>
           <p>Suma wegli: {totalCarbo} g</p>
           <p>Suma tłuszczy: {totalFat} g</p>

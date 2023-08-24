@@ -20,10 +20,10 @@ export interface trainingState {
   };
 }
 export interface FoodState {
-  FoodList: {
+  foodSet: {
     value: any;
   };
-  FoodSet: {
+  foodSetDinner: {
     value: any;
   };
 }
