@@ -28,8 +28,8 @@ export default function RootLayout({
       <Providers>
         <body className={inter.className}>
           {" "}
-          <div className="gradient-bg">
-            <div className="gradients-container">
+          <div className="gradient-bg  ">
+            <div className="gradients-container  dark:bg-secondary">
               <div className="g1"></div>
               <div className="g2"></div>
               <div className="g3"></div>
