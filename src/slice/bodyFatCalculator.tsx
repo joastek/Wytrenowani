@@ -7,6 +7,8 @@ const initialState: BMIState = {
   age: null,
   result: 0,
   progress: 0,
+  activity: 1.4,
+  calories: 0,
 };
 
 const bmiCalculatorSlice = createSlice({
@@ -25,8 +27,11 @@ const bmiCalculatorSlice = createSlice({
     setAge: (state, action) => {
       state.age = action.payload;
     },
+    setActivity: (state, action) => {
+      state.activity = action.payload;
+    },
     calculateResult: (state) => {
-      const { mass, height, gender, age } = state;
+      const { mass, height, gender, age, activity } = state;
       const calculateBMI = () => {
         if (mass && height) {
           const bmi = mass / (height * height);
@@ -41,6 +46,8 @@ const bmiCalculatorSlice = createSlice({
         const mappedResult = Math.min(Math.max(0, result + 10));
         state.result = parseFloat(result.toFixed(2));
         state.progress = mappedResult;
+        // const calories = result * activity;
+        // state.activity = parseFloat(calories.toFixed(2));
       } else {
         state.result = 0;
         state.progress = 0;
@@ -49,7 +56,13 @@ const bmiCalculatorSlice = createSlice({
   },
 });
 
-export const { setMass, setHeight, setGender, setAge, calculateResult } =
-  bmiCalculatorSlice.actions;
+export const {
+  setMass,
+  setHeight,
+  setGender,
+  setAge,
+  calculateResult,
+  setActivity,
+} = bmiCalculatorSlice.actions;
 
 export default bmiCalculatorSlice.reducer;

@@ -5,6 +5,8 @@ export interface BMIState {
   age: number | null;
   result: number;
   progress: number;
+  activity: number;
+  calories: number;
 }
 export interface RootState {
   trainingList: any;

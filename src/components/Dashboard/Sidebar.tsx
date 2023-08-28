@@ -39,7 +39,7 @@ export default function Sidebar() {
     useContext(SidebarContext);
   return (
     <>
-      <div className="absolute bg-white  ease-out h-screen">
+      <div className="absolute bg-bar  ease-out h-screen">
         <button className="btn">
           <AiOutlineArrowLeft
             className="h-12 w-12"
