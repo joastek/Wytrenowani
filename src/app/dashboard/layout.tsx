@@ -1,9 +1,11 @@
 "use client";
-import DashboardLayout from "@/components/Dashboard/dashboardLayout";
+
 import { SidebarProvider } from "@/components/Dashboard/SideBarContext";
 import { Provider } from "react-redux";
 
 import store from "@/store/store";
+import Sidebar from "@/components/Dashboard/Sidebar";
+import AccountSidebar from "@/components/Dashboard/AccountSidebar";
 
 export default function DashboardLayout1({
   children,
@@ -14,7 +16,9 @@ export default function DashboardLayout1({
     <>
       <Provider store={store}>
         <SidebarProvider>
-          <DashboardLayout>{children}</DashboardLayout>
+          <Sidebar />
+          {children}
+          <AccountSidebar />
         </SidebarProvider>
       </Provider>
     </>
