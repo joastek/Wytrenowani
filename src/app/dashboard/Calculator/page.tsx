@@ -149,7 +149,6 @@ const Calculator: React.FC = () => {
                 </motion.div>
               ))}
             </div>
-            {activity * result * 100}
           </div>
         </div>
         <div className="w-[70rem]">
@@ -161,6 +160,8 @@ const Calculator: React.FC = () => {
             <div className="bg-black h-6 rounded-lg mt-10 relative w-full">
               <div className="absolute left-0 top-[120%]">0%</div>
               <div className="absolute left-[20%] top-[120%]">8%</div>
+              <div className="absolute left-[30%] top-[120%]">12%</div>
+              <div className="absolute left-[37.5%] top-[120%]">15%</div>
               <div className="absolute left-[47.5%] top-[120%]">19%</div>
               <div className="absolute left-[62.5%] top-[120%]">25%</div>
               <div className="absolute right-0 top-[120%]">40%</div>
@@ -176,6 +177,7 @@ const Calculator: React.FC = () => {
               ></motion.div>
             </div>
             <div className="flex justify-center items-center">
+              Charakterystyka:
               {result > 0
                 ? result <= 18
                   ? goodResult()
@@ -185,11 +187,21 @@ const Calculator: React.FC = () => {
                 : null}
             </div>
           </div>
-          Wynik: {result}
-          <label htmlFor="mass">Masa ciała </label>
-          <div className="text-3xl ">
-            {mass && height ? (mass / (height * height)).toFixed(2) : ""}
+          <div className="  mt-5 flex">
+            <div className=" w-1/4  bg-bar  rounded-lg h-48 p-6">
+              Poziom tkanki tłuszczowej: <br />
+              {result}
+              <br />
+              BMI: <br />{" "}
+              {mass && height ? (mass / (height * height)).toFixed(2) : ""}
+              <br /> CPM: <br />
+              {activity * result * 100}
+            </div>
+            <div className="w-3/4  bg-bar  rounded-lg h-48 p-6 ml-5">
+              Wskazania: <br />
+            </div>
           </div>
+          <div className="text-3xl "></div>
         </div>
       </div>
     </>
