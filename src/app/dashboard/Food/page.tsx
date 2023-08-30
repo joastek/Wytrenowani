@@ -8,6 +8,7 @@ import { addLunch } from "@/slice/FoodCalculator/LunchCalculator";
 import { addDinner } from "@/slice/FoodCalculator/DinnerCalculator";
 import { useSelector, useDispatch } from "react-redux";
 
+import { RootState } from "@/types/type";
 import { useState } from "react";
 import { breakfastState, lunchState, dinnerState } from "@/types/type";
 import Button from "@mui/material/Button";
@@ -24,11 +25,12 @@ const Food = () => {
   const FoodSetDinner = useSelector(
     (state: dinnerState) => state.dinnerSet.value
   );
+  const { calories } = useSelector((state: RootState) => state.bmiCalculator);
   const [FoodName, setFoodName] = useState("");
   const [protein, setProtein] = useState("");
   const [carbo, setCarbo] = useState("");
   const [fat, setFat] = useState("");
-  const [calories, setCalories] = useState("");
+  const [gainedCalories, setCalories] = useState("");
 
   const handleAddFood = (FoodId: any) => {
     const breakfastId = FoodSet.length > 0 ? FoodSet[FoodSet.length - 1].id : 0;
@@ -39,7 +41,7 @@ const Food = () => {
         protein: protein,
         carbo: carbo,
         fat: fat,
-        calories: calories,
+        gainedCalories: gainedCalories,
 
         FoodId,
       })
@@ -112,7 +114,7 @@ const Food = () => {
   console.log(handleAddFoodDinner);
   return (
     <>
-      <div className="flex justify-center items-center bg-white">
+      <div className="flex justify-center items-center">
         <div>
           <table>
             <thead>
@@ -142,7 +144,7 @@ const Food = () => {
                 totalProtein += parseFloat(foodDinner.protein || 0);
                 totalCarbo += parseFloat(foodDinner.carbo || 0);
                 totalFat += parseFloat(foodDinner.fat || 0);
-                totalCalories += parseFloat(foodDinner.calories || 0);
+                totalCalories += parseFloat(foodDinner.gainedCalories || 0);
 
                 return (
                   <tr key={foodDinner.id}>
@@ -150,7 +152,7 @@ const Food = () => {
                     <td>{foodDinner.protein}</td>
                     <td>{foodDinner.carbo}</td>
                     <td>{foodDinner.fat}</td>
-                    <td>{foodDinner.calories}</td>
+                    <td>{foodDinner.gainedCalories}</td>
                   </tr>
                 );
               })}{" "}
@@ -359,7 +361,9 @@ const Food = () => {
           <p>Suma białka: {totalProtein} g</p>
           <p>Suma wegli: {totalCarbo} g</p>
           <p>Suma tłuszczy: {totalFat} g</p>
-          <p>Suma kcal: {totalCalories} g</p>
+          <p>
+            Suma kcal: {totalCalories}/{calories} kcal
+          </p>
         </div>
       </div>
     </>

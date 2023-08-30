@@ -37,9 +37,8 @@ import TextField from "@mui/material/TextField";
 
 const Calculator: React.FC = () => {
   const dispatch = useDispatch();
-  const { mass, height, gender, age, result, progress, activity } = useSelector(
-    (state: RootState) => state.bmiCalculator
-  );
+  const { mass, height, gender, age, result, progress, activity, calories } =
+    useSelector((state: RootState) => state.bmiCalculator);
   const getProgressBarColor = (value: number) => {
     if (value <= 8) {
       return "#00f"; // Niebieski
@@ -228,7 +227,7 @@ const Calculator: React.FC = () => {
                 {mass && height ? (mass / (height * height)).toFixed(2) : ""}
               </h2>
               <br /> <h3>CPM:</h3>
-              <h2>{Math.round(activity * result * 100)} kcal</h2>
+              <h2>{calories} kcal</h2>
             </div>
             <div className="w-2/3  bg-bar  rounded-lg  p-6 ml-5">
               <h2> Wskazania:</h2> <br />

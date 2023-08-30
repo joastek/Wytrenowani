@@ -47,8 +47,8 @@ const bmiCalculatorSlice = createSlice({
         const mappedResult = Math.min(Math.max(0, result + 10));
         state.result = parseFloat(result.toFixed(2));
         state.progress = mappedResult;
-        // const calories = result * activity;
-        // state.activity = parseFloat(calories.toFixed(2));
+        const calories = activity * result * 100;
+        state.calories = Math.round(calories);
       } else {
         state.result = 0;
         state.progress = 0;
