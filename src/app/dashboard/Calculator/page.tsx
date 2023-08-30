@@ -12,10 +12,14 @@ import {
 } from "@/slice/bodyFatCalculator";
 import { RootState } from "@/types/type";
 import {
-  goodResult,
-  neutralResult,
-  sadResult,
-} from "@/components/Dashboard/fatResult";
+  veryLowFat,
+  lowFat,
+  goodFat,
+  optionalFat,
+  obeseFat,
+  veryObeseFat,
+  thickFat,
+} from "@/components/Calculator/fatResult";
 import FormControl from "@mui/material/FormControl";
 import InputLabel from "@mui/material/InputLabel";
 import Select, { SelectChangeEvent } from "@mui/material/Select";
@@ -179,11 +183,19 @@ const Calculator: React.FC = () => {
             <div className="flex justify-center items-center">
               Charakterystyka:
               {result > 0
-                ? result <= 18
-                  ? goodResult()
-                  : result <= 24
-                  ? neutralResult()
-                  : sadResult()
+                ? result <= 8
+                  ? veryLowFat()
+                  : result <= 12
+                  ? lowFat()
+                  : result <= 15
+                  ? goodFat()
+                  : result <= 19
+                  ? optionalFat()
+                  : result <= 25
+                  ? obeseFat()
+                  : result <= 35
+                  ? veryObeseFat()
+                  : thickFat()
                 : null}
             </div>
           </div>
