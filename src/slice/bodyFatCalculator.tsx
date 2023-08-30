@@ -34,7 +34,8 @@ const bmiCalculatorSlice = createSlice({
       const { mass, height, gender, age, activity } = state;
       const calculateBMI = () => {
         if (mass && height) {
-          const bmi = mass / (height * height);
+          const heightInMeters = height / 100;
+          const bmi = mass / (heightInMeters * heightInMeters);
           return bmi.toFixed(2);
         }
         return "";

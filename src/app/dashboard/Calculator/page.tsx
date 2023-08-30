@@ -20,6 +20,15 @@ import {
   veryObeseFat,
   thickFat,
 } from "@/components/Calculator/fatResult";
+import {
+  veryLowFatIndication,
+  lowFatIndication,
+  goodFatIndication,
+  optionalFatIndication,
+  obeseFatIndication,
+  veryObeseFatIndication,
+  thickFatIndication,
+} from "@/components/Calculator/fatIndications";
 import FormControl from "@mui/material/FormControl";
 import InputLabel from "@mui/material/InputLabel";
 import Select, { SelectChangeEvent } from "@mui/material/Select";
@@ -92,9 +101,12 @@ const Calculator: React.FC = () => {
                   value={height || ""}
                   variant="outlined"
                   className="m-4"
-                  onChange={(e) =>
-                    dispatch(setHeight(parseFloat(e.target.value)))
-                  }
+                  onChange={(e) => {
+                    const parsedValue = parseFloat(e.target.value);
+                    if (!isNaN(parsedValue) && parsedValue >= 0) {
+                      dispatch(setHeight(parsedValue));
+                    }
+                  }}
                 />
               </div>
               <div>
@@ -162,17 +174,23 @@ const Calculator: React.FC = () => {
             }rem] justify-center items-center relative p-6`}
           >
             <div className="bg-black h-6 rounded-lg mt-10 relative w-full">
-              <div className="absolute left-0 top-[120%]">0%</div>
-              <div className="absolute left-[20%] top-[120%]">8%</div>
-              <div className="absolute left-[30%] top-[120%]">12%</div>
-              <div className="absolute left-[37.5%] top-[120%]">15%</div>
-              <div className="absolute left-[47.5%] top-[120%]">19%</div>
-              <div className="absolute left-[62.5%] top-[120%]">25%</div>
-              <div className="absolute right-0 top-[120%]">40%</div>
+              <div className="absolute left-0 top-[120%] text-lg">0%</div>
+              <div className="absolute left-[20%] top-[120%] text-lg">8%</div>
+              <div className="absolute left-[30%] top-[120%] text-lg">12%</div>
+              <div className="absolute left-[37.5%] top-[120%] text-lg">
+                15%
+              </div>
+              <div className="absolute left-[47.5%] top-[120%] text-lg">
+                19%
+              </div>
+              <div className="absolute left-[62.5%] top-[120%] text-lg">
+                25%
+              </div>
+              <div className="absolute right-0 top-[120%] text-lg">40%</div>
 
               <motion.div
                 initial={{ width: 0 }}
-                animate={{ width: `${(result / 40) * 100}%` }}
+                animate={{ width: `${Math.min((result / 40) * 100, 100)}%` }}
                 transition={{ duration: 1.5, type: "tween" }}
                 style={{
                   background: getProgressBarColor(result),
@@ -180,37 +198,57 @@ const Calculator: React.FC = () => {
                 className="h-6 rounded-lg"
               ></motion.div>
             </div>
-            <div className="flex justify-center items-center">
-              Charakterystyka:
-              {result > 0
-                ? result <= 8
-                  ? veryLowFat()
-                  : result <= 12
-                  ? lowFat()
-                  : result <= 15
-                  ? goodFat()
-                  : result <= 19
-                  ? optionalFat()
-                  : result <= 25
-                  ? obeseFat()
-                  : result <= 35
-                  ? veryObeseFat()
-                  : thickFat()
-                : null}
+            <div className=" mt-[5%]">
+              <h2>Charakterystyka:</h2>
+              <div className="text-lg w-1/2">
+                {result > 0
+                  ? result <= 8
+                    ? veryLowFat()
+                    : result <= 12
+                    ? lowFat()
+                    : result <= 15
+                    ? goodFat()
+                    : result <= 19
+                    ? optionalFat()
+                    : result <= 25
+                    ? obeseFat()
+                    : result <= 35
+                    ? veryObeseFat()
+                    : thickFat()
+                  : null}
+              </div>
             </div>
           </div>
-          <div className="  mt-5 flex">
-            <div className=" w-1/4  bg-bar  rounded-lg h-48 p-6">
-              Poziom tkanki tłuszczowej: <br />
-              {result}
-              <br />
-              BMI: <br />{" "}
-              {mass && height ? (mass / (height * height)).toFixed(2) : ""}
-              <br /> CPM: <br />
-              {activity * result * 100}
+          <div className="  mt-5 flex items-stretch ">
+            <div className=" w-1/3  bg-bar  rounded-lg  p-6">
+              <h3>Poziom tkanki tłuszczowej:</h3>
+              <h2>{result}%</h2> <br />
+              <h3>BMI:</h3>{" "}
+              <h2>
+                {mass && height ? (mass / (height * height)).toFixed(2) : ""}
+              </h2>
+              <br /> <h3>CPM:</h3>
+              <h2>{Math.round(activity * result * 100)} kcal</h2>
             </div>
-            <div className="w-3/4  bg-bar  rounded-lg h-48 p-6 ml-5">
-              Wskazania: <br />
+            <div className="w-2/3  bg-bar  rounded-lg  p-6 ml-5">
+              <h2> Wskazania:</h2> <br />
+              <div className="text-lg">
+                {result > 0
+                  ? result <= 8
+                    ? veryLowFatIndication()
+                    : result <= 12
+                    ? lowFatIndication()
+                    : result <= 15
+                    ? goodFatIndication()
+                    : result <= 19
+                    ? optionalFatIndication()
+                    : result <= 25
+                    ? obeseFatIndication()
+                    : result <= 35
+                    ? veryObeseFatIndication()
+                    : thickFatIndication()
+                  : null}
+              </div>
             </div>
           </div>
           <div className="text-3xl "></div>

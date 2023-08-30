@@ -41,6 +41,12 @@ body {
   color: white;
   transition: background;
 }
+h2 {
+  font-size: 1.6rem;
+}
+h3 {
+  font-size: 1.4rem;
+}
 .sidebar {
   width: 17rem;
   height: 100%;
