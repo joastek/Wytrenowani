@@ -99,7 +99,8 @@ const Calculator: React.FC = () => {
                   label="Wzrost (m)"
                   value={height || ""}
                   variant="outlined"
-                  className="m-4"
+                  className="m-4 border border-white"
+                  sx={{ p: 1, borderColor: "white" }}
                   onChange={(e) => {
                     const parsedValue = parseFloat(e.target.value);
                     if (!isNaN(parsedValue) && parsedValue >= 0) {
