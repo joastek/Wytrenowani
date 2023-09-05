@@ -37,7 +37,7 @@ const Navigation = () => {
           alt="tło"
           className="w-full -top-8  z-20 absolute"
         /> */}
-        <div className="  text-white  flex justify-end  space-x-0.5 self-end">
+        <div className="  text-white   justify-end  space-x-0.5 self-end">
           <div className="flex p-6 z-40">
             {" "}
             PL
