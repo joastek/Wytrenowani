@@ -18,6 +18,7 @@ module.exports = {
         secondary: "#B397FD",
         third: "#722796",
         bar: "#20223780",
+        popup:"",
       },
     },
   },
