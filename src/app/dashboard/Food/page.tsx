@@ -130,35 +130,45 @@ const Food = () => {
 
             <tbody className="block ">
               {" "}
-              <div className="m-6  rounded-lg border-[0.2rem] border-secondary text-lg h-[20rem]">
-                <tr className="bg-third w-full flex z-10 justify-between rounded-t-[0.4rem] h-[20%]">
+              <div className="m-6  rounded-lg border-[0.2rem] border-secondary text-lg h-[20rem] relative">
+                <tr className="bg-third w-full flex z-10 justify-between items-center rounded-t-[0.4rem] h-[20%]">
                   <td colSpan={5} className="p-4">
                     Śniadanie
                   </td>
-                  <motion.div layout="position" className="flex">
+
+                  <motion.div
+                    layout
+                    className=" justify-center items-center flex parent "
+                    data-isOpen={addNewBreakfast}
+                    style={{
+                      borderRadius: "0.1rem",
+                      boxShadow: "0px 10px 30px rgba(0,0,0,0.5)",
+                    }}
+                    transition={{
+                      layout: { duration: 1, type: "spring" },
+                    }}
+                  >
                     <motion.button
                       // variant="contained"
                       onClick={() => handleAddNewBreakfast()}
-                      className="p-4 w-24 h-24 bg-white "
+                      className=" "
                     >
                       <AddIcon />
                     </motion.button>
                     {addNewBreakfast && (
                       <>
                         {" "}
-                        <div
-                          className="fixed top-0 left-0 right-0 bottom-0  bg-black  backdrop-filter backdrop-blur-[2px] bg-opacity-30 z-40"
+                        <motion.div
+                          className="fixed top-0 left-0 right-0 bottom-0  z-50 bg-transparent"
                           onClick={() => handleAddNewBreakfast()}
-                        ></div>
-                        <motion.td
-                          animate={{ opacity: addNewBreakfast ? 1 : 0 }} // Animacja wejścia
-                          exit={{ opacity: 0 }} // Animacja wyjścia
-                          colSpan={5}
-                          className="   bg-white w-[50rem]   h-[20rem] z-50"
-                        >
+                        ></motion.div>
+                        <motion.td className="   bg-white z-50 ">
                           <Button
                             variant="contained"
-                            onClick={() => handleAddFood(FoodSet.id)}
+                            onClick={() => {
+                              handleAddNewBreakfast();
+                              handleAddFood(FoodSet.id);
+                            }}
                           >
                             <AddIcon />
                           </Button>
