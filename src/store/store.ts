@@ -7,6 +7,7 @@ import TrainingSetReducer from "@/slice/trainingSet";
 import BreakfastSetReducer from "@/slice/FoodCalculator/BreakfastCalculator";
 import LunchSetReducer from "@/slice/FoodCalculator/LunchCalculator";
 import DinnerSetReducer from "@/slice/FoodCalculator/DinnerCalculator";
+import FoodReducer from "@/slice/FoodCalculator/NutrientsSum";
 const store = configureStore({
   reducer: {
     bmiCalculator: bmiCalculatorReducer,
@@ -15,6 +16,7 @@ const store = configureStore({
     breakfastSet: BreakfastSetReducer,
     lunchSet: LunchSetReducer,
     dinnerSet: DinnerSetReducer,
+    nutriensSum: FoodReducer,
   },
 });
 

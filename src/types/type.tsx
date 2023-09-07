@@ -71,3 +71,13 @@ export interface dinnerSet {
   series: number;
   reps: number;
 }
+
+export interface nutriensSum {
+  breakfast: any;
+  lunch: any;
+  dinner: any;
+  totalProtein: any;
+  totalCarbo: any;
+  totalFat: any;
+  totalCalories: any;
+}
