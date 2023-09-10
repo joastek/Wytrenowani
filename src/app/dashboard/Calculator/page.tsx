@@ -222,7 +222,7 @@ const Calculator: React.FC = () => {
           <div className="  mt-5 flex items-stretch ">
             <div className=" w-1/3  bg-bar  rounded-lg  p-6">
               <h3>Poziom tkanki tłuszczowej:</h3>
-              <h2>{result}%</h2> <br />
+              <h2>{result}%</h2> 
               <h3>BMI:</h3>{" "}
               <h2>
                 {mass && height ? (mass / (height * height)).toFixed(2) : ""}

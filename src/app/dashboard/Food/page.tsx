@@ -14,9 +14,11 @@ const Food = () => {
   const { calories, result } = useSelector(
     (state: RootState) => state.bmiCalculator
   );
-  const percentageComplete = (calories / totalCalories) * 100;
 
-  const radius = 25; // Promień koła
+  // Oblicz procentowe uzupełnienie okręgu
+  const percentageComplete = (totalCalories / calories) * 100;
+
+  const radius = 60; // Promień koła
   const circumference = 2 * Math.PI * radius; // Obwód koła
 
   const progress = (percentageComplete / 100) * circumference; // Długość wypełnienia okręgu
@@ -32,6 +34,8 @@ const Food = () => {
       return "#f00"; // Czerwony
     }
   };
+  const textX = 50; // Pozycja tekstu w osi X
+  const textY = 50; // Pozycja tekstu w osi Y
   return (
     <>
       <div className="flex justify-center items-center  flex-col ">
@@ -67,36 +71,40 @@ const Food = () => {
           </table>
         </div>
 
-        <div className="flex justify-center  w-[70rem]  items-stretch">
-          <div className="w-1/2  bg-bar m-6">
+        <div className="flex justify-center  w-[70rem]  items-stretch  bg-bar">
+          <div className="  m-6 h-[24rem]">
             {" "}
-            <motion.svg
-              width="100"
-              height="100"
-              xmlns="http://www.w3.org/2000/svg"
-              initial={{ opacity: 0 }}
-              animate={{ opacity: 1 }}
-              transition={{ duration: 1 }}
-            >
+            <motion.svg width="200" height="200">
               <motion.circle
-                cx="50"
-                cy="50"
-                r={radius}
+                cx="50%"
+                cy="50%"
+                r="3rem"
                 fill="transparent"
-                stroke={getProgressBarColor(totalCalories)} // Kolor okręgu
-                strokeWidth="5" // Grubość obramowania okręgu
+                stroke={getProgressBarColor(totalCalories)}
+                strokeWidth="5" // Grubość obramowania koła
                 strokeDasharray={circumference}
                 strokeDashoffset={circumference - progress}
                 initial={{ strokeDashoffset: circumference }}
                 animate={{ strokeDashoffset: circumference - progress }}
                 transition={{ duration: 1.5, type: "tween" }}
-              />
+                width="100"
+                height="100"
+                xmlns="http://www.w3.org/2000/svg"
+              >
+                {" "}
+              </motion.circle>{" "}
+              <text x="750%" y="50%" text-anchor="middle">
+                <tspan x="50%" dy="0">
+                  Suma kcal:
+                </tspan>
+                <tspan x="50%" dy="1.2em">
+                  {totalCalories}/{calories} kcal
+                </tspan>
+              </text>
             </motion.svg>
-            <p>
-              Suma kcal: {totalCalories}/{calories} kcal
-            </p>
+            <p> </p>
           </div>
-          <div className="w-1/2  bg-bar">
+          <div className=" ">
             {" "}
             <p>Suma białka: {totalProtein} g</p>
             <p>Suma wegli: {totalCarbo} g</p>
