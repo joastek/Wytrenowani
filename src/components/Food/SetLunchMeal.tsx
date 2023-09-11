@@ -1,5 +1,5 @@
 "use client";
-import { addLunch } from "@/slice/FoodCalculator/LunchCalculator";
+import { addLunch, deleteLunch } from "@/slice/FoodCalculator/LunchCalculator";
 import { useSelector, useDispatch } from "react-redux";
 import { motion } from "framer-motion";
 import { useState } from "react";
@@ -7,8 +7,12 @@ import { lunchState } from "@/types/type";
 import Button from "@mui/material/Button";
 import AddIcon from "@mui/icons-material/Add";
 import TextField from "@mui/material/TextField";
-import { addNutriens } from "@/slice/FoodCalculator/NutrientsSum";
-
+import {
+  addNutriens,
+  deleteNutriens,
+} from "@/slice/FoodCalculator/NutrientsSum";
+import IconButton from "@mui/material/IconButton";
+import DeleteIcon from "@mui/icons-material/Delete";
 const Lunch = () => {
   const dispatch = useDispatch();
   const FoodSetLunch = useSelector((state: lunchState) => state.lunchSet.value);
@@ -17,34 +21,52 @@ const Lunch = () => {
   const [carbo, setCarbo] = useState("");
   const [fat, setFat] = useState("");
   const [gainedCalories, setCalories] = useState("");
+  const lunchData = {
+    FoodName,
+    protein,
+    carbo,
+    fat,
+    gainedCalories,
+  };
   const handleAddFoodLunch = (FoodIdLunch: any) => {
     const LunchId =
       FoodSetLunch.length > 0 ? FoodSetLunch[FoodSetLunch.length - 1].id : 0;
+    const proteinValue = isNaN(parseFloat(protein)) ? "0" : protein;
+    const carboValue = isNaN(parseFloat(carbo)) ? "0" : carbo;
+    const fatValue = isNaN(parseFloat(fat)) ? "0" : fat;
+    const gainedCaloriesValue = isNaN(parseFloat(gainedCalories))
+      ? "0"
+      : gainedCalories;
     dispatch(
       addLunch({
-        LunchId: LunchId,
+        id: LunchId + 1,
         FoodName: FoodName,
-        protein: protein,
-        carbo: carbo,
-        fat: fat,
-        gainedCalories: gainedCalories,
+        protein: proteinValue,
+        carbo: carboValue,
+        fat: fatValue,
+        gainedCalories: gainedCaloriesValue,
 
         FoodIdLunch,
       })
     );
-    const lunchData = {
-      FoodName,
-      protein,
-      carbo,
-      fat,
-      gainedCalories,
-    };
+
     dispatch(addNutriens(lunchData));
   };
   const [addNewLunch, setAddNewLunch] = useState(false);
 
   const handleAddNewLunch = () => {
     setAddNewLunch((prev) => !prev);
+  };
+  const handleDeleteFood = (foodId: number) => {
+    dispatch(deleteNutriens(lunchData));
+    dispatch(deleteLunch({ id: foodId }));
+  };
+  const handleValueChange = (
+    event: any,
+    setValue: React.Dispatch<React.SetStateAction<string>>
+  ) => {
+    const value = event.target.value;
+    setValue(value === "" || isNaN(parseFloat(value)) ? "0" : value);
   };
   return (
     <>
@@ -82,6 +104,56 @@ const Lunch = () => {
                 <motion.td colSpan={5} className="block w-full bg-third z-50 ">
                   {" "}
                   <h3 className="m-4">Dodaj produkt</h3>
+                  <TextField
+                    type="number"
+                    id="outlined-basic"
+                    label="Produkt"
+                    variant="outlined"
+                    onChange={(event) => {
+                      handleValueChange(event, setProtein);
+                    }}
+                    className="w-36 m-2"
+                  />
+                  <TextField
+                    type="number"
+                    id="outlined-basic"
+                    label="Białko"
+                    variant="outlined"
+                    onChange={(event) => {
+                      setProtein(event.target.value);
+                    }}
+                    className="w-36 m-2"
+                  />
+                  <TextField
+                    type="number"
+                    id="outlined-basic"
+                    label="Węglodowany"
+                    variant="outlined"
+                    onChange={(event) => {
+                      setCarbo(event.target.value);
+                    }}
+                    className="w-36 m-2"
+                  />
+                  <TextField
+                    type="number"
+                    id="outlined-basic"
+                    label="Tłuszcze"
+                    variant="outlined"
+                    onChange={(event) => {
+                      setFat(event.target.value);
+                    }}
+                    className="w-36 m-2"
+                  />
+                  <TextField
+                    type="number"
+                    id="outlined-basic"
+                    label="Kcal"
+                    variant="outlined"
+                    onChange={(event) => {
+                      setCalories(event.target.value);
+                    }}
+                    className="w-36 m-2"
+                  />{" "}
                   <Button
                     variant="contained"
                     onClick={() => {
@@ -92,71 +164,33 @@ const Lunch = () => {
                   >
                     <AddIcon />
                   </Button>
-                  <TextField
-                    id="outlined-basic"
-                    label="Produkt"
-                    variant="outlined"
-                    onChange={(event) => {
-                      setFoodName(event.target.value);
-                    }}
-                    className="w-36 m-2"
-                  />
-                  <TextField
-                    id="outlined-basic"
-                    label="Białko"
-                    variant="outlined"
-                    onChange={(event) => {
-                      setProtein(event.target.value);
-                    }}
-                    className="w-36 m-2"
-                  />
-                  <TextField
-                    id="outlined-basic"
-                    label="Węglodowany"
-                    variant="outlined"
-                    onChange={(event) => {
-                      setCarbo(event.target.value);
-                    }}
-                    className="w-36 m-2"
-                  />
-                  <TextField
-                    id="outlined-basic"
-                    label="Tłuszcze"
-                    variant="outlined"
-                    onChange={(event) => {
-                      setFat(event.target.value);
-                    }}
-                    className="w-36 m-2"
-                  />
-                  <TextField
-                    id="outlined-basic"
-                    label="Kcal"
-                    variant="outlined"
-                    onChange={(event) => {
-                      setCalories(event.target.value);
-                    }}
-                    className="w-36 m-2"
-                  />{" "}
                 </motion.td>{" "}
               </>
             )}
           </motion.div>
         </tr>
-        {FoodSetLunch.map((foodDinner: any) => {
+        {FoodSetLunch.map((foodLunch: any) => {
           return (
-            <tr key={foodDinner.id} className="flex">
+            <tr key={foodLunch.id} className="flex">
+              <IconButton
+                aria-label="delete"
+                size="large"
+                onClick={() => {
+                  handleDeleteFood(foodLunch.id);
+                }}
+              >
+                <DeleteIcon />
+              </IconButton>
               <td className="w-[40%] flex justify-center">
-                {foodDinner.FoodName}
+                {foodLunch.FoodName}
               </td>
               <td className="w-[15%] flex justify-center">
-                {foodDinner.protein}
+                {foodLunch.protein}
               </td>
-              <td className="w-[20%] flex justify-center">
-                {foodDinner.carbo}
-              </td>
-              <td className="w-[15%] flex justify-center">{foodDinner.fat}</td>
+              <td className="w-[20%] flex justify-center">{foodLunch.carbo}</td>
+              <td className="w-[15%] flex justify-center">{foodLunch.fat}</td>
               <td className="w-[15%] flex justify-center">
-                {foodDinner.totalCalories}
+                {foodLunch.totalCalories}
               </td>
             </tr>
           );

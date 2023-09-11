@@ -9,7 +9,8 @@ export const BreakfastSetSlice = createSlice({
       state.value.push(action.payload);
     },
     deleteBreakfast: (state, action) => {
-      state.value = state.value.filter((food) => food.id !== action.payload.id);
+      const idToDelete = action.payload.id;
+      state.value = state.value.filter((food) => food.id !== idToDelete);
     },
     updateBreakfast: (state, action) => {
       state.value.map((food) => {

@@ -21,21 +21,19 @@ const Food = () => {
   const radius = 60; // Promień koła
   const circumference = 2 * Math.PI * radius; // Obwód koła
 
-  const progress = (percentageComplete / 100) * circumference; // Długość wypełnienia okręgu
-
+  let progress = (percentageComplete / 100) * circumference; // Długość wypełnienia okręgu
+  if (progress >= circumference) {
+    progress = circumference;
+  }
   const getProgressBarColor = (value: number) => {
-    if (value <= 8) {
-      return "#00f"; // Niebieski
-    } else if (value <= 19) {
-      return "#006400"; // Zielony
-    } else if (value <= 25) {
-      return "#ff0"; // Żółty
+    if (totalCalories <= calories) {
+      return "#80ed99"; // Niebieski
     } else {
       return "#f00"; // Czerwony
     }
   };
-  const textX = 50; // Pozycja tekstu w osi X
-  const textY = 50; // Pozycja tekstu w osi Y
+  console.log(totalCalories);
+  console.log(calories);
   return (
     <>
       <div className="flex justify-center items-center  flex-col ">

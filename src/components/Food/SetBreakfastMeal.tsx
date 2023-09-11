@@ -9,8 +9,12 @@ import { breakfastState } from "@/types/type";
 import Button from "@mui/material/Button";
 import AddIcon from "@mui/icons-material/Add";
 import TextField from "@mui/material/TextField";
-import { addNutriens } from "@/slice/FoodCalculator/NutrientsSum";
-
+import {
+  addNutriens,
+  deleteNutriens,
+} from "@/slice/FoodCalculator/NutrientsSum";
+import IconButton from "@mui/material/IconButton";
+import DeleteIcon from "@mui/icons-material/Delete";
 const Breakfast = () => {
   const dispatch = useDispatch();
 
@@ -23,36 +27,54 @@ const Breakfast = () => {
   const [carbo, setCarbo] = useState("");
   const [fat, setFat] = useState("");
   const [gainedCalories, setCalories] = useState("");
+  const breakfastData = {
+    FoodName,
+    protein,
+    carbo,
+    fat,
+    gainedCalories,
+  };
   const handleAddFood = (FoodId: any) => {
     const breakfastId = FoodSet.length > 0 ? FoodSet[FoodSet.length - 1].id : 0;
+    const proteinValue = isNaN(parseFloat(protein)) ? "0" : protein;
+    const carboValue = isNaN(parseFloat(carbo)) ? "0" : carbo;
+    const fatValue = isNaN(parseFloat(fat)) ? "0" : fat;
+    const gainedCaloriesValue = isNaN(parseFloat(gainedCalories))
+      ? "0"
+      : gainedCalories;
+
     dispatch(
       addBreakfast({
-        breakfastid: breakfastId,
+        id: breakfastId + 1,
         FoodName: FoodName,
-        protein: protein,
-        carbo: carbo,
-        fat: fat,
-        gainedCalories: gainedCalories,
-
+        protein: proteinValue, // Użyj sparsowanej wartości
+        carbo: carboValue, // Użyj sparsowanej wartości
+        fat: fatValue, // Użyj sparsowanej wartości
+        gainedCalories: gainedCaloriesValue, // Użyj sparsowanej wartości
         FoodId,
       })
     );
-    const breakfastData = {
-      FoodName,
-      protein,
-      carbo,
-      fat,
-      gainedCalories,
-    };
 
     dispatch(addNutriens(breakfastData));
   };
-
+  console.log(fat);
+  console.log(gainedCalories);
   const [addNewBreakfast, setAddNewBreakfast] = useState(false);
   const handleAddNewBreakfast = () => {
     setAddNewBreakfast((prev) => !prev);
   };
-
+  /////
+  const handleDeleteFood = (foodId: number) => {
+    dispatch(deleteNutriens(breakfastData));
+    dispatch(deleteBreakfast({ id: foodId }));
+  };
+  const handleValueChange = (
+    event: any,
+    setValue: React.Dispatch<React.SetStateAction<string>>
+  ) => {
+    const value = event.target.value;
+    setValue(value === "" || isNaN(parseFloat(value)) ? "0" : value);
+  };
   return (
     <>
       <div className="m-6  rounded-lg border-[0.2rem] border-secondary text-lg h-[20rem] ">
@@ -97,6 +119,56 @@ const Breakfast = () => {
                 >
                   {" "}
                   <h3 className="m-4">Dodaj produkt</h3>
+                  <TextField
+                    type="number"
+                    id="outlined-basic"
+                    label="Produkt"
+                    variant="outlined"
+                    onChange={(event) => {
+                      setFoodName(event.target.value);
+                    }}
+                    className="w-36 m-2"
+                  />
+                  <TextField
+                    type="number"
+                    id="outlined-basic"
+                    label="Białko"
+                    variant="outlined"
+                    onChange={(event) => {
+                      setProtein(event.target.value);
+                    }}
+                    className="w-36 m-2"
+                  />
+                  <TextField
+                    type="number"
+                    id="outlined-basic"
+                    label="Węglodowany"
+                    variant="outlined"
+                    onChange={(event) => {
+                      setCarbo(event.target.value);
+                    }}
+                    className="w-36 m-2"
+                  />
+                  <TextField
+                    type="number"
+                    id="outlined-basic"
+                    label="Tłuszcze"
+                    variant="outlined"
+                    onChange={(event) => {
+                      setFat(event.target.value);
+                    }}
+                    className="w-36 m-2"
+                  />
+                  <TextField
+                    type="number"
+                    id="outlined-basic"
+                    label="Kcal"
+                    variant="outlined"
+                    onChange={(event) => {
+                      setCalories(event.target.value);
+                    }}
+                    className="w-36 m-2"
+                  />{" "}
                   <Button
                     variant="contained"
                     onClick={() => {
@@ -107,51 +179,6 @@ const Breakfast = () => {
                   >
                     <AddIcon />
                   </Button>
-                  <TextField
-                    id="outlined-basic"
-                    label="Produkt"
-                    variant="outlined"
-                    onChange={(event) => {
-                      setFoodName(event.target.value);
-                    }}
-                    className="w-36 m-2"
-                  />
-                  <TextField
-                    id="outlined-basic"
-                    label="Białko"
-                    variant="outlined"
-                    onChange={(event) => {
-                      setProtein(event.target.value);
-                    }}
-                    className="w-36 m-2"
-                  />
-                  <TextField
-                    id="outlined-basic"
-                    label="Węglodowany"
-                    variant="outlined"
-                    onChange={(event) => {
-                      setCarbo(event.target.value);
-                    }}
-                    className="w-36 m-2"
-                  />
-                  <TextField
-                    id="outlined-basic"
-                    label="Tłuszcze"
-                    variant="outlined"
-                    onChange={(event) => {
-                      setFat(event.target.value);
-                    }}
-                    className="w-36 m-2"
-                  />
-                  <TextField
-                    id="outlined-basic"
-                    label="Kcal"
-                    variant="outlined"
-                    onChange={(event) => {
-                      setCalories(event.target.value);
-                    }}
-                    className="w-36 m-2"
-                  />{" "}
                 </motion.td>{" "}
               </>
             )}
@@ -160,6 +187,15 @@ const Breakfast = () => {
         {FoodSet.map((foodBreakfast: any, index: number) => {
           return (
             <tr key={foodBreakfast.id} className="flex">
+              <IconButton
+                aria-label="delete"
+                size="large"
+                onClick={() => {
+                  handleDeleteFood(foodBreakfast.id);
+                }}
+              >
+                <DeleteIcon />
+              </IconButton>
               <td className="w-[40%] flex justify-center">
                 {foodBreakfast.FoodName}
               </td>
@@ -173,7 +209,7 @@ const Breakfast = () => {
                 {foodBreakfast.fat}
               </td>
               <td className="w-[15%] flex justify-center">
-                {foodBreakfast.calories}
+                {foodBreakfast.gainedCalories}
               </td>
             </tr>
           );
