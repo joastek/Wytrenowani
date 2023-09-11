@@ -18,7 +18,7 @@ const Food = () => {
   // Oblicz procentowe uzupełnienie okręgu
   const percentageComplete = (totalCalories / calories) * 100;
 
-  const radius = 60; // Promień koła
+  const radius = 95; // Promień koła
   const circumference = 2 * Math.PI * radius; // Obwód koła
 
   let progress = (percentageComplete / 100) * circumference; // Długość wypełnienia okręgu
@@ -36,9 +36,9 @@ const Food = () => {
   console.log(calories);
   return (
     <>
-      <div className="flex justify-center items-center  flex-col ">
-        <div className="w-[70rem] justify-center items-center relative">
-          <table className="  m-12  w-full bg-bar rounded-lg p-12 ">
+      <div className="flex justify-center items-center  flex-col  ">
+        <div className="w-[70rem] justify-center items-center relative m-6">
+          <table className="   w-full bg-bar rounded-lg  ">
             <thead className="">
               <tr className="flex m-6 p-4 rounded-lg border-[0.4rem] border-secondary text-lg ">
                 <th style={{ width: "40%" }} className="font-light">
@@ -60,7 +60,7 @@ const Food = () => {
             </thead>
 
             <tbody>
-              <div className="overflow-y-auto h-[45rem]">
+              <div className="overflow-y-auto h-[40rem]">
                 <Breakfast />
                 <Dinner />
                 <Lunch />
@@ -69,29 +69,34 @@ const Food = () => {
           </table>
         </div>
 
-        <div className="flex justify-center  w-[70rem]  items-stretch  bg-bar">
-          <div className="  m-6 h-[24rem]">
+        <div className="flex   w-[70rem]  mt-[2rem] bg-bar p-6">
+          <div className="  h-[16rem]">
             {" "}
-            <motion.svg width="200" height="200">
+            <motion.svg width="300" height="200">
               <motion.circle
                 cx="50%"
                 cy="50%"
-                r="3rem"
+                r={radius}
                 fill="transparent"
                 stroke={getProgressBarColor(totalCalories)}
-                strokeWidth="5" // Grubość obramowania koła
+                strokeWidth="7" // Grubość obramowania koła
                 strokeDasharray={circumference}
                 strokeDashoffset={circumference - progress}
                 initial={{ strokeDashoffset: circumference }}
                 animate={{ strokeDashoffset: circumference - progress }}
                 transition={{ duration: 1.5, type: "tween" }}
-                width="100"
-                height="100"
+                width="50"
+                height="50"
                 xmlns="http://www.w3.org/2000/svg"
               >
                 {" "}
               </motion.circle>{" "}
-              <text x="750%" y="50%" text-anchor="middle">
+              <text
+                x="750%"
+                y="50%"
+                textAnchor="middle"
+                className="text-red-600 text-lg"
+              >
                 <tspan x="50%" dy="0">
                   Suma kcal:
                 </tspan>

@@ -68,13 +68,7 @@ const Breakfast = () => {
     dispatch(deleteNutriens(breakfastData));
     dispatch(deleteBreakfast({ id: foodId }));
   };
-  const handleValueChange = (
-    event: any,
-    setValue: React.Dispatch<React.SetStateAction<string>>
-  ) => {
-    const value = event.target.value;
-    setValue(value === "" || isNaN(parseFloat(value)) ? "0" : value);
-  };
+
   return (
     <>
       <div className="m-6  rounded-lg border-[0.2rem] border-secondary text-lg h-[20rem] ">
@@ -120,7 +114,6 @@ const Breakfast = () => {
                   {" "}
                   <h3 className="m-4">Dodaj produkt</h3>
                   <TextField
-                    type="number"
                     id="outlined-basic"
                     label="Produkt"
                     variant="outlined"
