@@ -1,8 +1,8 @@
 export interface BMIState {
-  mass: number | null;
-  height: number | null;
+  mass: number;
+  height: number;
   gender: number;
-  age: number | null;
+  age: number ;
   result: number;
   progress: number;
   activity: number;

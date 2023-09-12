@@ -34,7 +34,7 @@ import InputLabel from "@mui/material/InputLabel";
 import Select, { SelectChangeEvent } from "@mui/material/Select";
 import MenuItem from "@mui/material/MenuItem";
 import TextField from "@mui/material/TextField";
-
+import InputAdornment from "@mui/material/InputAdornment";
 const Calculator: React.FC = () => {
   const dispatch = useDispatch();
   const { mass, height, gender, age, result, progress, activity, calories } =
@@ -85,27 +85,37 @@ const Calculator: React.FC = () => {
                 <TextField
                   type="number"
                   id="outlined-basic"
-                  label="Masa ciała (kg)"
+                  label="Masa ciała "
                   value={mass || ""}
                   variant="outlined"
-                  className="m-4"
+                  className="m-4 w-[14rem]"
                   onChange={(e) =>
                     dispatch(setMass(parseFloat(e.target.value)))
                   }
+                  InputProps={{
+                    startAdornment: (
+                      <InputAdornment position="start">kg</InputAdornment>
+                    ),
+                  }}
                 />
                 <TextField
+                  sx={{ color: "white" }}
                   type="number"
                   id="outlined-basic"
-                  label="Wzrost (m)"
+                  label="Wzrost"
                   value={height || ""}
                   variant="outlined"
-                  className="m-4 border border-white"
-                  sx={{ p: 1, borderColor: "white" }}
+                  className=" m-4 w-[14rem]"
                   onChange={(e) => {
                     const parsedValue = parseFloat(e.target.value);
                     if (!isNaN(parsedValue) && parsedValue >= 0) {
                       dispatch(setHeight(parsedValue));
                     }
+                  }}
+                  InputProps={{
+                    startAdornment: (
+                      <InputAdornment position="start">cm</InputAdornment>
+                    ),
                   }}
                 />
               </div>
@@ -117,8 +127,13 @@ const Calculator: React.FC = () => {
                   label="Wiek"
                   value={age || ""}
                   variant="outlined"
-                  className="m-4"
+                  className="m-4 w-[14rem]"
                   onChange={(e) => dispatch(setAge(parseInt(e.target.value)))}
+                  InputProps={{
+                    startAdornment: (
+                      <InputAdornment position="start">L</InputAdornment>
+                    ),
+                  }}
                 />
                 <FormControl sx={{ m: 2, width: "35ch" }}>
                   <InputLabel id="demo-simple-select-label">Płeć</InputLabel>
@@ -127,7 +142,7 @@ const Calculator: React.FC = () => {
                     id="demo-simple-select"
                     value={gender}
                     label="Płeć"
-                    className=""
+                    className=" w-[14rem]"
                     onChange={(e: any) =>
                       dispatch(setGender(parseInt(e.target.value)))
                     }
@@ -137,16 +152,6 @@ const Calculator: React.FC = () => {
                   </Select>
                 </FormControl>
               </div>
-
-              {/* <select
-            id="gender"
-            value={gender}
-            onChange={(e) => dispatch(setGender(parseInt(e.target.value)))}
-          >
-            <option value={1}>Mężczyzna</option>
-            <option value={0}>Kobieta</option>
-          </select> */}
-              <div>{/* {calories} */}</div>
             </div>
             <div className="w-1/3 ">
               {divs.map((item) => (
@@ -222,7 +227,7 @@ const Calculator: React.FC = () => {
           <div className="  mt-5 flex items-stretch ">
             <div className=" w-1/3  bg-bar  rounded-lg  p-6">
               <h3>Poziom tkanki tłuszczowej:</h3>
-              <h2>{result}%</h2> 
+              <h2>{result}%</h2>
               <h3>BMI:</h3>{" "}
               <h2>
                 {mass && height ? (mass / (height * height)).toFixed(2) : ""}

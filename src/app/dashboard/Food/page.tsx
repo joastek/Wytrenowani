@@ -5,35 +5,27 @@ import { motion } from "framer-motion";
 import Breakfast from "@/components/Food/SetBreakfastMeal";
 import Dinner from "@/components/Food/SetDinnerMeal";
 import Lunch from "@/components/Food/SetLunchMeal";
-
+import { CircularProgressbar, buildStyles } from "react-circular-progressbar";
+import "react-circular-progressbar/dist/styles.css";
 const Food = () => {
   const { totalProtein, totalCarbo, totalFat, totalCalories } = useSelector(
     (state: any) => state.nutriensSum
   );
 
-  const { calories, result } = useSelector(
+  const { calories, result, mass } = useSelector(
     (state: RootState) => state.bmiCalculator
   );
 
-  // Oblicz procentowe uzupełnienie okręgu
-  const percentageComplete = (totalCalories / calories) * 100;
+  ///nutriens circles
+  const Protein = Math.ceil(1.8 * mass);
+  const Fat = Math.ceil(0.6 * mass);
+  const ProteinGrammeToCalories = Protein * 4;
+  const FatGrammeToCalories = Fat * 9;
+  const Carbo = Math.ceil(
+    (calories - ProteinGrammeToCalories - FatGrammeToCalories) / 4
+  );
 
-  const radius = 95; // Promień koła
-  const circumference = 2 * Math.PI * radius; // Obwód koła
-
-  let progress = (percentageComplete / 100) * circumference; // Długość wypełnienia okręgu
-  if (progress >= circumference) {
-    progress = circumference;
-  }
-  const getProgressBarColor = (value: number) => {
-    if (totalCalories <= calories) {
-      return "#80ed99"; // Niebieski
-    } else {
-      return "#f00"; // Czerwony
-    }
-  };
-  console.log(totalCalories);
-  console.log(calories);
+  const percentage = 66;
   return (
     <>
       <div className="flex justify-center items-center  flex-col  ">
@@ -69,49 +61,50 @@ const Food = () => {
           </table>
         </div>
 
-        <div className="flex   w-[70rem]  mt-[2rem] bg-bar p-6">
-          <div className="  h-[16rem]">
-            {" "}
-            <motion.svg width="300" height="200">
-              <motion.circle
-                cx="50%"
-                cy="50%"
-                r={radius}
-                fill="transparent"
-                stroke={getProgressBarColor(totalCalories)}
-                strokeWidth="7" // Grubość obramowania koła
-                strokeDasharray={circumference}
-                strokeDashoffset={circumference - progress}
-                initial={{ strokeDashoffset: circumference }}
-                animate={{ strokeDashoffset: circumference - progress }}
-                transition={{ duration: 1.5, type: "tween" }}
-                width="50"
-                height="50"
-                xmlns="http://www.w3.org/2000/svg"
-              >
-                {" "}
-              </motion.circle>{" "}
-              <text
-                x="750%"
-                y="50%"
-                textAnchor="middle"
-                className="text-red-600 text-lg"
-              >
-                <tspan x="50%" dy="0">
-                  Suma kcal:
-                </tspan>
-                <tspan x="50%" dy="1.2em">
-                  {totalCalories}/{calories} kcal
-                </tspan>
-              </text>
-            </motion.svg>
-            <p> </p>
+        <div className="flex   w-[70rem]  mt-[2rem] bg-bar items-stretch p-12   rounded-lg">
+          <div className="w-1/4">
+            <div className="w-[13rem] h-[13rem] flex flex-col  items-center">
+              Suma kcal
+              <CircularProgressbar
+                value={totalCalories}
+                maxValue={calories}
+                text={` \n ${totalCalories}/${calories} kcal`}
+                styles={buildStyles({
+                  textColor: "white",
+                  textSize: "0.4rem",
+                  pathColor: `rgba(62, 112, 199, ${percentage / 100})`,
+                })}
+              />
+            </div>
           </div>
-          <div className=" ">
-            {" "}
-            <p>Suma białka: {totalProtein} g</p>
-            <p>Suma wegli: {totalCarbo} g</p>
-            <p>Suma tłuszczy: {totalFat} g</p>
+          <div className="w-3/4 flex items-center justify-center">
+            <div className=" w-[10rem] h-[10rem] flex flex-col  items-center mr-8 ">
+              Suma białka:
+              <CircularProgressbar
+                value={totalProtein}
+                maxValue={Protein}
+                text={` \n ${totalProtein}/${Protein} kcal`}
+                styles={buildStyles({ textColor: "white", textSize: "0.4rem" })}
+              />{" "}
+            </div>{" "}
+            <div className=" w-[10rem] h-[10rem] flex flex-col  items-center mr-8">
+              Suma węglowodanów
+              <CircularProgressbar
+                value={totalCarbo}
+                maxValue={Carbo}
+                text={` \n ${totalCarbo}/${Carbo} kcal`}
+                styles={buildStyles({ textColor: "white", textSize: "0.4rem" })}
+              />
+            </div>
+            <div className=" w-[10rem] h-[10rem] flex flex-col  items-center">
+              suma tłuszczy:
+              <CircularProgressbar
+                value={totalFat}
+                maxValue={Fat}
+                text={` \n ${totalFat}/${Fat} kcal`}
+                styles={buildStyles({ textColor: "white", textSize: "0.4rem" })}
+              />
+            </div>
           </div>
         </div>
       </div>
