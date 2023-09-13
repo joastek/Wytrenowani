@@ -79,8 +79,8 @@ const Breakfast = () => {
   return (
     <>
       <div className="m-6  rounded-lg border-[0.2rem] border-secondary text-lg h-[20rem] ">
-        <tr className="bg-third  flex z-10 justify-between  rounded-t-[0.4rem] h-[20%]">
-          <td className="p-4">Śniadanie</td>
+        <tr className="bg-third  flex  justify-end rounded-t-[0.4rem] h-[20%] relative">
+          <a className="absolute left-0 p-4 z-0">Śniadanie</a>
           <motion.div
             layout
             className=" justify-center items-center flex parent m-2 bg-third"
@@ -113,7 +113,7 @@ const Breakfast = () => {
                 ></motion.div>
                 <motion.td
                   colSpan={5}
-                  className="block w-full bg-third z-50 "
+                  className="w-full bg-third z-50  "
                   initial={{ opacity: 0 }}
                   animate={{ opacity: 1 }}
                   transition={{ duration: 1 }}
@@ -186,7 +186,7 @@ const Breakfast = () => {
         </tr>
         {FoodSet.map((foodBreakfast: any, index: number) => {
           return (
-            <tr key={foodBreakfast.id} className="flex">
+            <tr key={foodBreakfast.id} className="flex items-center">
               <IconButton
                 aria-label="delete"
                 size="large"
@@ -196,10 +196,10 @@ const Breakfast = () => {
               >
                 <DeleteIcon />
               </IconButton>
-              <td className="w-[40%] flex justify-center">
+              <td className="w-[32%] flex justify-center">
                 {foodBreakfast.FoodName}
               </td>
-              <td className="w-[15%] flex justify-center">
+              <td className="w-[18%] flex justify-center">
                 {foodBreakfast.protein}
               </td>
               <td className="w-[20%] flex justify-center">

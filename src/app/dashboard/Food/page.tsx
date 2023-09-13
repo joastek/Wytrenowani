@@ -29,8 +29,8 @@ const Food = () => {
   return (
     <>
       <div className="flex justify-center items-center  flex-col  ">
-        <div className="w-[70rem] justify-center items-center relative m-6">
-          <table className="   w-full bg-bar rounded-lg  ">
+        <div className="w-[70rem] justify-center items-center relative ">
+          <table className="   w-full bg-bar rounded-lg   ">
             <thead className="">
               <tr className="flex m-6 p-4 rounded-lg border-[0.4rem] border-secondary text-lg ">
                 <th style={{ width: "40%" }} className="font-light">
@@ -52,7 +52,7 @@ const Food = () => {
             </thead>
 
             <tbody>
-              <div className="overflow-y-auto h-[40rem]">
+              <div className="overflow-y-auto h-[40rem] border-[0.4rem] border-secondary p-4 m-6 rounded-lg">
                 <Breakfast />
                 <Dinner />
                 <Lunch />
@@ -61,48 +61,60 @@ const Food = () => {
           </table>
         </div>
 
-        <div className="flex   w-[70rem]  mt-[2rem] bg-bar items-stretch p-12   rounded-lg">
-          <div className="w-1/4">
-            <div className="w-[13rem] h-[13rem] flex flex-col  items-center">
-              Suma kcal
+        <div className="flex   w-[70rem]  mt-[2rem]  items-stretch    rounded-lg">
+          <div className="w-1/3">
+            <div className=" flex flex-col  items-center bg-bar p-6 mr-5   rounded-lg">
+              <h3 className="mb-4">Suma kcal :</h3>
               <CircularProgressbar
                 value={totalCalories}
                 maxValue={calories}
                 text={` \n ${totalCalories}/${calories} kcal`}
                 styles={buildStyles({
                   textColor: "white",
-                  textSize: "0.4rem",
-                  pathColor: `rgba(62, 112, 199, ${percentage / 100})`,
+                  textSize: "0.7rem",
+                  pathColor: `rgb(87, 204, 153, ${percentage / 100})`,
                 })}
               />
             </div>
           </div>
-          <div className="w-3/4 flex items-center justify-center">
-            <div className=" w-[10rem] h-[10rem] flex flex-col  items-center mr-8 ">
-              Suma białka:
+          <div className="w-2/3 flex items-center justify-center  bg-bar  rounded-lg">
+            <div className=" w-[14rem] h-[16rem] flex flex-col  items-center mr-6 ">
+              <h4 className="mb-4">Suma białka :</h4>
               <CircularProgressbar
                 value={totalProtein}
                 maxValue={Protein}
                 text={` \n ${totalProtein}/${Protein} kcal`}
-                styles={buildStyles({ textColor: "white", textSize: "0.4rem" })}
+                styles={buildStyles({
+                  textColor: "white",
+                  textSize: "0.6rem",
+                  pathColor: `rgb(18, 113, 255, ${percentage / 100}`,
+                })}
               />{" "}
             </div>{" "}
-            <div className=" w-[10rem] h-[10rem] flex flex-col  items-center mr-8">
-              Suma węglowodanów
+            <div className=" w-[14rem] h-[16rem] flex flex-col  items-center mr-6">
+              <h4 className="mb-4">Suma węglowodanów :</h4>
               <CircularProgressbar
                 value={totalCarbo}
                 maxValue={Carbo}
                 text={` \n ${totalCarbo}/${Carbo} kcal`}
-                styles={buildStyles({ textColor: "white", textSize: "0.4rem" })}
+                styles={buildStyles({
+                  textColor: "white",
+                  textSize: "0.6rem",
+                  pathColor: `rgb(221, 74, 255, ${percentage / 100}`,
+                })}
               />
             </div>
-            <div className=" w-[10rem] h-[10rem] flex flex-col  items-center">
-              suma tłuszczy:
+            <div className=" w-[14rem] h-[16rem] flex flex-col  items-center">
+              <h4 className="mb-4">Suma tłuszczy :</h4>
               <CircularProgressbar
                 value={totalFat}
                 maxValue={Fat}
                 text={` \n ${totalFat}/${Fat} kcal`}
-                styles={buildStyles({ textColor: "white", textSize: "0.4rem" })}
+                styles={buildStyles({
+                  textColor: "white",
+                  textSize: "0.6rem",
+                  pathColor: `rgb(200, 50, 50, ${percentage / 100}`,
+                })}
               />
             </div>
           </div>
