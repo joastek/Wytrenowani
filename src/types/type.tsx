@@ -2,7 +2,7 @@ export interface BMIState {
   mass: number;
   height: number;
   gender: number;
-  age: number ;
+  age: number;
   result: number;
   progress: number;
   activity: number;
@@ -80,4 +80,12 @@ export interface nutriensSum {
   totalCarbo: any;
   totalFat: any;
   totalCalories: any;
+}
+
+export interface NutrientsState {
+  protein: number;
+  carbo: number;
+  fat: number;
+  gainedCalories: number;
+  id: string;
 }

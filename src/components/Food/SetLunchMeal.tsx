@@ -21,22 +21,15 @@ const Lunch = () => {
   const [carbo, setCarbo] = useState("");
   const [fat, setFat] = useState("");
   const [gainedCalories, setCalories] = useState("");
-  const lunchData = {
-    FoodName,
-    protein,
-    carbo,
-    fat,
-    gainedCalories,
-  };
+  const LunchId =
+    FoodSetLunch.length > 0 ? FoodSetLunch[FoodSetLunch.length - 1].id : 0;
+  const proteinValue = isNaN(parseFloat(protein)) ? "0" : protein;
+  const carboValue = isNaN(parseFloat(carbo)) ? "0" : carbo;
+  const fatValue = isNaN(parseFloat(fat)) ? "0" : fat;
+  const gainedCaloriesValue = isNaN(parseFloat(gainedCalories))
+    ? "0"
+    : gainedCalories;
   const handleAddFoodLunch = (FoodIdLunch: any) => {
-    const LunchId =
-      FoodSetLunch.length > 0 ? FoodSetLunch[FoodSetLunch.length - 1].id : 0;
-    const proteinValue = isNaN(parseFloat(protein)) ? "0" : protein;
-    const carboValue = isNaN(parseFloat(carbo)) ? "0" : carbo;
-    const fatValue = isNaN(parseFloat(fat)) ? "0" : fat;
-    const gainedCaloriesValue = isNaN(parseFloat(gainedCalories))
-      ? "0"
-      : gainedCalories;
     dispatch(
       addLunch({
         id: LunchId + 1,
@@ -49,8 +42,16 @@ const Lunch = () => {
         FoodIdLunch,
       })
     );
-
-    dispatch(addNutriens(lunchData));
+    dispatch(
+      addNutriens({
+        id: LunchId + 1,
+        FoodName: FoodName,
+        protein: proteinValue, // Użyj sparsowanej wartości
+        carbo: carboValue, // Użyj sparsowanej wartości
+        fat: fatValue, // Użyj sparsowanej wartości
+        gainedCalories: gainedCaloriesValue, // Użyj sparsowanej wartości
+      })
+    );
   };
   const [addNewLunch, setAddNewLunch] = useState(false);
 
@@ -58,7 +59,12 @@ const Lunch = () => {
     setAddNewLunch((prev) => !prev);
   };
   const handleDeleteFood = (foodId: number) => {
-    dispatch(deleteNutriens(lunchData));
+    const productToDelete = FoodSetLunch.find(
+      (product: any) => product.id === foodId
+    );
+    if (productToDelete) {
+      dispatch(deleteNutriens(productToDelete)); // Przekazujemy cały produkt
+    }
     dispatch(deleteLunch({ id: foodId }));
   };
   const handleValueChange = (

@@ -27,22 +27,15 @@ const Breakfast = () => {
   const [carbo, setCarbo] = useState("");
   const [fat, setFat] = useState("");
   const [gainedCalories, setCalories] = useState("");
-  const breakfastData = {
-    FoodName,
-    protein,
-    carbo,
-    fat,
-    gainedCalories,
-  };
-  const handleAddFood = (FoodId: any) => {
-    const breakfastId = FoodSet.length > 0 ? FoodSet[FoodSet.length - 1].id : 0;
-    const proteinValue = isNaN(parseFloat(protein)) ? "0" : protein;
-    const carboValue = isNaN(parseFloat(carbo)) ? "0" : carbo;
-    const fatValue = isNaN(parseFloat(fat)) ? "0" : fat;
-    const gainedCaloriesValue = isNaN(parseFloat(gainedCalories))
-      ? "0"
-      : gainedCalories;
+  const breakfastId = FoodSet.length > 0 ? FoodSet[FoodSet.length - 1].id : 0;
+  const proteinValue = isNaN(parseFloat(protein)) ? "0" : protein;
+  const carboValue = isNaN(parseFloat(carbo)) ? "0" : carbo;
+  const fatValue = isNaN(parseFloat(fat)) ? "0" : fat;
+  const gainedCaloriesValue = isNaN(parseFloat(gainedCalories))
+    ? "0"
+    : gainedCalories;
 
+  const handleAddFood = (FoodId: any) => {
     dispatch(
       addBreakfast({
         id: breakfastId + 1,
@@ -55,17 +48,31 @@ const Breakfast = () => {
       })
     );
 
-    dispatch(addNutriens(breakfastData));
+    dispatch(
+      addNutriens({
+        id: breakfastId + 1,
+        FoodName: FoodName,
+        protein: proteinValue, // Użyj sparsowanej wartości
+        carbo: carboValue, // Użyj sparsowanej wartości
+        fat: fatValue, // Użyj sparsowanej wartości
+        gainedCalories: gainedCaloriesValue, // Użyj sparsowanej wartości
+      })
+    );
   };
-  console.log(fat);
-  console.log(gainedCalories);
+
   const [addNewBreakfast, setAddNewBreakfast] = useState(false);
   const handleAddNewBreakfast = () => {
     setAddNewBreakfast((prev) => !prev);
   };
+
   /////
   const handleDeleteFood = (foodId: number) => {
-    dispatch(deleteNutriens(breakfastData));
+    const productToDelete = FoodSet.find(
+      (product: any) => product.id === foodId
+    );
+    if (productToDelete) {
+      dispatch(deleteNutriens(productToDelete)); // Przekazujemy cały produkt
+    }
     dispatch(deleteBreakfast({ id: foodId }));
   };
 

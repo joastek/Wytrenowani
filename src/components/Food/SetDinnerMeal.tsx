@@ -27,22 +27,15 @@ const Dinner = () => {
   const [fat, setFat] = useState("");
   const [gainedCalories, setCalories] = useState("");
   const [addNewDinner, setAddNewDinner] = useState(false);
-  const dinnerData = {
-    FoodName,
-    protein,
-    carbo,
-    fat,
-    gainedCalories,
-  };
+  const DinnerId =
+    FoodSetDinner.length > 0 ? FoodSetDinner[FoodSetDinner.length - 1].id : 0;
+  const proteinValue = isNaN(parseFloat(protein)) ? "0" : protein;
+  const carboValue = isNaN(parseFloat(carbo)) ? "0" : carbo;
+  const fatValue = isNaN(parseFloat(fat)) ? "0" : fat;
+  const gainedCaloriesValue = isNaN(parseFloat(gainedCalories))
+    ? "0"
+    : gainedCalories;
   const handleAddFoodDinner = (FoodId: any) => {
-    const DinnerId =
-      FoodSetDinner.length > 0 ? FoodSetDinner[FoodSetDinner.length - 1].id : 0;
-    const proteinValue = isNaN(parseFloat(protein)) ? "0" : protein;
-    const carboValue = isNaN(parseFloat(carbo)) ? "0" : carbo;
-    const fatValue = isNaN(parseFloat(fat)) ? "0" : fat;
-    const gainedCaloriesValue = isNaN(parseFloat(gainedCalories))
-      ? "0"
-      : gainedCalories;
     dispatch(
       addDinner({
         id: DinnerId + 1,
@@ -55,14 +48,28 @@ const Dinner = () => {
       })
     );
 
-    dispatch(addNutriens(dinnerData));
+    dispatch(
+      addNutriens({
+        id: DinnerId + 1,
+        FoodName: FoodName,
+        protein: proteinValue, // Użyj sparsowanej wartości
+        carbo: carboValue, // Użyj sparsowanej wartości
+        fat: fatValue, // Użyj sparsowanej wartości
+        gainedCalories: gainedCaloriesValue, // Użyj sparsowanej wartości
+      })
+    );
   };
 
   const handleAddNewDinner = () => {
     setAddNewDinner((prev) => !prev);
   };
   const handleDeleteFood = (foodId: number) => {
-    dispatch(deleteNutriens(dinnerData));
+    const productToDelete = FoodSetDinner.find(
+      (product: any) => product.id === foodId
+    );
+    if (productToDelete) {
+      dispatch(deleteNutriens(productToDelete)); // Przekazujemy cały produkt
+    }
     dispatch(deleteDinner({ id: foodId }));
   };
   return (

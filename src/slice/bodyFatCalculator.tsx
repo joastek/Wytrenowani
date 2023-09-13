@@ -1,10 +1,10 @@
 import { createSlice } from "@reduxjs/toolkit";
 import { BMIState } from "@/types/type";
 const initialState: BMIState = {
-  mass: null,
-  height: null,
+  mass: 0,
+  height: 0,
   gender: 1,
-  age: null,
+  age: 0,
   result: 0,
   progress: 0,
   activity: 1.4,
