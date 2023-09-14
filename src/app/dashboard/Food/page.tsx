@@ -1,12 +1,13 @@
 "use client";
 import { useSelector } from "react-redux";
 import { RootState } from "@/types/type";
-import { motion } from "framer-motion";
+import { useState, useEffect } from "react";
 import Breakfast from "@/components/Food/SetBreakfastMeal";
 import Dinner from "@/components/Food/SetDinnerMeal";
 import Lunch from "@/components/Food/SetLunchMeal";
 import { CircularProgressbar, buildStyles } from "react-circular-progressbar";
 import "react-circular-progressbar/dist/styles.css";
+
 const Food = () => {
   const { totalProtein, totalCarbo, totalFat, totalCalories } = useSelector(
     (state: any) => state.nutriensSum
@@ -26,6 +27,38 @@ const Food = () => {
   );
 
   const percentage = 66;
+
+  ///API
+
+  const [breakfastNutrien, setbreakfastNutrien] = useState("");
+  const [nameOfNutrien, setNameOfNutrien] = useState("");
+  const [caloriesNutrien, setCaloriesNutrien] = useState("");
+  const apiKey = "rTU4Ta3bWeja9oPWfA0LhQ==1lRq3dJcu6pA0IT4";
+  const options = {
+    method: "GET",
+    headers: {
+      "X-Api-Key": apiKey,
+    },
+  };
+
+  const apiURL =
+    "https://api.api-ninjas.com/v1/nutrition?query=" + nameOfNutrien;
+
+  useEffect(() => {
+    // Monitoruj zmiany breakfastNutrien i aktualizuj nameOfNutrien tylko wtedy, gdy breakfastNutrien zostanie zmieniony
+    setNameOfNutrien(breakfastNutrien);
+  }, [breakfastNutrien]);
+
+  async function getNutriens() {
+    const response = await fetch(apiURL, options);
+    const data = await response.json();
+    let caloriesNutrien = data[0].calories;
+    setCaloriesNutrien(caloriesNutrien);
+  }
+
+  const handleInputChange = (event: any) => {
+    setbreakfastNutrien(event.target.value);
+  };
   return (
     <>
       <div className="flex justify-center items-center  flex-col  ">
@@ -52,6 +85,15 @@ const Food = () => {
             </thead>
 
             <tbody>
+              <input
+                type="text"
+                onChange={handleInputChange}
+                value={breakfastNutrien}
+              />
+              <button onClick={getNutriens}>Kliknij</button>
+
+              <div>{breakfastNutrien}</div>
+              <div>{caloriesNutrien}</div>
               <div className="overflow-y-auto h-[40rem] border-[0.4rem] border-secondary p-4 m-6 rounded-lg">
                 <Breakfast />
                 <Dinner />
@@ -123,4 +165,5 @@ const Food = () => {
     </>
   );
 };
+
 export default Food;

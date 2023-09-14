@@ -15,6 +15,7 @@ import {
 } from "@/slice/FoodCalculator/NutrientsSum";
 import IconButton from "@mui/material/IconButton";
 import DeleteIcon from "@mui/icons-material/Delete";
+
 const Breakfast = () => {
   const dispatch = useDispatch();
 
@@ -126,6 +127,7 @@ const Breakfast = () => {
                     variant="outlined"
                     onChange={(event) => {
                       setFoodName(event.target.value);
+                     ;
                     }}
                     className="w-36 m-2"
                   />
