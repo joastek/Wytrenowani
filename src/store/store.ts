@@ -8,6 +8,7 @@ import BreakfastSetReducer from "@/slice/FoodCalculator/BreakfastCalculator";
 import LunchSetReducer from "@/slice/FoodCalculator/LunchCalculator";
 import DinnerSetReducer from "@/slice/FoodCalculator/DinnerCalculator";
 import FoodReducer from "@/slice/FoodCalculator/NutrientsSum";
+
 const store = configureStore({
   reducer: {
     bmiCalculator: bmiCalculatorReducer,

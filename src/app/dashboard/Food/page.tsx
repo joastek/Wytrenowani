@@ -30,34 +30,14 @@ const Food = () => {
 
   ///API
 
-  const [breakfastNutrien, setbreakfastNutrien] = useState("");
-  const [nameOfNutrien, setNameOfNutrien] = useState("");
-  const [caloriesNutrien, setCaloriesNutrien] = useState("");
-  const apiKey = "rTU4Ta3bWeja9oPWfA0LhQ==1lRq3dJcu6pA0IT4";
-  const options = {
-    method: "GET",
-    headers: {
-      "X-Api-Key": apiKey,
-    },
+  const [writeNameOfNutrien, setwriteNameOfNutrien] = useState("");
+  const [writeAmountOfNutrien, setwriteAmountOfNutrien] = useState("");
+
+  const handleNameOfNutrienChange = (event: any) => {
+    setwriteNameOfNutrien(event.target.value);
   };
-
-  const apiURL =
-    "https://api.api-ninjas.com/v1/nutrition?query=" + nameOfNutrien;
-
-  useEffect(() => {
-    // Monitoruj zmiany breakfastNutrien i aktualizuj nameOfNutrien tylko wtedy, gdy breakfastNutrien zostanie zmieniony
-    setNameOfNutrien(breakfastNutrien);
-  }, [breakfastNutrien]);
-
-  async function getNutriens() {
-    const response = await fetch(apiURL, options);
-    const data = await response.json();
-    let caloriesNutrien = data[0].calories;
-    setCaloriesNutrien(caloriesNutrien);
-  }
-
-  const handleInputChange = (event: any) => {
-    setbreakfastNutrien(event.target.value);
+  const handleAmountOfNutrien = (event: any) => {
+    setwriteAmountOfNutrien(event.target.value);
   };
   return (
     <>
@@ -87,13 +67,21 @@ const Food = () => {
             <tbody>
               <input
                 type="text"
-                onChange={handleInputChange}
-                value={breakfastNutrien}
+                onChange={handleNameOfNutrienChange}
+                value={writeNameOfNutrien}
               />
-              <button onClick={getNutriens}>Kliknij</button>
+              <input
+                type="text"
+                onChange={handleAmountOfNutrien}
+                value={writeAmountOfNutrien}
+              />
 
-              <div>{breakfastNutrien}</div>
+              {/* <div>{writeNameOfNutrien}</div>
+              <div>{amountOfNutrien}</div>
               <div>{caloriesNutrien}</div>
+              <div>{proteinNutrien}</div>
+              <div>{carboNutrien}</div>
+              <div>{fatNutrien}</div> */}
               <div className="overflow-y-auto h-[40rem] border-[0.4rem] border-secondary p-4 m-6 rounded-lg">
                 <Breakfast />
                 <Dinner />
