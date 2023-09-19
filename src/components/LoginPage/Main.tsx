@@ -7,7 +7,11 @@ const LoginPage = () => {
     <>
       {" "}
       <div className="  flex  w-full  text-white  dark:bg-secondary h-screen">
-        <Navigation />
+        <div className=" absolute  right-0 top-0   flex justify-center items-center mr-12">
+          {" "}
+          <Navigation />
+        </div>
+
         <div className="m-auto ">
           <div className="text-8xl flex">
             Wy
