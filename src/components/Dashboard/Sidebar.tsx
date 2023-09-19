@@ -39,25 +39,25 @@ export default function Sidebar() {
     useContext(SidebarContext);
   return (
     <>
-      <div className="absolute bg-bar  ease-out h-screen">
-        <button className="btn">
-          <AiOutlineArrowLeft
-            className="h-12 w-12"
-            onClick={toggleSidebarcollapse}
-          />
-        </button>{" "}
-        <div>
-          <aside className="sidebar " data-collapse={isCollapsedSidebar}>
+      <div className=" fixed ease-out    h-full flex z-[100]">
+        <div className="m-6 bg-bar  rounded-[2rem] ">
+          <button className="btn">
+            <AiOutlineArrowLeft
+              className="h-12 w-12"
+              onClick={toggleSidebarcollapse}
+            />
+          </button>{" "}
+          <aside className="sidebar" data-collapse={isCollapsedSidebar}>
             <ul>
               {sidebarItems.map(({ name, href, icon: Icon }) => (
-                <li className="text-xl " key={name}>
+                <li className="text-xl" key={name}>
                   <Link
                     href={href}
                     className="flex"
                     data-collapse={isCollapsedSidebar}
                   >
-                    <Icon className="m-4 " />
-                    <div className="sidebar__name ">{name}</div>
+                    <Icon className="m-4" />
+                    <div className="sidebar__name">{name}</div>
                   </Link>
                 </li>
               ))}

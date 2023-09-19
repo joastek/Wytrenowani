@@ -47,14 +47,14 @@ const Navigation = () => {
           className="w-full -top-8  z-20 absolute"
         /> */}
         <div className="  text-white   flex">
-          <div className="flex items-center justify-center  p-2 my-4 mr-2 z-40 bg-bar rounded-[2rem] drop-shadow-2xl">
+          <div className="flex items-center justify-center  p-2 my-4 mr-2 z-40 bg-bar rounded-[2rem] drop-shadow-2xl w-[8rem]">
             {" "}
             <p className="text-[0.8rem]"> PL</p>
             <Switch color="secondary" />
             <p className="text-[0.8rem]">EN</p>
           </div>
 
-          <div className="flex items-center justify-center  p-2 my-4 mr-2 z-40 bg-bar rounded-[2rem] drop-shadow-2xl">
+          <div className="flex items-center justify-center  p-2 my-4 mr-2 z-40 bg-bar rounded-[2rem] drop-shadow-2xl w-[8rem]">
             {" "}
             <LightModeIcon className="w-8" />
             <Switch color="secondary" onChange={handleSwitchThem} />

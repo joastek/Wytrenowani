@@ -28,24 +28,13 @@ const Food = () => {
 
   const percentage = 66;
 
-  ///API
-
-  const [writeNameOfNutrien, setwriteNameOfNutrien] = useState("");
-  const [writeAmountOfNutrien, setwriteAmountOfNutrien] = useState("");
-
-  const handleNameOfNutrienChange = (event: any) => {
-    setwriteNameOfNutrien(event.target.value);
-  };
-  const handleAmountOfNutrien = (event: any) => {
-    setwriteAmountOfNutrien(event.target.value);
-  };
   return (
     <>
-      <div className="flex justify-center items-center  flex-col  ">
-        <div className="w-[70rem] justify-center items-center relative ">
-          <table className="   w-full bg-bar rounded-lg   ">
+      <div className="flex  items-center justify-center flex-row  ">
+        <div className="w-2/3 flex items-center justify-end mt-24 mb-6 ml-[20rem]">
+          <table className="   w-full bg-bar rounded-[2rem] max-w-[70rem] min-h-[70rem] ">
             <thead className="">
-              <tr className="flex m-6 p-4 rounded-lg border-[0.4rem] border-secondary text-lg ">
+              <tr className="flex m-6 p-4 rounded-[2rem] border-[0.4rem] border-secondary text-lg ">
                 <th style={{ width: "40%" }} className="font-light">
                   <h2>Produkt</h2>
                 </th>
@@ -65,33 +54,16 @@ const Food = () => {
             </thead>
 
             <tbody>
-              <input
-                type="text"
-                onChange={handleNameOfNutrienChange}
-                value={writeNameOfNutrien}
-              />
-              <input
-                type="text"
-                onChange={handleAmountOfNutrien}
-                value={writeAmountOfNutrien}
-              />
-
-              {/* <div>{writeNameOfNutrien}</div>
-              <div>{amountOfNutrien}</div>
-              <div>{caloriesNutrien}</div>
-              <div>{proteinNutrien}</div>
-              <div>{carboNutrien}</div>
-              <div>{fatNutrien}</div> */}
-              <div className="overflow-y-auto h-[40rem] border-[0.4rem] border-secondary p-4 m-6 rounded-lg">
-                <Breakfast />
+              <div className=" overflow-y-auto border-[0.4rem] border-secondary    p-4 m-6 rounded-[2rem]">
+                {/* <Breakfast />
                 <Dinner />
-                <Lunch />
+                <Lunch /> */}
               </div>
             </tbody>
           </table>
         </div>
 
-        <div className="flex   w-[70rem]  mt-[2rem]  items-stretch    rounded-lg">
+        <div className="block  w-1/3    items-stretch    rounded-lg">
           <div className="w-1/3">
             <div className=" flex flex-col  items-center bg-bar p-6 mr-5   rounded-lg">
               <h3 className="mb-4">Suma kcal :</h3>
