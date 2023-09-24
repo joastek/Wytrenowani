@@ -6,7 +6,8 @@ import { IconType } from "react-icons";
 import { BsCalculator } from "react-icons/bs";
 import { AiOutlineHome, AiOutlineArrowLeft } from "react-icons/ai";
 import { SidebarContext } from "./SideBarContext";
-
+import { GiWeightLiftingUp } from "react-icons/gi";
+import { GiMeal } from "react-icons/gi";
 interface SidebarItem {
   name: string;
   href: string;
@@ -27,12 +28,12 @@ export default function Sidebar() {
     {
       name: "Trening",
       href: "/dashboard/TrainingPlan",
-      icon: AiOutlineHome,
+      icon: GiWeightLiftingUp,
     },
     {
       name: "Jedzenie",
       href: "/dashboard/Food",
-      icon: AiOutlineHome,
+      icon: GiMeal,
     },
   ];
   const { isCollapsedSidebar, toggleSidebarcollapse } =
@@ -47,17 +48,20 @@ export default function Sidebar() {
               onClick={toggleSidebarcollapse}
             />
           </button>{" "}
-          <aside className="sidebar" data-collapse={isCollapsedSidebar}>
+          <aside className="sidebar  flex" data-collapse={isCollapsedSidebar}>
             <ul>
               {sidebarItems.map(({ name, href, icon: Icon }) => (
-                <li className="text-xl" key={name}>
+                <li
+                  className="text-xl my-6 text-center flex items-center"
+                  key={name}
+                >
                   <Link
                     href={href}
-                    className="flex"
+                    className=" flex items-center"
                     data-collapse={isCollapsedSidebar}
                   >
-                    <Icon className="m-4" />
-                    <div className="sidebar__name">{name}</div>
+                    <Icon className=" w-8 my-2" />
+                    <div className="sidebar__name justify-center">{name}</div>
                   </Link>
                 </li>
               ))}

@@ -60,7 +60,7 @@ h4 {
   overflow: hidden;
 }
 [data-collapse="true"] {
-  width: 5.4rem;
+  width: 4rem;
 }
 [data-collapse="true"] .sidebar__name {
   display: none;

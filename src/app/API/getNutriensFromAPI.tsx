@@ -24,7 +24,7 @@ export async function getNutriensFromAPI(
   const carboNutrien = data[0].carbohydrates_total_g;
   const fatNutrien = data[0].fat_total_g;
   const caloriesNutrien = data[0].calories;
-
+  console.log(caloriesNutrien);
   return {
     caloriesNutrien,
     proteinNutrien,

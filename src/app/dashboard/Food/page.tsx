@@ -30,9 +30,9 @@ const Food = () => {
 
   return (
     <>
-      <div className="flex  items-center justify-center flex-row  ">
-        <div className="w-2/3 flex items-center justify-end mt-24 mb-6 ml-[20rem]">
-          <table className="   w-full bg-bar rounded-[2rem] max-w-[70rem] min-h-[70rem] ">
+      <div className="flex   justify-center flex-row  ">
+        <div className="w-1/2 flex  justify-end mt-28  ">
+          <table className="   w-full bg-bar rounded-[2rem] max-w-[70rem] max-h-[70rem] ">
             <thead className="">
               <tr className="flex m-6 p-4 rounded-[2rem] border-[0.4rem] border-secondary text-lg ">
                 <th style={{ width: "40%" }} className="font-light">
@@ -54,34 +54,33 @@ const Food = () => {
             </thead>
 
             <tbody>
-              <div className=" overflow-y-auto border-[0.4rem] border-secondary    p-4 m-6 rounded-[2rem]">
-                {/* <Breakfast />
+              <div className=" overflow-y-auto border-[0.4rem] border-secondary  h-[60rem]  p-4 m-6 rounded-[2rem]">
+                <Breakfast />
                 <Dinner />
-                <Lunch /> */}
+                <Lunch />
               </div>
             </tbody>
           </table>
         </div>
 
-        <div className="block  w-1/3    items-stretch    rounded-lg">
-          <div className="w-1/3">
-            <div className=" flex flex-col  items-center bg-bar p-6 mr-5   rounded-lg">
-              <h3 className="mb-4">Suma kcal :</h3>
-              <CircularProgressbar
-                value={totalCalories}
-                maxValue={calories}
-                text={` \n ${totalCalories}/${calories} kcal`}
-                styles={buildStyles({
-                  textColor: "white",
-                  textSize: "0.7rem",
-                  pathColor: `rgb(87, 204, 153, ${percentage / 100})`,
-                })}
-              />
-            </div>
+        <div className="block  w-1/2    mt-28   rounded-lg ml-6 max-h-[70rem] max-w-[30rem]">
+          <div className="w-1/2 flex flex-col h-1/3 items-center bg-bar p-6 mr-5    rounded-[2rem]">
+            <h3 className="mb-4">Suma kcal :</h3>
+            <CircularProgressbar
+              value={totalCalories}
+              maxValue={calories}
+              text={` \n ${totalCalories}/${calories} kcal`}
+              styles={buildStyles({
+                textColor: "white",
+                textSize: "0.7rem",
+                pathColor: `rgb(87, 204, 153, ${percentage / 100})`,
+              })}
+            />
           </div>
-          <div className="w-2/3 flex items-center justify-center  bg-bar  rounded-lg">
-            <div className=" w-[14rem] h-[16rem] flex flex-col  items-center mr-6 ">
-              <h4 className="mb-4">Suma białka :</h4>
+
+          <div className=" w-1/2 max-h-[2/3] items-center justify-center flex flex-col bg-bar  rounded-[2rem] mt-6 p-6">
+            <div className="h-1/3 w-[10rem]  flex flex-col  items-center  mb-6">
+              <h4 className="">Suma białka :</h4>
               <CircularProgressbar
                 value={totalProtein}
                 maxValue={Protein}
@@ -93,8 +92,8 @@ const Food = () => {
                 })}
               />{" "}
             </div>{" "}
-            <div className=" w-[14rem] h-[16rem] flex flex-col  items-center mr-6">
-              <h4 className="mb-4">Suma węglowodanów :</h4>
+            <div className=" h-1/3 w-[10rem]  flex flex-col  items-center  mb-6">
+              <h4 className=" text-center">Suma węglowodanów :</h4>
               <CircularProgressbar
                 value={totalCarbo}
                 maxValue={Carbo}
@@ -106,8 +105,8 @@ const Food = () => {
                 })}
               />
             </div>
-            <div className=" w-[14rem] h-[16rem] flex flex-col  items-center">
-              <h4 className="mb-4">Suma tłuszczy :</h4>
+            <div className=" h-1/3 w-[10rem]  flex flex-col  items-center mb-6">
+              <h4 className="mt-4">Suma tłuszczy :</h4>
               <CircularProgressbar
                 value={totalFat}
                 maxValue={Fat}
