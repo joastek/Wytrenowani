@@ -9,10 +9,23 @@ import {
 } from "@supabase/auth-helpers-react";
 import DateTimePicker from "react-datetime-picker";
 import { useState } from "react";
+import { RootState } from "@/types/type";
+import { CircularProgressbar, buildStyles } from "react-circular-progressbar";
+import { useSelector } from "react-redux";
+
 type ValuePiece = Date;
 
 type Value = ValuePiece | [ValuePiece, ValuePiece];
 const dashboard = () => {
+  const { totalProtein, totalCarbo, totalFat, totalCalories } = useSelector(
+    (state: any) => state.nutriensSum
+  );
+
+  const { calories, result, mass } = useSelector(
+    (state: RootState) => state.bmiCalculator
+  );
+
+  const percentage = 66;
   const [start, setStart] = useState(new Date());
   const [end, setEnd] = useState(new Date());
   const [eventName, setEventName] = useState("");
@@ -59,40 +72,73 @@ const dashboard = () => {
         timeZone: Intl.DateTimeFormat().resolvedOptions().timeZone, // America/Los_Angeles
       },
     };
-    await fetch(
-      "https://www.googleapis.com/calendar/v3/calendars/primary/events",
-      {
-        method: "POST",
-        headers: {
-          Authorization: "Bearer " + session.provider_token, // Access token for google
-        },
-        body: JSON.stringify(event),
-      }
-    )
-      .then((data) => {
-        return data.json();
-      })
-      .then((data) => {
-        console.log(data);
-        alert("Event created, check your Google Calendar!");
-      });
+    if (session) {
+      // Check if session is not null
+      await fetch(
+        "https://www.googleapis.com/calendar/v3/calendars/primary/events",
+        {
+          method: "POST",
+          headers: {
+            Authorization: "Bearer " + session.provider_token,
+          },
+          body: JSON.stringify(event),
+        }
+      )
+        .then((data) => {
+          return data.json();
+        })
+        .then((data) => {
+          console.log(data);
+          alert("Event created, check your Google Calendar!");
+        });
+    } else {
+      // Handle the case where session is null (e.g., show an error message)
+      console.error("Session is null. Please sign in.");
+    }
   }
   return (
     <>
       <div className="flex justify-center   w-full  ">
-        <div className="w-2/3 flex h-[70rem]  mt-28 justify-center ">
-          <div className="bg-black w-[70rem] h-[15rem]"></div>
+        <div className="w-1/2 flex   max-w-[70rem] mt-28  ml-28">
+          <div className="bg-bar w-[70rem] h-[17rem] z-50 rounded-[2rem] relative">
+            <h2 className="absolute left-4 top-4">Witaj User !</h2>
+          </div>{" "}
+          <div className="w-[20rem] max-h-[17rem]  bg-bar rounded-[2rem] mt-6">
+            <h3 className="mb-4">Suma kcal :</h3>
+            <CircularProgressbar
+              value={totalCalories}
+              maxValue={calories}
+              text={` \n ${totalCalories}/${calories} kcal`}
+              className=" p-6 max-w-[20rem] max-h-[14rem]"
+              styles={buildStyles({
+                textColor: "white",
+                textSize: "0.7rem",
+                pathColor: `rgb(87, 204, 153, ${percentage / 100})`,
+              })}
+            />
+          </div>
+          <div className="w-[27rem] bg-bar ml-6 mt-6"></div>
+          <div className="w-[20rem] block ml-6 mt-6">
+            <div className="h-[7.75rem] bg-bar">wdwdwdw</div>
+            <div className="h-[7.75rem] bg-bar mt-6">dwdwdwdw</div>
+          </div>
         </div>
-        <div className="w-1/3  h-[70rem]  mt-28">
+        <div className="w-1/2    mt-28 mr-8 justify-start">
           {" "}
-          <div>
+          <div className="bg-bar  max-w-[35rem] h-[17rem] rounded-[2rem] p-4 ml-6">
             {session ? (
               <>
                 <h2>Hey there {session.user.email}</h2>
                 <p>Start of your event</p>
-                <DateTimePicker onChange={setStart} value={start} />
+                <DateTimePicker
+                  onChange={(value) => setStart(value as Date)}
+                  value={start}
+                />
                 <p>End of your event</p>
-                <DateTimePicker onChange={setEnd} value={end} />
+                <DateTimePicker
+                  onChange={(value) => setEnd(value as Date)}
+                  value={end}
+                />
                 <p>Event name</p>
                 <input
                   type="text"
