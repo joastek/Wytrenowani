@@ -34,7 +34,10 @@ const dashboard = () => {
   const supabase = useSupabaseClient(); // talk to supabase!
   const { isLoading } = useSessionContext();
   const axios = require("axios");
-  const [currLocation, setCurrLocation] = useState({});
+  const [currLocation, setCurrLocation] = useState<{
+    city: string;
+    region: string;
+  }>({ city: "", region: "" });
   const getLocation = async () => {
     const location = await axios.get("https://ipapi.co/json/");
     setCurrLocation(location.data);
