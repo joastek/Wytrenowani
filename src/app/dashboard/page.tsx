@@ -8,11 +8,11 @@ import {
   useSessionContext,
 } from "@supabase/auth-helpers-react";
 import DateTimePicker from "react-datetime-picker";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { RootState } from "@/types/type";
 import { CircularProgressbar, buildStyles } from "react-circular-progressbar";
 import { useSelector } from "react-redux";
-
+import { LineChart } from "@mui/x-charts/LineChart";
 type ValuePiece = Date;
 
 type Value = ValuePiece | [ValuePiece, ValuePiece];
@@ -33,7 +33,15 @@ const dashboard = () => {
   const session = useSession(); // tokens, when session exists we have a user
   const supabase = useSupabaseClient(); // talk to supabase!
   const { isLoading } = useSessionContext();
-
+  const axios = require("axios");
+  const [currLocation, setCurrLocation] = useState({});
+  const getLocation = async () => {
+    const location = await axios.get("https://ipapi.co/json/");
+    setCurrLocation(location.data);
+  };
+  useEffect(() => {
+    getLocation();
+  }, []);
   console.log(start);
   console.log(session);
   console.log(eventDescription);
@@ -96,12 +104,17 @@ const dashboard = () => {
       console.error("Session is null. Please sign in.");
     }
   }
+  /////////////////
+
   return (
     <>
       <div className="flex justify-center   w-full  ">
-        <div className="w-1/2 flex   max-w-[70rem] mt-28  ml-28">
+        <div className="w-1/2 flex  flex-wrap max-w-[70rem] mt-28  ml-28">
           <div className="bg-bar w-[70rem] h-[17rem] z-50 rounded-[2rem] relative">
-            <h2 className="absolute left-4 top-4">Witaj User !</h2>
+            <h2 className="absolute left-4 top-4">
+              Witaj User ! {currLocation.city}
+              {currLocation.region}
+            </h2>
           </div>{" "}
           <div className="w-[20rem] max-h-[17rem]  bg-bar rounded-[2rem] mt-6">
             <h3 className="mb-4">Suma kcal :</h3>
@@ -122,6 +135,7 @@ const dashboard = () => {
             <div className="h-[7.75rem] bg-bar">wdwdwdw</div>
             <div className="h-[7.75rem] bg-bar mt-6">dwdwdwdw</div>
           </div>
+          <div className="w-[35rem]"></div>
         </div>
         <div className="w-1/2    mt-28 mr-8 justify-start">
           {" "}
