@@ -32,3 +32,4 @@ export async function getNutriensFromAPI(
     fatNutrien,
   };
 }
+console.log("teeest");

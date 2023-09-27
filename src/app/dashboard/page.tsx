@@ -12,7 +12,8 @@ import { useState, useEffect } from "react";
 import { RootState } from "@/types/type";
 import { CircularProgressbar, buildStyles } from "react-circular-progressbar";
 import { useSelector } from "react-redux";
-import { LineChart } from "@mui/x-charts/LineChart";
+import { WEATHER_API_KEY, WEATHER_API_URL } from "../API/weatherAPI";
+import Image from "next/image";
 type ValuePiece = Date;
 
 type Value = ValuePiece | [ValuePiece, ValuePiece];
@@ -34,10 +35,16 @@ const dashboard = () => {
   const supabase = useSupabaseClient(); // talk to supabase!
   const { isLoading } = useSessionContext();
   const axios = require("axios");
+  ///////////////////
+  const [currentWeather, setCurrentWeather] = useState(null);
+  const [forecast, setForecast] = useState(null);
+  /////////////////
   const [currLocation, setCurrLocation] = useState<{
     city: string;
     region: string;
-  }>({ city: "", region: "" });
+    longitude: string;
+    latitude: string;
+  }>({ city: "", region: "", longitude: "", latitude: "" });
   const getLocation = async () => {
     const location = await axios.get("https://ipapi.co/json/");
     setCurrLocation(location.data);
@@ -48,10 +55,43 @@ const dashboard = () => {
   console.log(start);
   console.log(session);
   console.log(eventDescription);
+  console.log("test");
+  //////////////////////
+  const fetchCurrentWeather = async () => {
+    try {
+      const response = await fetch(
+        `${WEATHER_API_URL}/weather?lat=${currLocation.latitude}&lon=${currLocation.longitude}&appid=${WEATHER_API_KEY}&lang=pl`
+      );
+      const weatherResponse = await response.json();
+
+      if (weatherResponse && weatherResponse.name) {
+        setCurrentWeather(weatherResponse);
+      } else {
+        console.error(
+          "Nieprawidłowa odpowiedź API lub brak właściwości 'name'"
+        );
+      }
+    } catch (error) {
+      console.error("Błąd podczas pobierania aktualnej pogody:", error);
+    }
+  };
+  const handleCurrentWeatherClick = () => {
+    fetchCurrentWeather();
+  };
+  console.log(currentWeather);
+  //////////
   if (isLoading) {
     return <></>;
   }
-
+  fetch("https://ipapi.co/ip/")
+    .then(function (response) {
+      response.text().then((txt) => {
+        console.log(txt);
+      });
+    })
+    .catch(function (error) {
+      console.log(error);
+    });
   async function googleSignIn() {
     const { error } = await supabase.auth.signInWithOAuth({
       provider: "google",
@@ -112,12 +152,15 @@ const dashboard = () => {
   return (
     <>
       <div className="flex justify-center   w-full  ">
-        <div className="w-1/2 flex  flex-wrap max-w-[70rem] mt-28  ml-28">
+        <div className="flex  flex-wrap max-w-[70rem] mt-28  ml-28">
           <div className="bg-bar w-[70rem] h-[17rem] z-50 rounded-[2rem] relative">
             <h2 className="absolute left-4 top-4">
               Witaj User ! {currLocation.city}
               {currLocation.region}
-            </h2>
+              {currLocation.longitude}
+              {currLocation.latitude}
+            </h2>{" "}
+            <Image src="/icons/01n.png" alt="weather" width={50} height={50} />
           </div>{" "}
           <div className="w-[20rem] max-h-[17rem]  bg-bar rounded-[2rem] mt-6">
             <h3 className="mb-4">Suma kcal :</h3>
@@ -133,14 +176,37 @@ const dashboard = () => {
               })}
             />
           </div>
-          <div className="w-[27rem] bg-bar ml-6 mt-6"></div>
+          <div className="w-[27rem] bg-bar ml-6 mt-6">
+            {" "}
+            <button onClick={handleCurrentWeatherClick}>
+              Pobierz aktualną pogodę
+            </button>
+            {/* Wyświetlanie danych pogodowych */}
+            {currentWeather && (
+              <div>
+                <h2>Aktualna pogoda w {currLocation.city}</h2>
+                <p>Temperatura: {currentWeather.main.temp} K</p>
+                <p>Opis pogody: {currentWeather.weather[0].description}</p>
+                <p>Wilgotność: {currentWeather.main.humidity}%</p>
+                <p>Prędkość wiatru: {currentWeather.wind.speed} m/s</p>
+                <p>Prędkość wiatru: {currentWeather.name} m/s</p>
+
+                <Image
+                  src={`/icons/${currentWeather.weather[0].icon}.png`}
+                  alt="weather"
+                  width={50}
+                  height={50}
+                />
+              </div>
+            )}
+          </div>
           <div className="w-[20rem] block ml-6 mt-6">
             <div className="h-[7.75rem] bg-bar">wdwdwdw</div>
             <div className="h-[7.75rem] bg-bar mt-6">dwdwdwdw</div>
           </div>
           <div className="w-[35rem]"></div>
         </div>
-        <div className="w-1/2    mt-28 mr-8 justify-start">
+        <div className="    mt-28 mr-8 justify-start">
           {" "}
           <div className="bg-bar  max-w-[35rem] h-[17rem] rounded-[2rem] p-4 ml-6">
             {session ? (
