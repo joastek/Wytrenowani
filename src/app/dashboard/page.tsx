@@ -14,6 +14,7 @@ import { CircularProgressbar, buildStyles } from "react-circular-progressbar";
 import { useSelector } from "react-redux";
 import { WEATHER_API_KEY, WEATHER_API_URL } from "../API/weatherAPI";
 import Image from "next/image";
+// import "@/styles/globals.css";
 type ValuePiece = Date;
 
 type Value = ValuePiece | [ValuePiece, ValuePiece];
@@ -39,6 +40,7 @@ const dashboard = () => {
   const [currentWeather, setCurrentWeather] = useState(null);
   const [forecast, setForecast] = useState(null);
   /////////////////
+  const [fillLevel, setFillLevel] = useState(0);
   const [currLocation, setCurrLocation] = useState<{
     city: string;
     region: string;
@@ -149,6 +151,24 @@ const dashboard = () => {
   }
   /////////////////
 
+  // Funkcja do napełniania szklanki
+  const handleFillClick = () => {
+    if (fillLevel < 100) {
+      // Max poziom napełnienia szklanki
+      setFillLevel((prevFillLevel) => prevFillLevel + 10); // Możesz dostosować tempo napełniania
+    }
+  };
+  const handleAddClick = () => {
+    if (fillLevel < 100) {
+      setFillLevel((prevFillLevel) => prevFillLevel + 10);
+    }
+  };
+
+  const handleRemoveClick = () => {
+    if (fillLevel > 0) {
+      setFillLevel((prevFillLevel) => prevFillLevel - 10);
+    }
+  };
   return (
     <>
       <div className="flex justify-center   w-full  ">
@@ -201,10 +221,28 @@ const dashboard = () => {
             )}
           </div>
           <div className="w-[20rem] block ml-6 mt-6">
-            <div className="h-[7.75rem] bg-bar">wdwdwdw</div>
-            <div className="h-[7.75rem] bg-bar mt-6">dwdwdwdw</div>
+            <div className="h-[7.75rem] bg-bar ">
+              <div className="water">
+                {" "}
+                <div
+                  className="progress"
+                  style={{ height: `${fillLevel}%` }}
+                ></div>
+              </div>
+            </div>
+            <div className="h-[7.75rem] bg-bar mt-6">
+              {" "}
+              <div className="water-level">{fillLevel}%</div>
+            </div>
           </div>
-          <div className="w-[35rem]"></div>
+          <div className="w-[35rem]">
+            {" "}
+            <div className="water-level">
+              {fillLevel}ddddddd%
+              <button onClick={handleAddClick}>Dodaj do szklanki</button>
+              <button onClick={handleRemoveClick}>Odejmij z szklanki</button>
+            </div>
+          </div>
         </div>
         <div className="    mt-28 mr-8 justify-start">
           {" "}
