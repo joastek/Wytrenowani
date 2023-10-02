@@ -282,36 +282,38 @@ tr:nth-child(even) {
   display: flex;
   margin: auto;
   position: relative;
-  width: 200px;
-  height: 200px;
-  background-color: #a5d7fe;
+  width: 5rem;
+  height: 5rem;
+
   overflow: hidden;
   z-index: 0;
-  /* box-shadow: inset 0 0 50px #1c637c; */
-  clip-path: polygon(0 0, 100% 0, 85% 100%, 15% 100%);
+  background: #2c74b3;
+  border-bottom-left-radius: 20%;
+  border-bottom-right-radius: 20%;
+
+  clip-path: polygon(0 0, 100% 0, 90% 100%, 10% 100%);
 }
-.progress {
+
+/* .progress {
   z-index: 100;
   background-color: #fff;
   position: absolute;
-  width: 100%;
+  width: 200%;
   bottom: 0;
   transition: 0.5s ease;
   height: 20%;
-}
-.animate-wave {
-  animation: wave 1s infinite alternate;
-}
-@keyframes wave {
+  animation: anim 12s linear infinite;
+} */
+
+/* @keyframes wave {
   0% {
     transform: scaleY(1);
   }
   100% {
-    transform: scaleY(
-      1.1
-    ); /* Zwiększenie skali po osi Y, aby uzyskać efekt fali */
+    transform: scaleY(1.1);
   }
-}
+} */
+
 /* .water::before {
   content: "";
   width: 200%;
@@ -342,5 +344,44 @@ tr:nth-child(even) {
   }
   100% {
     transform: rotate(360deg);
+  }
+}
+.wave {
+  position: relative;
+  bottom: -50%;
+  width: 100%;
+  height: 100%;
+  background: #2c74b3;
+  padding-bottom: 2rem;
+  box-shadow: inset 0 0 40px 0 rgba(0, 0, 0, 0);
+}
+.wave:before,
+.wave:after {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 50%;
+  width: 200%;
+  height: 200%;
+  background: black;
+  transform: translate(-50%, -75%);
+}
+.wave:before {
+  border-radius: 45%;
+  background: rgba(255, 255, 255, 1);
+  animation: animate 5s linear infinite;
+}
+.wave:after {
+  border-radius: 40%;
+  background: rgba(255, 255, 255, 0.5);
+  animation: animate 10s linear infinite;
+}
+
+@keyframes animate {
+  0% {
+    transform: translate(-50%, -75%) rotate(0deg);
+  }
+  100% {
+    transform: translate(-50%, -75%) rotate(360deg);
   }
 }

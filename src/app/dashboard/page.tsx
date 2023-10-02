@@ -40,7 +40,7 @@ const dashboard = () => {
   const [currentWeather, setCurrentWeather] = useState(null);
   const [forecast, setForecast] = useState(null);
   /////////////////
-  const [fillLevel, setFillLevel] = useState(0);
+  const [fillLevel, setFillLevel] = useState(-50);
   const [currLocation, setCurrLocation] = useState<{
     city: string;
     region: string;
@@ -165,7 +165,7 @@ const dashboard = () => {
   };
 
   const handleRemoveClick = () => {
-    if (fillLevel > 0) {
+    if (fillLevel > -50) {
       setFillLevel((prevFillLevel) => prevFillLevel - 10);
     }
   };
@@ -223,16 +223,15 @@ const dashboard = () => {
           <div className="w-[20rem] block ml-6 mt-6">
             <div className="h-[7.75rem] bg-bar ">
               <div className="water">
-                {" "}
                 <div
-                  className="progress"
-                  style={{ height: `${fillLevel}%` }}
+                  className="wave "
+                  style={{ bottom: `${fillLevel}%` }}
                 ></div>
               </div>
             </div>
             <div className="h-[7.75rem] bg-bar mt-6">
               {" "}
-              <div className="water-level">{fillLevel}%</div>
+              <div className="water-level">{fillLevel + 50}%</div>
             </div>
           </div>
           <div className="w-[35rem]">
