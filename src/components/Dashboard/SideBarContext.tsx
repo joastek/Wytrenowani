@@ -5,14 +5,14 @@ interface Props {
   children: ReactNode;
 }
 const initialValue = {
-  isCollapsedSidebar: false,
+  isCollapsedSidebar: true,
   toggleSidebarcollapse: () => {},
 };
 
 const SidebarContext = createContext(initialValue);
 
 const SidebarProvider = ({ children }: Props) => {
-  const [isCollapsedSidebar, setCollapse] = useState(false);
+  const [isCollapsedSidebar, setCollapse] = useState(true);
 
   const toggleSidebarcollapse = () => {
     setCollapse((prevState) => !prevState);

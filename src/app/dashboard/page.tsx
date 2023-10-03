@@ -13,7 +13,9 @@ import {
 } from "@/types/type";
 import AuthAndCalendarManagement from "../API/googleAPI";
 import Image from "next/image";
-
+import AddIcon from "@mui/icons-material/Add";
+import RemoveIcon from "@mui/icons-material/Remove";
+import Button from "@mui/material/Button";
 const dashboard = () => {
   const { totalProtein, totalCarbo, totalFat, totalCalories } = useSelector(
     (state: any) => state.nutriensSum
@@ -26,7 +28,9 @@ const dashboard = () => {
   const percentage = 66;
   ///glass of water
   const [fillLevel, setFillLevel] = useState(-50);
+  const [maxFillLevel, setMaxFillLevel] = useState(12);
 
+  const fillLevels = (fillLevel + 50) / 10;
   /////////////////////
   /// WeatherApi
   const [currentWeather, setCurrentWeather] =
@@ -64,14 +68,19 @@ const dashboard = () => {
     }
   };
   const handleAddClick = () => {
-    if (fillLevel < 100) {
-      setFillLevel((prevFillLevel) => prevFillLevel + 10);
+    // Oblicz procent, o ile ma zostać zwiększone fillLevel
+    const incrementPercentage = 100 / maxFillLevel;
+
+    if (fillLevels < maxFillLevel) {
+      setFillLevel((prevFillLevel) => prevFillLevel + incrementPercentage);
     }
   };
 
   const handleRemoveClick = () => {
-    if (fillLevel > -50) {
-      setFillLevel((prevFillLevel) => prevFillLevel - 10);
+    const incrementPercentage = 100 / maxFillLevel;
+
+    if (fillLevels < maxFillLevel) {
+      setFillLevel((prevFillLevel) => prevFillLevel - incrementPercentage);
     }
   };
   return (
@@ -121,26 +130,40 @@ const dashboard = () => {
             )}
           </div>
           <div className="w-[20rem] block ml-6 mt-6">
-            <div className="h-[7.75rem] bg-bar ">
-              <div className="water">
+            <div className="h-[7.75rem] bg-bar flex p-2 ">
+              <div className="water w-1/4">
                 <div
                   className="wave "
-                  style={{ bottom: `${fillLevel}%` }}
-                ></div>
+                  style={{ bottom: `${fillLevel - fillLevels}%` }}
+                />
+              </div>
+              <div className="w-3/4 flex">
+                <p>
+                  {fillLevels}/{maxFillLevel} Szklanek
+                </p>
+                <Button
+                  onClick={handleAddClick}
+                  className="rounded-[5rem] w-6 h-6"
+                >
+                  {" "}
+                  <AddIcon />
+                </Button>
+                <Button
+                  onClick={handleRemoveClick}
+                  className="rounded-[5rem] w-6 h-6"
+                >
+                  <RemoveIcon />
+                </Button>
               </div>
             </div>
             <div className="h-[7.75rem] bg-bar mt-6">
               {" "}
-              <div className="water-level">{fillLevel + 50}%</div>
+              <div className="water-level"></div>
             </div>
           </div>
           <div className="w-[35rem]">
             {" "}
-            <div className="water-level">
-              {fillLevel}ddddddd%
-              <button onClick={handleAddClick}>Dodaj do szklanki</button>
-              <button onClick={handleRemoveClick}>Odejmij z szklanki</button>
-            </div>
+            <div className="water-level">{fillLevel}ddddddd%</div>
           </div>
         </div>
         <div className="    mt-28 mr-8 justify-start">

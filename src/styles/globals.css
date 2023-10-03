@@ -280,7 +280,7 @@ tr:nth-child(even) {
 
 .water {
   display: flex;
-  margin: auto;
+
   position: relative;
   width: 5rem;
   height: 5rem;
@@ -294,50 +294,6 @@ tr:nth-child(even) {
   clip-path: polygon(0 0, 100% 0, 90% 100%, 10% 100%);
 }
 
-/* .progress {
-  z-index: 100;
-  background-color: #fff;
-  position: absolute;
-  width: 200%;
-  bottom: 0;
-  transition: 0.5s ease;
-  height: 20%;
-  animation: anim 12s linear infinite;
-} */
-
-/* @keyframes wave {
-  0% {
-    transform: scaleY(1);
-  }
-  100% {
-    transform: scaleY(1.1);
-  }
-} */
-
-/* .water::before {
-  content: "";
-  width: 200%;
-  height: 200%;
-  background-color: black;
-  position: absolute;
-  top: -150%;
-  left: -50%;
-  border-radius: 40%;
-  animation: anim 12s linear infinite;
-}
-.water::after {
-  content: "";
-  width: 204%;
-  height: 204%;
-  background-color: #eceece80;
-  position: absolute;
-  top: -150%;
-  left: -52%;
-  border-radius: 40%;
-  animation: anim 12s linear infinite;
-  animation-delay: 0.5s;
-} */
-
 @keyframes anim {
   0% {
     transform: rotate(0deg);
@@ -348,11 +304,11 @@ tr:nth-child(even) {
 }
 .wave {
   position: relative;
-  bottom: -50%;
+
   width: 100%;
   height: 100%;
   background: #2c74b3;
-  padding-bottom: 2rem;
+  padding-bottom: 5rem;
   box-shadow: inset 0 0 40px 0 rgba(0, 0, 0, 0);
 }
 .wave:before,
