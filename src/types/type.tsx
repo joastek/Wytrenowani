@@ -89,3 +89,42 @@ export interface NutrientsState {
   gainedCalories: number;
   id: string;
 }
+
+//// WeatherAPI
+export interface WeatherData {
+  city: string;
+  main: {
+    temp: string;
+    humidity: string;
+  };
+  temp: string;
+  weather: {
+    description: string;
+    icon: string;
+  }[];
+  wind: {
+    speed: string;
+  };
+  name: string;
+}
+
+export const initialWeatherData: WeatherData = {
+  city: "",
+  main: { temp: "", humidity: "" },
+  temp: "",
+  weather: [{ description: "", icon: "" }],
+  wind: { speed: "" },
+  name: "",
+};
+
+/// GeolocalizationAPI
+export interface GeolocalizationData {
+  longitude: number;
+  latitude: number;
+  city: string;
+}
+export const initialGeolocalizationData: GeolocalizationData = {
+  longitude: 0,
+  latitude: 0,
+  city: "",
+};
