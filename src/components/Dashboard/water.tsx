@@ -1,51 +1,54 @@
 import { useState } from "react";
-import AddIcon from "@mui/icons-material/Add";
-import RemoveIcon from "@mui/icons-material/Remove";
+import { useSelector, useDispatch } from "react-redux";
+import {
+  updateFillLevels,
+  updateAnimationLevels,
+} from "@/slice/numberOfGlasses";
 import EditIcon from "@mui/icons-material/Edit";
 import CheckIcon from "@mui/icons-material/Check";
 import Button from "@mui/material/Button";
 const WaterFill = () => {
-  const [fillLevel, setFillLevel] = useState(-50);
+  // const [fillLevel, setFillLevel] = useState(-50);
   const [maxFillLevel, setMaxFillLevel] = useState(9);
-  const [fillLevels, setFillLevels] = useState(
-    Math.ceil((fillLevel + 50) / 10)
-  );
+  // const [fillLevels, setFillLevels] = useState(
+  //   Math.ceil((fillLevel + 50) / 10)
+  // );
   const [newMaxFillLevel, setNewMaxFillLevel] = useState("");
   const [isEditing, setIsEditing] = useState(true);
+  const fillLevels = useSelector((state: any) => state.glassOfWater.fillLevels);
+  const fillLevel = useSelector(
+    (state: any) => state.glassOfWater.animationLevel
+  );
+
+  const dispatch = useDispatch();
   /////////////////////
-  ////////////////
-  // Funkcja do napełniania szklanki
-  const handleFillClick = () => {
-    if (fillLevel < 100) {
-      // Max poziom napełnienia szklanki
-      setFillLevel((prevFillLevel) => prevFillLevel + 10); // Możesz dostosować tempo napełniania
-    }
-  };
+
   const handleAddClick = () => {
     // Oblicz procent, o ile ma zostać zwiększone fillLevel
     const incrementPercentage = 100 / maxFillLevel;
 
     if (fillLevels < maxFillLevel) {
-      setFillLevel((prevFillLevel) => prevFillLevel + incrementPercentage);
-      setFillLevels((prevFillLevels) => prevFillLevels + 1); // Dodaj 1 do fillLevels
+      const newFillLevels = fillLevels + 1;
+      dispatch(updateFillLevels(newFillLevels));
+      dispatch(updateAnimationLevels(fillLevel + incrementPercentage));
     }
   };
 
-  const handleRemoveClick = () => {
-    const incrementPercentage = 100 / maxFillLevel;
+  // const handleRemoveClick = () => {
+  //   const incrementPercentage = 100 / maxFillLevel;
 
-    if (fillLevels > 0) {
-      setFillLevel((prevFillLevel) => prevFillLevel - incrementPercentage);
-      setFillLevels((prevFillLevels) => prevFillLevels - 1); // Dodaj 1 do fillLevels
-    }
-  };
+  //   if (fillLevels > 0) {
+  //     setFillLevel((prevFillLevel) => prevFillLevel - incrementPercentage);
+  //     setFillLevels((prevFillLevels) => prevFillLevels - 1); // Dodaj 1 do fillLevels
+  //   }
+  // };
   const handleUpdateClick = () => {
     const newMaxFillLevelValue = parseInt(newMaxFillLevel, 10);
 
     if (!isNaN(newMaxFillLevelValue) && newMaxFillLevelValue > 0) {
       setMaxFillLevel(newMaxFillLevelValue);
-      setFillLevel(-50); // Resetuj fillLevel do stanu początkowego (-50)
-      setFillLevels(0);
+      dispatch(updateAnimationLevels(-50));
+      dispatch(updateFillLevels(0));
     }
   };
   const handleEditClick = () => {

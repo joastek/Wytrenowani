@@ -8,6 +8,7 @@ import BreakfastSetReducer from "@/slice/FoodCalculator/BreakfastCalculator";
 import LunchSetReducer from "@/slice/FoodCalculator/LunchCalculator";
 import DinnerSetReducer from "@/slice/FoodCalculator/DinnerCalculator";
 import FoodReducer from "@/slice/FoodCalculator/NutrientsSum";
+import GlassOfWaterReducer from "@/slice/numberOfGlasses";
 
 const store = configureStore({
   reducer: {
@@ -18,6 +19,7 @@ const store = configureStore({
     lunchSet: LunchSetReducer,
     dinnerSet: DinnerSetReducer,
     nutriensSum: FoodReducer,
+    glassOfWater: GlassOfWaterReducer,
   },
 });
 
