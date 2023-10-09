@@ -41,7 +41,7 @@ export default function Sidebar() {
   return (
     <>
       <div className=" fixed ease-out    h-full flex z-[100]">
-        <div className="m-6 bg-bar  z-[999] rounded-[2rem] ">
+        <div className="m-6 bg-bar  z-[999] rounded-[1rem] ">
           <button className="btn">
             <AiOutlineArrowLeft
               className="h-12 w-12"

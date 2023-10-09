@@ -2,7 +2,11 @@
 
 import { useState, useEffect } from "react";
 import { RootState } from "@/types/type";
-import { CircularProgressbar, buildStyles } from "react-circular-progressbar";
+import {
+  CircularProgressbarWithChildren,
+  buildStyles,
+  CircularProgressbar,
+} from "react-circular-progressbar";
 import { useSelector, useDispatch } from "react-redux";
 import { getLocation, fetchCurrentWeather } from "../API/weatherAPI";
 import { WeatherState } from "@/types/type";
@@ -14,7 +18,9 @@ import AuthAndCalendarManagement from "../API/googleAPI";
 import Image from "next/image";
 import WaterFill from "@/components/Dashboard/WaterFill";
 import NumberOfSteps from "@/components/Dashboard/NumberOfSteps";
-
+import "@/styles/DashboardWave.css";
+import MotivationalQuotes from "@/components/Dashboard/MotivationalQuotes";
+import "react-circular-progressbar/dist/styles.css";
 const dashboard = () => {
   const dispatch = useDispatch();
   const { totalProtein, totalCarbo, totalFat, totalCalories } = useSelector(
@@ -32,7 +38,7 @@ const dashboard = () => {
   );
   const percentage = 66;
   ///glass of water
-
+  const value = 0.66;
   useEffect(() => {
     const getLocationData = async () => {
       const locationData = await getLocation();
@@ -57,25 +63,27 @@ const dashboard = () => {
     <>
       <div className="flex justify-center   w-full  ">
         <div className="flex  flex-wrap max-w-[70rem] mt-28  ml-28">
-          <div className="bg-bar w-[70rem] h-[17rem] z-50 rounded-[2rem] relative">
-            <h2 className="absolute left-4 top-4">Witaj User !</h2>{" "}
-            <Image src="/icons/01n.png" alt="weather" width={50} height={50} />
+          <div className="bg-bar w-[70rem] h-[17rem]  rounded-[1rem] relative  shadow-3xl">
+            <div className="box">
+              <MotivationalQuotes />
+              <div className="box-inner"></div>
+            </div>
           </div>{" "}
-          <div className="w-[20rem] max-h-[17rem]  bg-bar rounded-[2rem] mt-6">
-            <h3 className="mb-4">Suma kcal :</h3>
+          <div className="w-[20rem] max-h-[17rem]  bg-bar rounded-[1rem] mt-6 justify-center flex flex-row text-center shadow-3xl">
             <CircularProgressbar
               value={totalCalories}
               maxValue={calories}
-              text={` \n ${totalCalories}/${calories} kcal`}
-              className=" p-6 max-w-[20rem] max-h-[14rem]"
+              text={`  ${totalCalories}/${calories} kcal`}
+              className="p-6 max-w-[20rem] max-h-[16rem]"
               styles={buildStyles({
                 textColor: "white",
                 textSize: "0.7rem",
-                pathColor: `rgb(87, 204, 153, ${percentage / 100})`,
+                pathColor: "#f00",
+                trailColor: "#000",
               })}
             />
           </div>
-          <div className="w-[27rem] bg-bar ml-6 mt-6">
+          <div className="w-[27rem] bg-bar ml-6 mt-6  rounded-[1rem]  shadow-3xl">
             {" "}
             <button onClick={handleCurrentWeatherClick}>
               Pobierz aktualną pogodę
@@ -103,10 +111,10 @@ const dashboard = () => {
             )}
           </div>
           <div className="w-[20rem] block ml-6 mt-6">
-            <div className="h-[7.75rem] bg-bar flex p-4 ">
+            <div className="h-[7.75rem] bg-bar flex p-4  rounded-[1rem]  shadow-3xl">
               <WaterFill />
             </div>
-            <div className="h-[7.75rem] bg-bar mt-6 p-4">
+            <div className="h-[7.75rem] bg-bar mt-6 p-4 rounded-[1rem]  shadow-3xl">
               {" "}
               <NumberOfSteps />
             </div>
@@ -115,10 +123,9 @@ const dashboard = () => {
         </div>
         <div className="    mt-28 mr-8 justify-start">
           {" "}
-          <div className="bg-bar  max-w-[35rem] h-[17rem] rounded-[2rem] p-4 ml-6">
+          <div className="bg-bar  max-w-[35rem] h-[17rem] rounded-[2rem] p-4 ml-6  shadow-3xl">
             <AuthAndCalendarManagement />
           </div>
-          <div></div>
         </div>
       </div>
     </>

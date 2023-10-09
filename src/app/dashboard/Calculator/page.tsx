@@ -35,6 +35,7 @@ import Select, { SelectChangeEvent } from "@mui/material/Select";
 import MenuItem from "@mui/material/MenuItem";
 import TextField from "@mui/material/TextField";
 import InputAdornment from "@mui/material/InputAdornment";
+
 const Calculator: React.FC = () => {
   const dispatch = useDispatch();
   const { mass, height, gender, age, result, progress, activity, calories } =
@@ -69,7 +70,7 @@ const Calculator: React.FC = () => {
   return (
     <>
       <div className="flex justify-center items-center  flex-col  ">
-        <div className=" justify-center items-center relative  bg-bar m-6 p-6 rounded-lg">
+        <div className=" justify-center items-center relative  bg-bar m-6 p-6 rounded-lg  shadow-3xl">
           <h1 className="text-[2rem]">
             Podaj swoją wagę, wzrost, wiek, płeć oraz określ poziom aktywności
           </h1>
@@ -176,9 +177,9 @@ const Calculator: React.FC = () => {
           <div
             className={`bg-bar rounded-lg w-[${
               result * 2
-            }rem] justify-center items-center relative p-6`}
+            }rem] justify-center items-center relative p-6  shadow-3xl`}
           >
-            <div className="bg-black h-6 rounded-lg mt-10 relative w-full">
+            <div className="bg-black h-6 rounded-lg mt-10 relative w-full  shadow-3xl">
               <div className="absolute left-0 top-[120%] text-lg">0%</div>
               <div className="absolute left-[20%] top-[120%] text-lg">8%</div>
               <div className="absolute left-[30%] top-[120%] text-lg">12%</div>
@@ -225,7 +226,7 @@ const Calculator: React.FC = () => {
             </div>
           </div>
           <div className="  mt-5 flex items-stretch ">
-            <div className=" w-1/3  bg-bar  rounded-lg  p-6">
+            <div className=" w-1/3  bg-bar  rounded-lg  p-6  shadow-3xl">
               <h3>Poziom tkanki tłuszczowej:</h3>
               <h2>{result}%</h2>
               <h3>BMI:</h3>{" "}
@@ -235,7 +236,7 @@ const Calculator: React.FC = () => {
               <br /> <h3>CPM:</h3>
               <h2>{calories} kcal</h2>
             </div>
-            <div className="w-2/3  bg-bar  rounded-lg  p-6 ml-5">
+            <div className="w-2/3  bg-bar  rounded-lg  p-6 ml-5  shadow-3xl">
               <h2> Wskazania:</h2> <br />
               <div className="text-lg">
                 {result > 0

@@ -18,7 +18,10 @@ module.exports = {
         secondary: "#B397FD",
         third: "#722796",
         bar: "#20223780",
-        popup:"",
+        popup: "",
+      },
+      boxShadow: {
+        "3xl": "2px 2px 12px 0 rgba(0, 0, 0, 0.58)",
       },
     },
   },
