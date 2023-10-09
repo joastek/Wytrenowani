@@ -12,8 +12,8 @@ import {
   Select,
   Checkbox,
 } from "@mui/material";
-import { addSet, deleteSet } from "@/slice/trainingSet";
-import { deleteTraining } from "@/slice/trainingList";
+import { addSet, deleteSet } from "@/slice/Training/trainingSet";
+import { deleteTraining } from "@/slice/Training/trainingList";
 
 const StrengthActivity = ({ training, trainingSet }: any) => {
   const dispatch = useDispatch();

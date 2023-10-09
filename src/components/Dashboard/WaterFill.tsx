@@ -3,16 +3,14 @@ import { useSelector, useDispatch } from "react-redux";
 import {
   updateFillLevels,
   updateAnimationLevels,
-} from "@/slice/numberOfGlasses";
+} from "@/slice/Dashboard/numberOfGlasses";
 import EditIcon from "@mui/icons-material/Edit";
 import CheckIcon from "@mui/icons-material/Check";
 import Button from "@mui/material/Button";
+import TextField from "@mui/material/TextField";
 const WaterFill = () => {
-  // const [fillLevel, setFillLevel] = useState(-50);
   const [maxFillLevel, setMaxFillLevel] = useState(9);
-  // const [fillLevels, setFillLevels] = useState(
-  //   Math.ceil((fillLevel + 50) / 10)
-  // );
+
   const [newMaxFillLevel, setNewMaxFillLevel] = useState("");
   const [isEditing, setIsEditing] = useState(true);
   const fillLevels = useSelector((state: any) => state.glassOfWater.fillLevels);
@@ -69,11 +67,11 @@ const WaterFill = () => {
           {isEditing ? (
             `${maxFillLevel}`
           ) : (
-            <input
-              type="text"
+            <TextField
+              type="number"
               value={newMaxFillLevel}
               onChange={(e) => setNewMaxFillLevel(e.target.value)}
-              className="w-6"
+              className="w-24 h-4"
             />
           )}{" "}
           szklanek
@@ -87,16 +85,6 @@ const WaterFill = () => {
             {" "}
             +250ml
           </Button>
-          {/* {isEditing ? (
-      
-        ) : (
-          <Button
-            onClick={handleUpdateClick}
-            className="rounded-[5rem] w-6 h-6"
-          >
-            Zatwierdź
-          </Button>
-        )} */}
           <Button
             onClick={() => {
               handleEditClick(), handleUpdateClick();

@@ -94,10 +94,10 @@ export interface NutrientsState {
 export interface WeatherData {
   city: string;
   main: {
-    temp: string;
+    temp: number;
     humidity: string;
   };
-  temp: string;
+  temp: number;
   weather: {
     description: string;
     icon: string;
@@ -110,8 +110,8 @@ export interface WeatherData {
 
 export const initialWeatherData: WeatherData = {
   city: "",
-  main: { temp: "", humidity: "" },
-  temp: "",
+  main: { temp: 0, humidity: "" },
+  temp: 0,
   weather: [{ description: "", icon: "" }],
   wind: { speed: "" },
   name: "",
@@ -128,3 +128,9 @@ export const initialGeolocalizationData: GeolocalizationData = {
   latitude: 0,
   city: "",
 };
+export interface WeatherState {
+  weather: {
+    currLocation: GeolocalizationData,
+    currentWeather:WeatherData
+  };
+}

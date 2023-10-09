@@ -3,19 +3,20 @@
 import { useState, useEffect } from "react";
 import { RootState } from "@/types/type";
 import { CircularProgressbar, buildStyles } from "react-circular-progressbar";
-import { useSelector } from "react-redux";
+import { useSelector, useDispatch } from "react-redux";
 import { getLocation, fetchCurrentWeather } from "../API/weatherAPI";
+import { WeatherState } from "@/types/type";
 import {
-  WeatherData,
-  initialWeatherData,
-  GeolocalizationData,
-  initialGeolocalizationData,
-} from "@/types/type";
+  setCurrLocation,
+  setCurrentWeather,
+} from "@/slice/Dashboard/weatherData";
 import AuthAndCalendarManagement from "../API/googleAPI";
 import Image from "next/image";
-import WaterFill from "@/components/Dashboard/water";
+import WaterFill from "@/components/Dashboard/WaterFill";
+import NumberOfSteps from "@/components/Dashboard/NumberOfSteps";
 
 const dashboard = () => {
+  const dispatch = useDispatch();
   const { totalProtein, totalCarbo, totalFat, totalCalories } = useSelector(
     (state: any) => state.nutriensSum
   );
@@ -23,24 +24,22 @@ const dashboard = () => {
   const { calories, result, mass } = useSelector(
     (state: RootState) => state.bmiCalculator
   );
-
+  const currentWeather = useSelector(
+    (state: WeatherState) => state.weather.currentWeather
+  );
+  const currLocation = useSelector(
+    (state: WeatherState) => state.weather.currLocation
+  );
   const percentage = 66;
   ///glass of water
-
-  /// WeatherApi
-  const [currentWeather, setCurrentWeather] =
-    useState<WeatherData>(initialWeatherData);
-  const [currLocation, setCurrLocation] = useState<GeolocalizationData>(
-    initialGeolocalizationData
-  );
 
   useEffect(() => {
     const getLocationData = async () => {
       const locationData = await getLocation();
-      setCurrLocation(locationData);
+      dispatch(setCurrLocation(locationData));
     };
     getLocationData();
-  }, []);
+  }, [dispatch]);
 
   const handleCurrentWeatherClick = async () => {
     try {
@@ -48,7 +47,7 @@ const dashboard = () => {
         currLocation.latitude,
         currLocation.longitude
       );
-      setCurrentWeather(weatherData);
+      dispatch(setCurrentWeather(weatherData));
     } catch (error) {
       console.error("Error fetching current weather:", error);
     }
@@ -85,7 +84,10 @@ const dashboard = () => {
             {currentWeather && (
               <div>
                 <h2>Aktualna pogoda w {currLocation.city}</h2>
-                <p>Temperatura: {currentWeather.main.temp} K</p>
+                <p>
+                  Temperatura: {(currentWeather.main.temp - 273.15).toFixed(1)}{" "}
+                  C
+                </p>
                 <p>Opis pogody: {currentWeather.weather[0].description}</p>
                 <p>Wilgotność: {currentWeather.main.humidity}%</p>
                 <p>Prędkość wiatru: {currentWeather.wind.speed} m/s</p>
@@ -104,9 +106,9 @@ const dashboard = () => {
             <div className="h-[7.75rem] bg-bar flex p-4 ">
               <WaterFill />
             </div>
-            <div className="h-[7.75rem] bg-bar mt-6">
+            <div className="h-[7.75rem] bg-bar mt-6 p-4">
               {" "}
-              <div className="water-level"></div>
+              <NumberOfSteps />
             </div>
           </div>
           <div className="w-[35rem]"> </div>

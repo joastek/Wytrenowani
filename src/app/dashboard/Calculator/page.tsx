@@ -9,7 +9,7 @@ import {
   setAge,
   calculateResult,
   setActivity,
-} from "@/slice/bodyFatCalculator";
+} from "@/slice/Calculator/bodyFatCalculator";
 import { RootState } from "@/types/type";
 import {
   veryLowFat,

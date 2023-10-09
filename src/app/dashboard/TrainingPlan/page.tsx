@@ -1,6 +1,6 @@
 "use client";
 import { trainingState } from "@/types/type";
-import { addTraining } from "@/slice/trainingList";
+import { addTraining } from "@/slice/Training/trainingList";
 import { useSelector, useDispatch } from "react-redux";
 
 import { useState } from "react";

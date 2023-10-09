@@ -6,12 +6,8 @@ import {
   initialGeolocalizationData,
 } from "@/types/type";
 
-
-
 const WEATHER_API_URL = "https://api.openweathermap.org/data/2.5";
 const WEATHER_API_KEY = "e1af2622031195f43d1d95b3c9b21403";
-console.log("test22");
-
 
 export const getLocation = async () => {
   try {

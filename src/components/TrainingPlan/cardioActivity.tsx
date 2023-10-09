@@ -1,6 +1,6 @@
 import React from "react";
 import { useState } from "react";
-import { deleteTraining } from "@/slice/trainingList";
+import { deleteTraining } from "@/slice/Training/trainingList";
 import { useDispatch } from "react-redux";
 import IconButton from "@mui/material/IconButton";
 import DeleteIcon from "@mui/icons-material/Delete";
@@ -8,7 +8,7 @@ import Button from "@mui/material/Button";
 import AddIcon from "@mui/icons-material/Add";
 import TextField from "@mui/material/TextField";
 import SeriesController from "@/components/TrainingPlan/seriesControl";
-import { addSet, deleteSet } from "@/slice/trainingSet";
+import { addSet, deleteSet } from "@/slice/Training/trainingSet";
 import { MenuItem } from "@mui/material";
 
 const CardioActivity = ({ training, trainingSet }: any) => {
