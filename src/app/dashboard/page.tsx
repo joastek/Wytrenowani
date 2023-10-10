@@ -19,8 +19,13 @@ import Image from "next/image";
 import WaterFill from "@/components/Dashboard/WaterFill";
 import NumberOfSteps from "@/components/Dashboard/NumberOfSteps";
 import "@/styles/DashboardWave.css";
+import "@/styles/theme.css";
 import MotivationalQuotes from "@/components/Dashboard/MotivationalQuotes";
 import "react-circular-progressbar/dist/styles.css";
+import { FaWind, FaTemperatureLow } from "react-icons/fa";
+import { BsFillDropletFill } from "react-icons/bs";
+import { BiRefresh } from "react-icons/bi";
+import { Button } from "@mui/material";
 const dashboard = () => {
   const dispatch = useDispatch();
   const { totalProtein, totalCarbo, totalFat, totalCalories } = useSelector(
@@ -38,13 +43,26 @@ const dashboard = () => {
   );
   const percentage = 66;
   ///glass of water
-  const value = 0.66;
   useEffect(() => {
-    const getLocationData = async () => {
-      const locationData = await getLocation();
-      dispatch(setCurrLocation(locationData));
+    const loadData = async () => {
+      try {
+        // Pobierz lokalizację
+        const locationData = await getLocation();
+        dispatch(setCurrLocation(locationData));
+
+        // Pobierz aktualną pogodę na podstawie lokalizacji
+        const weatherData = await fetchCurrentWeather(
+          locationData.latitude,
+          locationData.longitude
+        );
+        dispatch(setCurrentWeather(weatherData));
+      } catch (error) {
+        console.error("Error fetching data:", error);
+      }
     };
-    getLocationData();
+
+    // Wywołaj funkcję loadData po załadowaniu komponentu
+    loadData();
   }, [dispatch]);
 
   const handleCurrentWeatherClick = async () => {
@@ -58,7 +76,7 @@ const dashboard = () => {
       console.error("Error fetching current weather:", error);
     }
   };
-
+  console.log(handleCurrentWeatherClick);
   return (
     <>
       <div className="flex justify-center   w-full  ">
@@ -83,31 +101,56 @@ const dashboard = () => {
               })}
             />
           </div>
-          <div className="w-[27rem] bg-bar ml-6 mt-6  rounded-[1rem]  shadow-3xl">
+          <div className="w-[27rem] weather_box  ml-6 mt-6  rounded-[1rem]  shadow-3xl p-2 flex justify-center text-center relative">
             {" "}
-            <button onClick={handleCurrentWeatherClick}>
-              Pobierz aktualną pogodę
+            <button
+              onClick={handleCurrentWeatherClick}
+              className="absolute left-4 top-4"
+            >
+              <BiRefresh className=" w-[2rem] h-[2rem]" />
             </button>
             {/* Wyświetlanie danych pogodowych */}
             {currentWeather && (
-              <div>
-                <h2>Aktualna pogoda w {currLocation.city}</h2>
-                <p>
-                  Temperatura: {(currentWeather.main.temp - 273.15).toFixed(1)}{" "}
-                  C
-                </p>
-                <p>Opis pogody: {currentWeather.weather[0].description}</p>
-                <p>Wilgotność: {currentWeather.main.humidity}%</p>
-                <p>Prędkość wiatru: {currentWeather.wind.speed} m/s</p>
-                <p>Prędkość wiatru: {currentWeather.name} m/s</p>
-
-                <Image
-                  src={`/icons/${currentWeather.weather[0].icon}.png`}
-                  alt="weather"
-                  width={50}
-                  height={50}
-                />
-              </div>
+              <>
+                <div className=" flex-col w-3/4">
+                  <h2>{currLocation.city} </h2>
+                  <h4> {currentWeather.name}</h4>
+                  <Image
+                    src={`/icons/${currentWeather.weather[0].icon}.png`}
+                    alt="weather"
+                    className=" justify-center flex mx-auto"
+                    width={80}
+                    height={80}
+                  />
+                  <p className="text-[5rem] ml-8 mt-[-5%] ">
+                    25<sup>o</sup>
+                  </p>{" "}
+                  <p className="mt-[-5%] text-sm">
+                    {currentWeather.weather[0].description}{" "}
+                  </p>
+                </div>
+                <div className="flex flex-col w-1/4 h-full">
+                  <div className="flex flex-col justify-center h-1/3 border-b border-white">
+                    <FaWind className="justify-center flex mx-auto w-[1.7rem] h-[1.7rem]" />{" "}
+                    <p className="text-sm mt-2 text-gray">Wiatr</p>
+                    <p className="text-sm text-gray">
+                      {currentWeather.wind.speed} m/s
+                    </p>
+                  </div>
+                  <div className="flex flex-col justify-center h-1/3   border-b border-white mt-2">
+                    <BsFillDropletFill className="justify-center flex mx-auto  w-[1.7rem] h-[1.7rem]" />{" "}
+                    <p className="text-sm mt-2 text-gray">Wilgotność</p>
+                    <p className="text-sm text-gray">
+                      {currentWeather.main.humidity}%
+                    </p>
+                  </div>
+                  <div className="flex flex-col justify-center h-1/3 mt-2 ">
+                    <FaTemperatureLow className="justify-center flex ml-[40%]  w-[1.7rem] h-[1.7rem] " />{" "}
+                    <p className="text-sm mt-2 text-gray">Odczuwalne </p>
+                    <p className="text-sm text-gray">3.4 m/s</p>
+                  </div>
+                </div>
+              </>
             )}
           </div>
           <div className="w-[20rem] block ml-6 mt-6">
