@@ -1,5 +1,5 @@
 "use client";
-import { motion } from "framer-motion";
+import { color, motion } from "framer-motion";
 import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import {
@@ -35,6 +35,7 @@ import Select, { SelectChangeEvent } from "@mui/material/Select";
 import MenuItem from "@mui/material/MenuItem";
 import TextField from "@mui/material/TextField";
 import InputAdornment from "@mui/material/InputAdornment";
+import { deepOrange } from "@mui/material/colors";
 
 const Calculator: React.FC = () => {
   const dispatch = useDispatch();
@@ -67,6 +68,9 @@ const Calculator: React.FC = () => {
     { text: "Średnia aktywność", value: 1.6 },
     { text: "Wysoka aktywność", value: 1.9 },
   ];
+  const primary = {
+    main: " #e3f2fd",
+  };
   return (
     <>
       <div className="flex justify-center items-center  flex-col  ">
@@ -84,6 +88,9 @@ const Calculator: React.FC = () => {
               <div>
                 {" "}
                 <TextField
+                  sx={{
+                    color: "white",
+                  }}
                   type="number"
                   id="outlined-basic"
                   label="Masa ciała "
@@ -95,12 +102,20 @@ const Calculator: React.FC = () => {
                   }
                   InputProps={{
                     startAdornment: (
-                      <InputAdornment position="start">kg</InputAdornment>
+                      <InputAdornment position="start">
+                        <p className="text-white">kg</p>
+                      </InputAdornment>
                     ),
                   }}
                 />
                 <TextField
-                  sx={{ color: "white" }}
+                  // sx={{
+                  //   color: "#000000",
+                  //   border: "2px white solid",
+                  //   borderRadius: "1rem",
+                  //   bgcolor: deepOrange[800],
+                  // }}
+                  color="primary"
                   type="number"
                   id="outlined-basic"
                   label="Wzrost"
@@ -115,7 +130,10 @@ const Calculator: React.FC = () => {
                   }}
                   InputProps={{
                     startAdornment: (
-                      <InputAdornment position="start">cm</InputAdornment>
+                      <InputAdornment position="start">
+                        {" "}
+                        <p className="text-white">cm</p>
+                      </InputAdornment>
                     ),
                   }}
                 />
@@ -130,11 +148,6 @@ const Calculator: React.FC = () => {
                   variant="outlined"
                   className="m-4 w-[14rem]"
                   onChange={(e) => dispatch(setAge(parseInt(e.target.value)))}
-                  InputProps={{
-                    startAdornment: (
-                      <InputAdornment position="start">L</InputAdornment>
-                    ),
-                  }}
                 />
                 <FormControl sx={{ m: 2, width: "35ch" }}>
                   <InputLabel id="demo-simple-select-label">Płeć</InputLabel>

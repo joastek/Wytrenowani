@@ -5,10 +5,16 @@ import {
   useSessionContext,
 } from "@supabase/auth-helpers-react";
 import { DateTime } from "luxon";
-import DateTimePicker from "react-datetime-picker";
+// import DateTimePicker from "react-datetime-picker";
+import { MobileDateTimePicker } from "@mui/x-date-pickers/MobileDateTimePicker";
+import { FormControl, useFormControlContext } from "@mui/base/FormControl";
+import { Input, inputClasses } from "@mui/base/Input";
+import { styled } from "@mui/system";
 import "react-datetime-picker/dist/DateTimePicker.css";
 import "react-calendar/dist/Calendar.css";
 import "react-clock/dist/Clock.css";
+import { Textarea } from "@mui/joy";
+import dayjs from "dayjs";
 interface CalendarEvent {
   eventName: string;
   eventDescription: string;
@@ -85,25 +91,44 @@ const AuthAndCalendarManagement = () => {
     <>
       {session ? (
         <>
-          <h2>Hey there {session.user.email}</h2>
-          <p>Start of your event</p>
-          <DateTimePicker
-            onChange={(value) => setStart(value as Date)}
-            value={start}
+          <h2>Witaj {session.user.email}</h2>
+          <p>Rozpoczęcie wydarzenia</p>
+          <MobileDateTimePicker
+            onChange={(value) => setStart(new Date(dayjs(value).toISOString()))}
+            value={dayjs(start)}
           />
-          <p>End of your event</p>
-          <DateTimePicker
-            onChange={(value) => setEnd(value as Date)}
-            value={end}
+          <p>Zakończenie wydarzenia</p>
+          <MobileDateTimePicker
+            onChange={(value) => setEnd(new Date(dayjs(value).toISOString()))}
+            value={dayjs(end)}
           />
-          <p>Event name</p>
-          <input type="text" onChange={(e) => setEventName(e.target.value)} />
-          <p>Event description</p>
-          <input
-            type="text"
-            onChange={(e) => setEventDescription(e.target.value)}
-          />
-          <hr />
+          <p>Nazwa wydarzenia</p>
+          <textarea rows={5} />
+          <FormControl onChange={(e) => setEventName(e.target.value)}>
+            <Input
+              placeholder="Wpisz nazwę wydarzenia "
+              slotProps={{
+                input: {
+                  className:
+                    "w-full text-sm font-normal bg-transparent font-sans leading-normal text-white dark:text-slate-300 dark:bg-slate-800 border border-solid border-slate-200 dark:border-slate-700 px-3 py-2 rounded-lg hover:dark:bg-slate-900 hover:border-slate-400 hover:dark:border-slate-700 focus:outline-0 focus:shadow-outline-purple",
+                },
+              }}
+            />
+          </FormControl>
+
+          <p>Opis wydarzenia</p>
+          <FormControl onChange={(e) => setEventDescription(e.target.value)}>
+            <Input
+              placeholder="Wpisz opis wydarzenia "
+              slotProps={{
+                input: {
+                  className:
+                    "w-full text-sm font-normal bg-transparent font-sans leading-normal text-white dark:text-slate-300 dark:bg-slate-800 border border-solid border-slate-200 dark:border-slate-700 px-3 py-2 rounded-lg hover:dark:bg-slate-900 hover:border-slate-400 hover:dark:border-slate-700 focus:outline-0 focus:shadow-outline-purple",
+                },
+              }}
+            />
+          </FormControl>
+
           <button
             onClick={() =>
               createCalendarEvent({
@@ -114,14 +139,14 @@ const AuthAndCalendarManagement = () => {
               })
             }
           >
-            Create Calendar Event
+            Dodaj wydarzenie
           </button>
           <p></p>
-          <button onClick={() => signOut()}>Sign Out</button>
+          <button onClick={() => signOut()}>Wyloguj się</button>
         </>
       ) : (
         <>
-          <button onClick={() => googleSignIn()}>Sign In With Google</button>
+          <button onClick={() => googleSignIn()}>Zaloguj się z google</button>
         </>
       )}
     </>

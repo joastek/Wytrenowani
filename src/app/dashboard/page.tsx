@@ -26,6 +26,7 @@ import { FaWind, FaTemperatureLow } from "react-icons/fa";
 import { BsFillDropletFill } from "react-icons/bs";
 import { BiRefresh } from "react-icons/bi";
 import { Button } from "@mui/material";
+
 const dashboard = () => {
   const dispatch = useDispatch();
   const { totalProtein, totalCarbo, totalFat, totalCalories } = useSelector(
@@ -87,7 +88,7 @@ const dashboard = () => {
               <div className="box-inner"></div>
             </div>
           </div>{" "}
-          <div className="w-[20rem] max-h-[17rem]  bg-bar rounded-[1rem] mt-6 justify-center flex flex-row text-center shadow-3xl">
+          <div className="w-[20rem] max-h-[17rem]  bg-[#293556] rounded-[1rem] mt-6 justify-center flex flex-row text-center shadow-3xl">
             <CircularProgressbar
               value={totalCalories}
               maxValue={calories}
@@ -96,7 +97,7 @@ const dashboard = () => {
               styles={buildStyles({
                 textColor: "white",
                 textSize: "0.7rem",
-                pathColor: "#f00",
+                pathColor: "#EDB90C",
                 trailColor: "#000",
               })}
             />
@@ -122,8 +123,9 @@ const dashboard = () => {
                     width={80}
                     height={80}
                   />
-                  <p className="text-[5rem] ml-8 mt-[-5%] ">
-                    25<sup>o</sup>
+                  <p className="text-[5rem] ml-8 mt-[-5%] text-contrast">
+                    {(currentWeather.main.temp - 273.15).toFixed(0)}
+                    <sup>o</sup>
                   </p>{" "}
                   <p className="mt-[-5%] text-sm">
                     {currentWeather.weather[0].description}{" "}
@@ -154,10 +156,10 @@ const dashboard = () => {
             )}
           </div>
           <div className="w-[20rem] block ml-6 mt-6">
-            <div className="h-[7.75rem] bg-bar flex p-4  rounded-[1rem]  shadow-3xl">
+            <div className="h-[7.75rem] bg-bgcontrastpurple flex p-4  rounded-[1rem]  shadow-3xl">
               <WaterFill />
             </div>
-            <div className="h-[7.75rem] bg-bar mt-6 p-4 rounded-[1rem]  shadow-3xl">
+            <div className="h-[7.75rem] bg-bgcontrastpurple mt-6 p-4 rounded-[1rem]  shadow-3xl">
               {" "}
               <NumberOfSteps />
             </div>
@@ -166,7 +168,7 @@ const dashboard = () => {
         </div>
         <div className="    mt-28 mr-8 justify-start">
           {" "}
-          <div className="bg-bar  max-w-[35rem] h-[17rem] rounded-[2rem] p-4 ml-6  shadow-3xl">
+          <div className="bg-bgcontrastpurple  max-w-[35rem] h-3/4 rounded-[2rem] p-4 ml-6  shadow-3xl">
             <AuthAndCalendarManagement />
           </div>
         </div>

@@ -19,6 +19,9 @@ module.exports = {
         third: "#722796",
         bar: "#20223780",
         gray: "#d3d3d3",
+        contrast: "#EDB90C",
+        contrastblack: "#293556",
+        bgcontrastpurple: "#440099",
       },
       boxShadow: {
         "3xl": "2px 2px 12px 0 rgba(0, 0, 0, 0.58)",

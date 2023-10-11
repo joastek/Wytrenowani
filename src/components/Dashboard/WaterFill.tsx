@@ -81,6 +81,7 @@ const WaterFill = () => {
           <Button
             onClick={handleAddClick}
             className="rounded-[5rem] w-6 h-6 mr-6 items-center flex"
+            disableRipple
           >
             {" "}
             +250ml
@@ -90,6 +91,7 @@ const WaterFill = () => {
               handleEditClick(), handleUpdateClick();
             }}
             className="rounded-[5rem] w-6 h-6"
+            disableRipple
           >
             {isEditing ? (
               <>
