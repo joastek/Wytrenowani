@@ -156,20 +156,33 @@ const dashboard = () => {
             )}
           </div>
           <div className="w-[20rem] block ml-6 mt-6">
-            <div className="h-[7.75rem] bg-bgcontrastpurple flex p-4  rounded-[1rem]  shadow-3xl">
+            <div className="h-[7.75rem] bg-bgcontrastpurple flex p-4  rounded-[1rem]  shadow-3xl ">
               <WaterFill />
             </div>
-            <div className="h-[7.75rem] bg-bgcontrastpurple mt-6 p-4 rounded-[1rem]  shadow-3xl">
+            <div className="h-[7.75rem] bg-bgcontrastpurple mt-4 p-4 rounded-[1rem]  shadow-3xl">
               {" "}
               <NumberOfSteps />
             </div>
           </div>
-          <div className="w-[35rem]"> </div>
+          <div className="flex h-[17rem] w-full mt-6  ">
+            {" "}
+            <div className=" bg-bar  w-1/2 rounded-[1rem] relative  shadow-3xl p-4">
+              {" "}
+              dwadwaddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddd
+            </div>{" "}
+            <div className=" bg-bar  w-1/2  ml-6 rounded-[1rem] relative  shadow-3xl  p-4">
+              {" "}
+              dwadwad
+            </div>
+          </div>
         </div>
         <div className="    mt-28 mr-8 justify-start">
           {" "}
-          <div className="bg-bgcontrastpurple  max-w-[35rem] h-3/4 rounded-[2rem] p-4 ml-6  shadow-3xl">
+          <div className="bg-bgcontrastpurple  max-w-[35rem] max-h-[3/4] rounded-[1rem] p-4 ml-6  shadow-3xl">
             <AuthAndCalendarManagement />
+          </div>
+          <div className="bg-bgcontrastpurple  max-w-[35rem] max-h-[1/4] rounded-[1rem] p-4 ml-6  mt-4  shadow-3xl">
+            {/* <AuthAndCalendarManagement /> */}
           </div>
         </div>
       </div>

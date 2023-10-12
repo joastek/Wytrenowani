@@ -55,28 +55,31 @@ const WaterFill = () => {
   return (
     <>
       {" "}
-      <div className="water w-1/4">
+      <div className="water w-1/4  ">
         <div
           className="wave "
           style={{ bottom: `${fillLevel - fillLevels}%` }}
         />
       </div>
-      <div className="w-3/4 ml-4 ">
-        <p className="text-base">
-          {fillLevels}/
-          {isEditing ? (
-            `${maxFillLevel}`
-          ) : (
-            <TextField
-              type="number"
-              value={newMaxFillLevel}
-              onChange={(e) => setNewMaxFillLevel(e.target.value)}
-              className="w-24 h-4"
-            />
-          )}{" "}
-          szklanek
-        </p>
-        <div className="h-full flex  justify-center items-end p-6">
+      <div className="w-3/4 ml-4   ">
+        <div className="flex  text-base space-x-2">
+          <div> {fillLevels}</div>
+
+          <div className="text-base text-gray">
+            {isEditing ? (
+              `/${maxFillLevel}`
+            ) : (
+              <TextField
+                type="number"
+                value={newMaxFillLevel}
+                onChange={(e) => setNewMaxFillLevel(e.target.value)}
+                className="w-24 h-4"
+              />
+            )}{" "}
+            szklanek
+          </div>
+        </div>
+        <div className="h-full flex  justify-center items-end p-6 ">
           {" "}
           <Button
             onClick={handleAddClick}

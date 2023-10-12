@@ -284,16 +284,25 @@ tr:nth-child(even) {
   position: relative;
   width: 5rem;
   height: 5rem;
-
+  border: 4px solid #fff;
+  border-top: 3px solid #440099;
   overflow: hidden;
   z-index: 0;
-  background: #2c74b3;
+  background: #edb90c;
+  border-top-left-radius: 3px;
+  border-top-right-radius: 3px;
   border-bottom-left-radius: 20%;
   border-bottom-right-radius: 20%;
-
-  clip-path: polygon(0 0, 100% 0, 90% 100%, 10% 100%);
 }
-
+.water:before {
+  position: absolute;
+  content: "";
+  background-color: #edb90c;
+  top: 0;
+  left: 0;
+  width: 200%;
+  height: 200%;
+}
 @keyframes anim {
   0% {
     transform: rotate(0deg);
@@ -307,7 +316,7 @@ tr:nth-child(even) {
 
   width: 100%;
   height: 100%;
-  background: #2c74b3;
+  background: #edb90c;
   padding-bottom: 5rem;
   box-shadow: inset 0 0 40px 0 rgba(0, 0, 0, 0);
 }
@@ -324,12 +333,12 @@ tr:nth-child(even) {
 }
 .wave:before {
   border-radius: 45%;
-  background: rgba(255, 255, 255, 1);
+  background: #440099;
   animation: animate 5s linear infinite;
 }
 .wave:after {
   border-radius: 40%;
-  background: rgba(255, 255, 255, 0.5);
+  background: rgba(68, 0, 153, 0.5);
   animation: animate 10s linear infinite;
 }
 

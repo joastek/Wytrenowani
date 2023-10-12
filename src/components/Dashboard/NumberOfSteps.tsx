@@ -17,7 +17,7 @@ const NumberOfSteps = () => {
 
   return (
     <>
-      <div className="bg-black h-6 rounded-lg  relative w-full">
+      <div className="bg-black h-4 rounded-[0.4rem]  relative w-full border-solid border-2 border-white ">
         <motion.div
           initial={{ width: 0 }} // Ustaw początkową szerokość na 0 i left na 0
           animate={{
@@ -44,21 +44,29 @@ const NumberOfSteps = () => {
           }}
           transition={{ duration: 1.5, type: "tween" }}
           style={{
-            background: "red",
+            background: " #edb90c",
           }}
-          className="h-6 rounded-lg"
+          className="h-[0.8rem] rounded-[0.3rem]"
         ></motion.div>
       </div>
-      <div>
+      <div className="flex h-full space-x-2">
         <TextField
           type="number"
           value={NumberOfSteps}
           onChange={(e) =>
             dispatch(updateNumberOfSteps(parseInt(e.target.value)))
           }
-          className="w-24 h-4"
+          className="w-24  my-auto"
+          inputProps={{
+            style: {
+              height: "0.5rem",
+              fontSize: "1rem",
+            },
+          }}
         />
-        /{maxNumberOfSteps}
+        <p className="text-base text-gray my-auto  space-x-2">
+          /{maxNumberOfSteps} Kroki
+        </p>
       </div>
     </>
   );
