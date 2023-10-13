@@ -10,7 +10,7 @@ import {
   addNutriens,
   deleteNutriens,
 } from "@/slice/FoodCalculator/NutrientsSum";
-import { getNutriensFromAPI } from "@/app/API/getNutriensFromAPI";
+import { getNutriensFromAPI } from "@/components/API/getNutriensFromAPI";
 import Button from "@mui/material/Button";
 import AddIcon from "@mui/icons-material/Add";
 import TextField from "@mui/material/TextField";

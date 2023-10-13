@@ -35,7 +35,6 @@ import Select, { SelectChangeEvent } from "@mui/material/Select";
 import MenuItem from "@mui/material/MenuItem";
 import TextField from "@mui/material/TextField";
 import InputAdornment from "@mui/material/InputAdornment";
-import { deepOrange } from "@mui/material/colors";
 
 const Calculator: React.FC = () => {
   const dispatch = useDispatch();

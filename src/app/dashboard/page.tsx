@@ -8,13 +8,16 @@ import {
   CircularProgressbar,
 } from "react-circular-progressbar";
 import { useSelector, useDispatch } from "react-redux";
-import { getLocation, fetchCurrentWeather } from "../API/weatherAPI";
+import {
+  getLocation,
+  fetchCurrentWeather,
+} from "../../components/API/weatherAPI";
 import { WeatherState } from "@/types/type";
 import {
   setCurrLocation,
   setCurrentWeather,
 } from "@/slice/Dashboard/weatherData";
-import AuthAndCalendarManagement from "../API/googleAPI";
+import AuthAndCalendarManagement from "../../components/API/googleAPI";
 import Image from "next/image";
 import WaterFill from "@/components/Dashboard/WaterFill";
 import NumberOfSteps from "@/components/Dashboard/NumberOfSteps";

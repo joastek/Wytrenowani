@@ -8,6 +8,7 @@ import { AiOutlineHome, AiOutlineArrowLeft } from "react-icons/ai";
 import { SidebarContext } from "./SideBarContext";
 import { GiWeightLiftingUp } from "react-icons/gi";
 import { GiMeal } from "react-icons/gi";
+import { FiTarget } from "react-icons/fi";
 interface SidebarItem {
   name: string;
   href: string;
@@ -21,19 +22,24 @@ export default function Sidebar() {
       icon: AiOutlineHome,
     },
     {
+      name: "Cele",
+      href: "/dashboard/Targets",
+      icon: FiTarget,
+    },
+    {
       name: "Kalkulator",
       href: "/dashboard/Calculator",
       icon: BsCalculator,
     },
     {
-      name: "Trening",
-      href: "/dashboard/TrainingPlan",
-      icon: GiWeightLiftingUp,
-    },
-    {
       name: "Jedzenie",
       href: "/dashboard/Food",
       icon: GiMeal,
+    },
+    {
+      name: "Trening",
+      href: "/dashboard/TrainingPlan",
+      icon: GiWeightLiftingUp,
     },
   ];
   const { isCollapsedSidebar, toggleSidebarcollapse } =
