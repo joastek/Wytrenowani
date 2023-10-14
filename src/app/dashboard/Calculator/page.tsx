@@ -40,7 +40,7 @@ const Calculator: React.FC = () => {
   const dispatch = useDispatch();
   const { mass, height, gender, age, result, progress, activity, calories } =
     useSelector((state: RootState) => state.bmiCalculator);
-  const getProgressBarColor = (value: number) => {
+  const getProgressBarColorFAT = (value: number) => {
     if (value <= 8) {
       return "#00f"; // Niebieski
     } else if (value <= 19) {
@@ -51,145 +51,35 @@ const Calculator: React.FC = () => {
       return "#f00"; // Czerwony
     }
   };
-
+  const getProgressBarColorBMI = (value: number) => {
+    if (value <= 16) {
+      return "#f00"; //Czerwony
+    } else if (value <= 18.5) {
+      return " #ff0"; // Żółty
+    } else if (value <= 25) {
+      return "#006400"; //Zielony
+    } else if (value <= 30) {
+      return "#D38888";
+    } else {
+      return "#f00"; // Czerwony
+    }
+  };
   useEffect(() => {
     dispatch(calculateResult());
   }, [mass, height, age, gender, activity]);
   const [selectedDiv, setSelectedDiv] = useState(null);
 
-  const handleClick = (index: any) => {
-    setSelectedDiv(index);
-  };
+  const BMI: any =
+    mass && height ? ((mass / (height * height)) * 10000).toFixed(1) : 0;
 
-  const divs = [
-    { text: "Brak aktywności", value: 1.2 },
-    { text: "Mała aktywność", value: 1.4 },
-    { text: "Średnia aktywność", value: 1.6 },
-    { text: "Wysoka aktywność", value: 1.9 },
-  ];
-  const primary = {
-    main: " #e3f2fd",
-  };
   return (
     <>
-      <div className="flex justify-center items-center  flex-col  ">
-        <div className=" justify-center items-center relative  bg-bar m-6 p-6 rounded-lg  shadow-3xl">
-          <h1 className="text-[2rem]">
-            Podaj swoją wagę, wzrost, wiek, płeć oraz określ poziom aktywności
-          </h1>
-          <h2 className="text-[1rem]">
-            Potrzebujemy tych informacji aby obliczyć twój poziom tkankę
-            tłuszczową oraz całkowitą przemianę materii
-          </h2>
-
-          <div className="flex">
-            <div className="w-2/3 ">
-              <div>
-                {" "}
-                <TextField
-                  sx={{
-                    color: "white",
-                  }}
-                  type="number"
-                  id="outlined-basic"
-                  label="Masa ciała "
-                  value={mass || ""}
-                  variant="outlined"
-                  className="m-4 w-[14rem]"
-                  onChange={(e) =>
-                    dispatch(setMass(parseFloat(e.target.value)))
-                  }
-                  InputProps={{
-                    startAdornment: (
-                      <InputAdornment position="start">
-                        <p className="text-white">kg</p>
-                      </InputAdornment>
-                    ),
-                  }}
-                />
-                <TextField
-                  // sx={{
-                  //   color: "#000000",
-                  //   border: "2px white solid",
-                  //   borderRadius: "1rem",
-                  //   bgcolor: deepOrange[800],
-                  // }}
-                  color="primary"
-                  type="number"
-                  id="outlined-basic"
-                  label="Wzrost"
-                  value={height || ""}
-                  variant="outlined"
-                  className=" m-4 w-[14rem]"
-                  onChange={(e) => {
-                    const parsedValue = parseFloat(e.target.value);
-                    if (!isNaN(parsedValue) && parsedValue >= 0) {
-                      dispatch(setHeight(parsedValue));
-                    }
-                  }}
-                  InputProps={{
-                    startAdornment: (
-                      <InputAdornment position="start">
-                        {" "}
-                        <p className="text-white">cm</p>
-                      </InputAdornment>
-                    ),
-                  }}
-                />
-              </div>
-              <div>
-                {" "}
-                <TextField
-                  type="number"
-                  id="outlined-basic"
-                  label="Wiek"
-                  value={age || ""}
-                  variant="outlined"
-                  className="m-4 w-[14rem]"
-                  onChange={(e) => dispatch(setAge(parseInt(e.target.value)))}
-                />
-                <FormControl sx={{ m: 2, width: "35ch" }}>
-                  <InputLabel id="demo-simple-select-label">Płeć</InputLabel>
-                  <Select
-                    labelId="demo-simple-select-label"
-                    id="demo-simple-select"
-                    value={gender}
-                    label="Płeć"
-                    className=" w-[14rem]"
-                    onChange={(e: any) =>
-                      dispatch(setGender(parseInt(e.target.value)))
-                    }
-                  >
-                    <MenuItem value={1}>Mężczyzna</MenuItem>
-                    <MenuItem value={0}>Kobieta</MenuItem>
-                  </Select>
-                </FormControl>
-              </div>
-            </div>
-            <div className="w-1/3 ">
-              {divs.map((item) => (
-                <motion.div
-                  key={item.value}
-                  whileHover={{ scale: 1.05 }}
-                  className={`border  p-1 text-lg m-2 cursor-pointer ${
-                    selectedDiv === item.value ? "bg-red-500" : ""
-                  }`}
-                  onClick={() => {
-                    handleClick(item.value);
-                    dispatch(setActivity(item.value)); // Ustaw aktywność przy kliknięciu
-                  }}
-                >
-                  {item.text}
-                </motion.div>
-              ))}
-            </div>
-          </div>
-        </div>
-        <div className="w-[70rem]">
+      <div className="flex justify-center items-center  flex-col   ">
+        <div className="w-[70rem] ">
           <div
             className={`bg-bar rounded-lg w-[${
               result * 2
-            }rem] justify-center items-center relative p-6  shadow-3xl`}
+            }rem] justify-center items-center relative p-6  shadow-3xl  mt-28`}
           >
             <div className="bg-black h-6 rounded-lg mt-10 relative w-full  shadow-3xl">
               <div className="absolute left-0 top-[120%] text-lg">0%</div>
@@ -211,40 +101,65 @@ const Calculator: React.FC = () => {
                 animate={{ width: `${Math.min((result / 40) * 100, 100)}%` }}
                 transition={{ duration: 1.5, type: "tween" }}
                 style={{
-                  background: getProgressBarColor(result),
+                  background: getProgressBarColorFAT(result),
                 }}
                 className="h-6 rounded-lg"
               ></motion.div>
-            </div>
-            <div className=" mt-[5%]">
-              <h2>Charakterystyka:</h2>
-              <div className="text-lg w-1/2">
-                {result > 0
-                  ? result <= 8
-                    ? veryLowFat()
-                    : result <= 12
-                    ? lowFat()
-                    : result <= 15
-                    ? goodFat()
-                    : result <= 19
-                    ? optionalFat()
-                    : result <= 25
-                    ? obeseFat()
-                    : result <= 35
-                    ? veryObeseFat()
-                    : thickFat()
-                  : null}
-              </div>
+            </div>{" "}
+          </div>
+          <div
+            className={`bg-bar rounded-lg w-[${
+              BMI * 2
+            }rem] justify-center items-center relative p-6  shadow-3xl mt-12`}
+          >
+            <div className="bg-black h-6 rounded-lg mt-10 relative w-full  shadow-3xl">
+              <div className="absolute left-0 top-[120%] text-lg">0</div>
+              <div className="absolute left-[32%] top-[120%] text-lg">16</div>
+
+              <div className="absolute left-[37%] top-[120%] text-lg">18,5</div>
+              <div className="absolute left-[50%] top-[120%] text-lg">25</div>
+              <div className="absolute left-[60%] top-[120%] text-lg">30</div>
+              <div className="absolute left-[70%] top-[120%] text-lg">35</div>
+              <div className="absolute left-[80%] top-[120%] text-lg">40</div>
+              <div className="absolute right-0 top-[120%] text-lg">50</div>
+
+              <motion.div
+                initial={{ width: 0 }}
+                animate={{ width: `${Math.min((BMI / 50) * 100, 100)}%` }}
+                transition={{ duration: 1.5, type: "tween" }}
+                style={{
+                  background: getProgressBarColorBMI(BMI),
+                }}
+                className="h-6 rounded-lg mt-24"
+              ></motion.div>
             </div>
           </div>
+          <div className=" mt-[5%]">
+            <h2>Charakterystyka:</h2>
+            <div className="text-lg w-1/2">
+              {result > 0
+                ? result <= 8
+                  ? veryLowFat()
+                  : result <= 12
+                  ? lowFat()
+                  : result <= 15
+                  ? goodFat()
+                  : result <= 19
+                  ? optionalFat()
+                  : result <= 25
+                  ? obeseFat()
+                  : result <= 35
+                  ? veryObeseFat()
+                  : thickFat()
+                : null}
+            </div>
+          </div>
+
           <div className="  mt-5 flex items-stretch ">
             <div className=" w-1/3  bg-bar  rounded-lg  p-6  shadow-3xl">
               <h3>Poziom tkanki tłuszczowej:</h3>
               <h2>{result}%</h2>
-              <h3>BMI:</h3>{" "}
-              <h2>
-                {mass && height ? (mass / (height * height)).toFixed(2) : ""}
-              </h2>
+              <h3>BMI:</h3> <h2>{BMI}</h2>
               <br /> <h3>CPM:</h3>
               <h2>{calories} kcal</h2>
             </div>
