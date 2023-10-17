@@ -21,6 +21,14 @@ import {
   thickFat,
 } from "@/components/Calculator/fatResult";
 import {
+  LowBMI,
+  NormalBMI,
+  OverweightBMI,
+  ObesityFirstDegreeBMI,
+  ObesitySecondDegreeBMI,
+  ObesityThirdDegreeBMI,
+} from "@/components/Calculator/BMIResult";
+import {
   veryLowFatIndication,
   lowFatIndication,
   goodFatIndication,
@@ -29,13 +37,7 @@ import {
   veryObeseFatIndication,
   thickFatIndication,
 } from "@/components/Calculator/fatIndications";
-import FormControl from "@mui/material/FormControl";
-import InputLabel from "@mui/material/InputLabel";
-import Select, { SelectChangeEvent } from "@mui/material/Select";
-import MenuItem from "@mui/material/MenuItem";
-import TextField from "@mui/material/TextField";
-import InputAdornment from "@mui/material/InputAdornment";
-
+import "@/styles/theme.css";
 const Calculator: React.FC = () => {
   const dispatch = useDispatch();
   const { mass, height, gender, age, result, progress, activity, calories } =
@@ -134,36 +136,59 @@ const Calculator: React.FC = () => {
               ></motion.div>
             </div>
           </div>
-          <div className=" mt-[5%]">
-            <h2>Charakterystyka:</h2>
-            <div className="text-lg w-1/2">
-              {result > 0
-                ? result <= 8
-                  ? veryLowFat()
-                  : result <= 12
-                  ? lowFat()
-                  : result <= 15
-                  ? goodFat()
-                  : result <= 19
-                  ? optionalFat()
-                  : result <= 25
-                  ? obeseFat()
-                  : result <= 35
-                  ? veryObeseFat()
-                  : thickFat()
-                : null}
-            </div>
-          </div>
 
           <div className="  mt-5 flex items-stretch ">
-            <div className=" w-1/3  bg-bar  rounded-lg  p-6  shadow-3xl">
+            <div className=" w-1/3  weather_box  rounded-lg  p-6  shadow-3xl">
               <h3>Poziom tkanki tłuszczowej:</h3>
               <h2>{result}%</h2>
               <h3>BMI:</h3> <h2>{BMI}</h2>
               <br /> <h3>CPM:</h3>
               <h2>{calories} kcal</h2>
             </div>
-            <div className="w-2/3  bg-bar  rounded-lg  p-6 ml-5  shadow-3xl">
+            <div className="w-2/3  weather_box  rounded-lg  p-6 ml-5  shadow-3xl">
+              {" "}
+              <h2> Opis BMI:</h2> <br />
+              <div className="text-lg">
+                {BMI > 0
+                  ? BMI <= 18.5
+                    ? LowBMI()
+                    : BMI <= 24.9
+                    ? NormalBMI()
+                    : BMI <= 29.9
+                    ? OverweightBMI()
+                    : BMI <= 34.9
+                    ? ObesityFirstDegreeBMI()
+                    : BMI <= 39.9
+                    ? ObesitySecondDegreeBMI()
+                    : ObesityThirdDegreeBMI()
+                  : null}
+              </div>
+            </div>
+          </div>
+          <div className=" mt-6 flex">
+            <div className="w-1/2 weather_box  rounded-lg  p-6  ">
+              {" "}
+              <h2>Charakterystyka:</h2>
+              <div className="text-lg">
+                {result > 0
+                  ? result <= 8
+                    ? veryLowFat()
+                    : result <= 12
+                    ? lowFat()
+                    : result <= 15
+                    ? goodFat()
+                    : result <= 19
+                    ? optionalFat()
+                    : result <= 25
+                    ? obeseFat()
+                    : result <= 35
+                    ? veryObeseFat()
+                    : thickFat()
+                  : null}
+              </div>
+            </div>{" "}
+            <div className="w-1/2 weather_box  rounded-lg  p-6 ml-5 ">
+              {" "}
               <h2> Wskazania:</h2> <br />
               <div className="text-lg">
                 {result > 0
@@ -184,7 +209,6 @@ const Calculator: React.FC = () => {
               </div>
             </div>
           </div>
-          <div className="text-3xl "></div>
         </div>
       </div>
     </>

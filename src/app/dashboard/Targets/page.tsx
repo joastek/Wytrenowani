@@ -17,9 +17,21 @@ import FormControl from "@mui/material/FormControl";
 import InputLabel from "@mui/material/InputLabel";
 import MenuItem from "@mui/material/MenuItem";
 import Select, { SelectChangeEvent } from "@mui/material/Select";
+import { updateTargetQuantitySteps } from "@/slice/Dashboard/numberOfSteps";
+import {
+  updateFillLevels,
+  updateAnimationLevels,
+  updateTargetFillLevel,
+} from "@/slice/Dashboard/numberOfGlasses";
 const Targets = () => {
   const { mass, height, gender, age, result, progress, activity, calories } =
     useSelector((state: RootState) => state.bmiCalculator);
+  const QuantityOfSteps = useSelector(
+    (state: any) => state.stepsNumber.targetQuantitySteps
+  );
+  const maxFillLevel = useSelector(
+    (state: any) => state.glassOfWater.targetFillLevel
+  );
   const dispatch = useDispatch();
   const [selectedDiv, setSelectedDiv] = useState(null);
   const divs = [
@@ -28,15 +40,22 @@ const Targets = () => {
     { text: "Średnia aktywność", value: 1.6 },
     { text: "Wysoka aktywność", value: 1.9 },
   ];
+  const handleUpdateClick = () => {
+    const newMaxFillLevelValue = parseInt(maxFillLevel, 10);
 
+    if (!isNaN(newMaxFillLevelValue) && newMaxFillLevelValue > 0) {
+      dispatch(updateAnimationLevels(-50));
+      dispatch(updateFillLevels(0));
+    }
+  };
   const handleClick = (index: any) => {
     setSelectedDiv(index);
   };
   return (
     <>
-      <div className="flex justify-center  mt-28 ">
+      <div className="flex justify-center ">
         {" "}
-        <div className=" justify-center items-center relative  bg-bar m-6 p-6 rounded-lg  shadow-3xl">
+        <div className=" justify-center items-center relative  bg-bar m-6 p-6 rounded-lg  shadow-3xl  mt-28 ">
           <h1 className="text-[2rem]">
             Podaj swoją wagę, wzrost, wiek, płeć oraz określ poziom aktywności
           </h1>
@@ -128,6 +147,28 @@ const Targets = () => {
                   </Select>
                 </FormControl>
               </div>
+              <TextField
+                type="number"
+                id="outlined-basic"
+                label="ilość kroków"
+                variant="outlined"
+                className="m-4 w-[14rem]"
+                onChange={(e) =>
+                  dispatch(updateTargetQuantitySteps(e.target.value))
+                }
+              />
+              <TextField
+                value={maxFillLevel}
+                type="number"
+                id="outlined-basic"
+                label="Ilość szklanek"
+                variant="outlined"
+                className="m-4 w-[14rem]"
+                onChange={(e) => {
+                  dispatch(updateTargetFillLevel(e.target.value));
+                  handleUpdateClick();
+                }}
+              />
             </div>
             <div className="w-1/3 ">
               {divs.map((item) => (

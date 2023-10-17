@@ -3,16 +3,20 @@ import { useSelector, useDispatch } from "react-redux";
 import {
   updateFillLevels,
   updateAnimationLevels,
+  updateTargetFillLevel,
 } from "@/slice/Dashboard/numberOfGlasses";
 import EditIcon from "@mui/icons-material/Edit";
 import CheckIcon from "@mui/icons-material/Check";
 import Button from "@mui/material/Button";
 import TextField from "@mui/material/TextField";
 const WaterFill = () => {
-  const [maxFillLevel, setMaxFillLevel] = useState(9);
+  // const [maxFillLevel, setMaxFillLevel] = useState(9);
 
   const [newMaxFillLevel, setNewMaxFillLevel] = useState("");
   const [isEditing, setIsEditing] = useState(true);
+  const maxFillLevel = useSelector(
+    (state: any) => state.glassOfWater.targetFillLevel
+  );
   const fillLevels = useSelector((state: any) => state.glassOfWater.fillLevels);
   const fillLevel = useSelector(
     (state: any) => state.glassOfWater.animationLevel
@@ -32,19 +36,12 @@ const WaterFill = () => {
     }
   };
 
-  // const handleRemoveClick = () => {
-  //   const incrementPercentage = 100 / maxFillLevel;
-
-  //   if (fillLevels > 0) {
-  //     setFillLevel((prevFillLevel) => prevFillLevel - incrementPercentage);
-  //     setFillLevels((prevFillLevels) => prevFillLevels - 1); // Dodaj 1 do fillLevels
-  //   }
   // };
   const handleUpdateClick = () => {
     const newMaxFillLevelValue = parseInt(newMaxFillLevel, 10);
 
     if (!isNaN(newMaxFillLevelValue) && newMaxFillLevelValue > 0) {
-      setMaxFillLevel(newMaxFillLevelValue);
+      dispatch(updateTargetFillLevel(newMaxFillLevelValue));
       dispatch(updateAnimationLevels(-50));
       dispatch(updateFillLevels(0));
     }
@@ -89,7 +86,7 @@ const WaterFill = () => {
             {" "}
             +250ml
           </Button>
-          <Button
+          {/* <Button
             onClick={() => {
               handleEditClick(), handleUpdateClick();
             }}
@@ -103,7 +100,7 @@ const WaterFill = () => {
             ) : (
               <CheckIcon />
             )}
-          </Button>
+          </Button> */}
         </div>
       </div>
     </>

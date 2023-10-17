@@ -82,8 +82,20 @@ const Breakfast = () => {
     const productToDelete = FoodSet.find(
       (product: any) => product.id === foodId
     );
+
     if (productToDelete) {
-      dispatch(deleteNutriens(productToDelete));
+      const { protein, carbo, fat, gainedCalories } = productToDelete;
+
+      // Create a new object with the values to subtract
+      const valuesToSubtract = {
+        protein: -parseFloat(protein || "0"),
+        carbo: -parseFloat(carbo || "0"),
+        fat: -parseFloat(fat || "0"),
+        gainedCalories: -parseFloat(gainedCalories || "0"),
+      };
+
+      // Dispatch the deleteNutriens action with the values to subtract
+      dispatch(deleteNutriens({ id: foodId, ...valuesToSubtract }));
     }
     dispatch(deleteBreakfast({ id: foodId }));
   };

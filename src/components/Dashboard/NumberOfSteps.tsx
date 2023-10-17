@@ -7,11 +7,14 @@ const NumberOfSteps = () => {
   const NumberOfSteps = useSelector(
     (state: any) => state.stepsNumber.numberOfSteps
   );
+  const QuantityOfSteps = useSelector(
+    (state: any) => state.stepsNumber.targetQuantitySteps
+  );
   const dispatch = useDispatch();
-  const [maxNumberOfSteps, setMaxNumberOfSteps] = useState(10000);
+
   //   const [NumberOfSteps, setNumberOfSteps] = useState(0);
   const animationWidth = `${Math.min(
-    (NumberOfSteps / maxNumberOfSteps) * 100,
+    (NumberOfSteps / QuantityOfSteps) * 100,
     100
   ).toFixed(0)}%`;
 
@@ -37,10 +40,7 @@ const NumberOfSteps = () => {
         <motion.div
           initial={{ width: 0 }}
           animate={{
-            width: `${Math.min(
-              (NumberOfSteps / maxNumberOfSteps) * 100,
-              100
-            )}%`,
+            width: `${Math.min((NumberOfSteps / QuantityOfSteps) * 100, 100)}%`,
           }}
           transition={{ duration: 1.5, type: "tween" }}
           style={{
@@ -65,7 +65,7 @@ const NumberOfSteps = () => {
           }}
         />
         <p className="text-base text-gray my-auto  space-x-2">
-          /{maxNumberOfSteps} Kroki
+          /{QuantityOfSteps} Kroki
         </p>
       </div>
     </>
