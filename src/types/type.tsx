@@ -48,12 +48,13 @@ export interface TrainingSet {
   reps: number;
 }
 export interface breakfastSet {
-  FoodSets: any;
-  FoodSet: any;
+  breakfastSet: any;
   id: number;
   FoodName: string;
-  series: number;
-  reps: number;
+  protein: number;
+  carbo: number;
+  fat: number;
+  calories: number;
 }
 export interface lunchSet {
   FoodSets: any;
@@ -130,7 +131,7 @@ export const initialGeolocalizationData: GeolocalizationData = {
 };
 export interface WeatherState {
   weather: {
-    currLocation: GeolocalizationData,
-    currentWeather:WeatherData
+    currLocation: GeolocalizationData;
+    currentWeather: WeatherData;
   };
 }

@@ -32,11 +32,15 @@ const nutrientsSlice = createSlice({
   reducers: {
     addNutriens: (state, action: PayloadAction<Product>) => {
       const { protein, carbo, fat, gainedCalories } = action.payload;
-      state.totalProtein += parseFloat(protein || "0");
+      state.totalProtein += Math.floor(parseFloat(protein || "0"));
       state.totalCarbo += parseFloat(carbo || "0");
       state.totalFat += parseFloat(fat || "0");
       state.totalCalories += parseFloat(gainedCalories || "0");
       state.products.push(action.payload);
+      state.totalProtein = parseFloat(state.totalProtein.toFixed(1));
+      state.totalCarbo = parseFloat(state.totalCarbo.toFixed(1));
+      state.totalFat = parseFloat(state.totalFat.toFixed(1));
+      state.totalCalories = parseFloat(state.totalCalories.toFixed(1));
     },
     deleteNutriens: (state, action: PayloadAction<{ id: number }>) => {
       const { id } = action.payload;
@@ -50,6 +54,10 @@ const nutrientsSlice = createSlice({
         state.totalFat -= parseFloat(deletedProduct.fat || "0");
         state.totalCalories -= parseFloat(deletedProduct.gainedCalories || "0");
         state.products.splice(productIndex, 1);
+        state.totalProtein = parseFloat(state.totalProtein.toFixed(1));
+        state.totalCarbo = parseFloat(state.totalCarbo.toFixed(1));
+        state.totalFat = parseFloat(state.totalFat.toFixed(1));
+        state.totalCalories = parseFloat(state.totalCalories.toFixed(1));
       }
     },
   },

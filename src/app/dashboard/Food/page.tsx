@@ -93,7 +93,7 @@ const Food = () => {
               />{" "}
             </div>{" "}
             <div className=" h-1/3 w-[8rem]  flex flex-col  items-center  mb-6">
-              <h4 className=" text-center">Suma węglowodanów :</h4>
+              <h4 className=" text-center">Suma węglowodanów : {totalCarbo}</h4>
               <CircularProgressbar
                 value={totalCarbo}
                 maxValue={Carbo}
