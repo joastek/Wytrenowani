@@ -79,8 +79,8 @@ const theme = createTheme({
   },
 });
 const supabase = createClient(
-  "https://stvkcwqqiszetklseils.supabase.co",
-  "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InN0dmtjd3FxaXN6ZXRrbHNlaWxzIiwicm9sZSI6ImFub24iLCJpYXQiOjE2OTUzMTU1MTAsImV4cCI6MjAxMDg5MTUxMH0.sL41P_Y1oRDCLpx-PuzjUCO3--YPr0XcJ38Zrvw5Xmw"
+  `${process.env.NEXT_PUBLIC_SUPABASE_BASE_URL}`,
+  `${process.env.NEXT_PUBLIC_SUPABASE_BASE_CODE}`
 );
 export default function DashboardLayout1({
   children,

@@ -114,7 +114,7 @@ const dashboard = () => {
               <BiRefresh className=" w-[2rem] h-[2rem]" />
             </button>
             {/* Wyświetlanie danych pogodowych */}
-            {currentWeather && (
+            {/* {currentWeather && (
               <>
                 <div className=" flex-col w-3/4">
                   <h2>{currLocation.city} </h2>
@@ -156,7 +156,8 @@ const dashboard = () => {
                   </div>
                 </div>
               </>
-            )}
+            )} */}
+            2424
           </div>
           <div className="w-[20rem] block ml-6 mt-6">
             <div className="h-[7.75rem] bg-bgcontrastpurple flex p-4  rounded-[1rem]  shadow-3xl ">

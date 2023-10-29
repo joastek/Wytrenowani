@@ -28,7 +28,7 @@ export default function Sidebar() {
     },
     {
       name: "Kalkulator",
-      href: "/dashboard/Calculator",
+      href: "/dashboard/calculator",
       icon: BsCalculator,
     },
     {

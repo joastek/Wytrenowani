@@ -1,19 +1,39 @@
+"use client";
 import Link from "next/link";
 import Button from "@mui/material/Button";
 import Stack from "@mui/material/Stack";
+import { createClient } from "@supabase/supabase-js";
+import { Auth } from "@supabase/auth-ui-react";
+import {
+  // Import predefined theme
+  ThemeSupa,
+} from "@supabase/auth-ui-shared";
+import { useRouter } from "next/navigation";
+const supabase = createClient(
+  `${process.env.NEXT_PUBLIC_SUPABASE_AUTHORIZATION_URL}`,
+  `${process.env.NEXT_PUBLIC_SUPABASE_AUTHORIZATION_CODE}`
+);
 
 const LoginButtons = () => {
+  const router = useRouter();
+  supabase.auth.onAuthStateChange(async (event) => {
+    if (event !== "SIGNED_OUT") {
+      router.push("/");
+    } else {
+      router.push("/");
+    }
+  });
   return (
     <>
       {" "}
       <div className="w-full flex p-16 flex-col justify-center items-center">
         <div className=" m-6">
-          <Button variant="outlined" className="cursor-not-allowed m-6">
-            Zaloguj się
-          </Button>
-          <Button variant="outlined" className="cursor-not-allowed m-6">
-            Zarejestruj się
-          </Button>
+          <Auth
+            supabaseClient={supabase}
+            appearance={{ theme: ThemeSupa }}
+            theme="dark"
+            providers={["google", "facebook", "github"]}
+          />
         </div>
         <div>
           {" "}

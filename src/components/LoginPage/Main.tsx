@@ -1,7 +1,9 @@
+"use client";
 import Navigation from "./Navigation";
 import Logo from "../../../public/Logo.png";
 import Image from "next/image";
 import LoginButtons from "./LoginButtons";
+
 const LoginPage = () => {
   return (
     <>

@@ -30,7 +30,7 @@ const Food = () => {
 
   return (
     <>
-      <div className="flex   justify-center flex-row  ">
+      {/* <div className="flex   justify-center flex-row  ">
         <div className="w-1/2 flex  justify-end mt-28  max-h-[50rem]">
           <table className="   w-full bg-bar rounded-[2rem] max-w-[70rem]   shadow-3xl">
             <thead className="">
@@ -120,7 +120,7 @@ const Food = () => {
             </div>
           </div>
         </div>
-      </div>
+      </div> */}
     </>
   );
 };
