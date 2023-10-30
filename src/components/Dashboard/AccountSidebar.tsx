@@ -10,11 +10,13 @@ import {
 import { createClient } from "@supabase/supabase-js";
 import { useState, useEffect } from "react";
 import { useRouter } from "next/navigation";
+import { Button } from "@mui/material";
+
 const supabase = createClient(
   `${process.env.NEXT_PUBLIC_SUPABASE_AUTHORIZATION_URL}`,
   `${process.env.NEXT_PUBLIC_SUPABASE_AUTHORIZATION_CODE}`
 );
-import { Button } from "@mui/material";
+
 const AccountSidebar = () => {
   const router = useRouter();
   const [user, setUser] = useState({});
@@ -32,6 +34,7 @@ const AccountSidebar = () => {
   async function singOutUser() {
     const { error } = await supabase.auth.signOut();
     router.push("/");
+    console.log(error);
   }
   return (
     <div className="absolute right-0 top-0 flex flex-row mr-12 mt-6 px-4 rounded-[2rem] h-[4rem]">
@@ -55,10 +58,7 @@ const AccountSidebar = () => {
           <div className="bg-gray fixed top-0 left-0 w-full h-full z-50">
             <div className="top-[50%] left-[50%] z-50 absolute flex flex-col">
               <p>Nie jesteś zalogowany</p>
-              <Button
-                onClick={() => router.push("/")}
-                className=" top-[50%] left-[50%] z-50 "
-              >
+              <Button className=" top-[50%] left-[50%] z-50 ">
                 <Link href="/"> Zaloguj się</Link>
               </Button>{" "}
             </div>

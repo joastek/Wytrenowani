@@ -5,13 +5,13 @@ import { Provider } from "react-redux";
 import { createClient } from "@supabase/supabase-js";
 import { SessionContextProvider } from "@supabase/auth-helpers-react";
 import { createTheme, ThemeProvider } from "@mui/material/styles";
-import { lime, purple } from "@mui/material/colors";
+
 import { LocalizationProvider } from "@mui/x-date-pickers";
 import { AdapterDayjs } from "@mui/x-date-pickers/AdapterDayjs";
 import store from "@/store/store";
 import Sidebar from "@/components/Dashboard/Sidebar";
 import AccountSidebar from "@/components/Dashboard/AccountSidebar";
-import { light } from "@mui/material/styles/createPalette";
+
 const theme = createTheme({
   components: {
     MuiFormControl: {

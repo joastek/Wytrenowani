@@ -17,7 +17,7 @@ import {
   setCurrLocation,
   setCurrentWeather,
 } from "@/slice/Dashboard/weatherData";
-import AuthAndCalendarManagement from "../../components/API/googleAPI";
+// import AuthAndCalendarManagement from "../../components/API/googleAPI";
 import Image from "next/image";
 import WaterFill from "@/components/Dashboard/WaterFill";
 import NumberOfSteps from "@/components/Dashboard/NumberOfSteps";
@@ -80,7 +80,7 @@ const dashboard = () => {
       console.error("Error fetching current weather:", error);
     }
   };
-  console.log(handleCurrentWeatherClick);
+  // console.log(handleCurrentWeatherClick);
   return (
     <>
       <div className="flex justify-center   w-full  ">
@@ -108,13 +108,13 @@ const dashboard = () => {
           <div className="w-[27rem] weather_box  ml-6 mt-6  rounded-[1rem]  shadow-3xl p-2 flex justify-center text-center relative">
             {" "}
             <button
-              onClick={handleCurrentWeatherClick}
+              // onClick={handleCurrentWeatherClick}
               className="absolute left-4 top-4"
             >
               <BiRefresh className=" w-[2rem] h-[2rem]" />
             </button>
             {/* Wyświetlanie danych pogodowych */}
-            {/* {currentWeather && (
+            {currentWeather && (
               <>
                 <div className=" flex-col w-3/4">
                   <h2>{currLocation.city} </h2>
@@ -156,7 +156,7 @@ const dashboard = () => {
                   </div>
                 </div>
               </>
-            )} */}
+            )}
             2424
           </div>
           <div className="w-[20rem] block ml-6 mt-6">
@@ -172,7 +172,7 @@ const dashboard = () => {
             {" "}
             <div className=" bg-bar  w-1/2 rounded-[1rem] relative  shadow-3xl p-4">
               {" "}
-              dwadwaddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddd
+              wwdddddddddddddddddddddddddddddddddddddddddddddddddddddd
             </div>{" "}
             <div className=" bg-bar  w-1/2  ml-6 rounded-[1rem] relative  shadow-3xl  p-4">
               {" "}
@@ -183,7 +183,7 @@ const dashboard = () => {
         <div className="    mt-28 mr-8 justify-start">
           {" "}
           <div className="bg-bgcontrastpurple  max-w-[35rem] max-h-[3/4] rounded-[1rem] p-4 ml-6  shadow-3xl">
-            <AuthAndCalendarManagement />
+            {/* <AuthAndCalendarManagement /> */}
           </div>
           <div className="bg-bgcontrastpurple  max-w-[35rem] max-h-[1/4] rounded-[1rem] p-4 ml-6  mt-4  shadow-3xl">
             {/* <AuthAndCalendarManagement /> */}

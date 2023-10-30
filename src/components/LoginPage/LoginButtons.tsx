@@ -8,6 +8,7 @@ import {
   // Import predefined theme
   ThemeSupa,
 } from "@supabase/auth-ui-shared";
+import { useEffect } from "react";
 import { useRouter } from "next/navigation";
 const supabase = createClient(
   `${process.env.NEXT_PUBLIC_SUPABASE_AUTHORIZATION_URL}`,
@@ -16,13 +17,17 @@ const supabase = createClient(
 
 const LoginButtons = () => {
   const router = useRouter();
-  supabase.auth.onAuthStateChange(async (event) => {
-    if (event !== "SIGNED_OUT") {
-      router.push("/");
-    } else {
-      router.push("/");
-    }
-  });
+  useEffect(() => {
+    const authChangeHandler = async (event: any) => {
+      if (event === "SIGNED_IN") {
+        router.push("/dashboard");
+      } else {
+        router.push("/");
+      }
+    };
+
+    supabase.auth.onAuthStateChange(authChangeHandler);
+  }, [router]);
   return (
     <>
       {" "}
