@@ -3,7 +3,7 @@
 import React from "react";
 import { Weight } from "@/types/type";
 import WeightItem from "@/components/History/WeightItem";
-import deleteWeight from "@/actions/deleteWeight";
+
 interface PagecontentProps {
   weight: Weight[];
   dltWeight: any;
@@ -15,7 +15,7 @@ export const PageContent: React.FC<PagecontentProps> = ({
   if (weight.length === 0) {
     return <div> Brak pomiarów wagi</div>;
   }
-  const handleDeleteWeight = deleteWeight();
+
   return (
     <>
       {" "}
