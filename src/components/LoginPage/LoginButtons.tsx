@@ -4,37 +4,42 @@ import Button from "@mui/material/Button";
 import Stack from "@mui/material/Stack";
 import { createClient } from "@supabase/supabase-js";
 import { Auth } from "@supabase/auth-ui-react";
+
 import {
   // Import predefined theme
   ThemeSupa,
 } from "@supabase/auth-ui-shared";
 import { useEffect } from "react";
 import { useRouter } from "next/navigation";
-const supabase = createClient(
-  `${process.env.NEXT_PUBLIC_SUPABASE_AUTHORIZATION_URL}`,
-  `${process.env.NEXT_PUBLIC_SUPABASE_AUTHORIZATION_CODE}`
-);
 
+import {
+  useSessionContext,
+  useSupabaseClient,
+} from "@supabase/auth-helpers-react";
 const LoginButtons = () => {
+  const supabaseClient = useSupabaseClient();
+  const { session } = useSessionContext();
   const router = useRouter();
   useEffect(() => {
     const authChangeHandler = async (event: any) => {
       if (event === "SIGNED_IN") {
         router.push("/dashboard");
-      } else {
+      } else if (event === "SIGNED_OUT") {
         router.push("/");
       }
     };
 
-    supabase.auth.onAuthStateChange(authChangeHandler);
+    supabaseClient.auth.onAuthStateChange(authChangeHandler);
   }, [router]);
+
   return (
     <>
       {" "}
       <div className="w-full flex p-16 flex-col justify-center items-center">
         <div className=" m-6">
           <Auth
-            supabaseClient={supabase}
+            magicLink
+            supabaseClient={supabaseClient}
             appearance={{ theme: ThemeSupa }}
             theme="dark"
             providers={["google", "facebook", "github"]}

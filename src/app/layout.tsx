@@ -1,7 +1,11 @@
 import "@/styles/globals.css";
 import type { Metadata } from "next";
 import { Poppins } from "next/font/google";
-import Providers from "@/components/provider";
+import Providers from "@/providers/provider";
+import SupabaseProvider from "../providers/SupaBaseProvider";
+import UserProvider from "@/providers/useProvider";
+import ModalProvider from "@/providers/ModalProvider";
+import ToasterProvider from "@/providers/ToasterProvider";
 
 const inter = Poppins({
   subsets: ["latin"],
@@ -37,8 +41,14 @@ export default function RootLayout({
               <div className="g5"></div>
               <div className="interactive"></div>
             </div>{" "}
-          </div>
-          {children}
+          </div>{" "}
+          <ToasterProvider />
+          <SupabaseProvider>
+            <UserProvider>
+              <ModalProvider />
+              {children}
+            </UserProvider>
+          </SupabaseProvider>
         </body>
       </Providers>
     </html>

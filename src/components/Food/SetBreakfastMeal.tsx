@@ -4,7 +4,7 @@ import { motion } from "framer-motion";
 import { Button, TextField, IconButton } from "@mui/material";
 import AddIcon from "@mui/icons-material/Add";
 import DeleteIcon from "@mui/icons-material/Delete";
-import { getNutriensFromAPI } from "@/components/API/getNutriensFromAPI";
+import { getNutriensFromAPI } from "@/app/API/getNutriensFromAPI";
 import {
   addBreakfast,
   deleteBreakfast,

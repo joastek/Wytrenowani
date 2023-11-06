@@ -38,6 +38,7 @@ import {
   thickFatIndication,
 } from "@/components/Calculator/fatIndications";
 import "@/styles/theme.css";
+
 const Calculator: React.FC = () => {
   const dispatch = useDispatch();
   const { mass, height, gender, age, result, progress, activity, calories } =

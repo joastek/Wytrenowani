@@ -5,7 +5,7 @@ import { useContext } from "react";
 import { IconType } from "react-icons";
 import { BsCalculator } from "react-icons/bs";
 import { AiOutlineHome, AiOutlineArrowLeft } from "react-icons/ai";
-import { SidebarContext } from "./SideBarContext";
+import { SidebarContext } from "../../providers/SideBarContext";
 import { GiWeightLiftingUp } from "react-icons/gi";
 import { GiMeal } from "react-icons/gi";
 import { FiTarget } from "react-icons/fi";
@@ -39,6 +39,11 @@ export default function Sidebar() {
     {
       name: "Trening",
       href: "/dashboard/TrainingPlan",
+      icon: GiWeightLiftingUp,
+    },
+    {
+      name: "Historia",
+      href: "/dashboard/History",
       icon: GiWeightLiftingUp,
     },
   ];

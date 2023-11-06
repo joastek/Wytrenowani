@@ -11,30 +11,33 @@ import { createClient } from "@supabase/supabase-js";
 import { useState, useEffect } from "react";
 import { useRouter } from "next/navigation";
 import { Button } from "@mui/material";
-
-const supabase = createClient(
-  `${process.env.NEXT_PUBLIC_SUPABASE_AUTHORIZATION_URL}`,
-  `${process.env.NEXT_PUBLIC_SUPABASE_AUTHORIZATION_CODE}`
-);
+import { useUser } from "@/app/hooks/useUser";
+import { toast } from "react-hot-toast";
 
 const AccountSidebar = () => {
+  const supabaseClient = useSupabaseClient();
   const router = useRouter();
-  const [user, setUser] = useState({});
-  useEffect(() => {
-    async function getUserData() {
-      await supabase.auth.getUser().then((value) => {
-        if (value.data?.user) {
-          console.log(value.data.user);
-          setUser(value.data.user);
-        }
-      });
-    }
-    getUserData();
-  }, []);
+  const { user } = useUser();
+  const [user1, setUser] = useState({});
+  // useEffect(() => {
+  //   async function getUserData() {
+  //     const { error } = await supabaseClient.auth.getUser().then((value) => {
+  //       if (value.data?.user) {
+  //         console.log(value.data.user.id);
+  //         setUser(value.data.user);
+  //       }
+  //     });
+  //   }
+  //   getUserData();
+  // }, []);
   async function singOutUser() {
-    const { error } = await supabase.auth.signOut();
+    const { error } = await supabaseClient.auth.signOut();
     router.push("/");
-    console.log(error);
+    if (error) {
+      toast.error(error.message);
+    } else {
+      toast.success("Wylogowano pomyślnie!");
+    }
   }
   return (
     <div className="absolute right-0 top-0 flex flex-row mr-12 mt-6 px-4 rounded-[2rem] h-[4rem]">
@@ -43,7 +46,7 @@ const AccountSidebar = () => {
         {/* Zmieniamy to na flex-grow */}
         <Navigation />
       </div>
-      {Object.keys(user).length !== 0 ? (
+      {user ? (
         <>
           {" "}
           <Button

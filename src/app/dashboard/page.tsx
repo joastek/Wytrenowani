@@ -8,10 +8,7 @@ import {
   CircularProgressbar,
 } from "react-circular-progressbar";
 import { useSelector, useDispatch } from "react-redux";
-import {
-  getLocation,
-  fetchCurrentWeather,
-} from "../../components/API/weatherAPI";
+import { getLocation, fetchCurrentWeather } from "../API/weatherAPI";
 import { WeatherState } from "@/types/type";
 import {
   setCurrLocation,
@@ -29,6 +26,7 @@ import { FaWind, FaTemperatureLow } from "react-icons/fa";
 import { BsFillDropletFill } from "react-icons/bs";
 import { BiRefresh } from "react-icons/bi";
 import { Button } from "@mui/material";
+import { Auth } from "@supabase/auth-ui-react";
 
 const dashboard = () => {
   const dispatch = useDispatch();
@@ -68,7 +66,8 @@ const dashboard = () => {
     // Wywołaj funkcję loadData po załadowaniu komponentu
     loadData();
   }, [dispatch]);
-
+  const { user } = Auth.useUser();
+  console.log(user);
   const handleCurrentWeatherClick = async () => {
     try {
       const weatherData = await fetchCurrentWeather(
@@ -173,6 +172,7 @@ const dashboard = () => {
             <div className=" bg-bar  w-1/2 rounded-[1rem] relative  shadow-3xl p-4">
               {" "}
               wwdddddddddddddddddddddddddddddddddddddddddddddddddddddd
+              {/* <Notes /> */}
             </div>{" "}
             <div className=" bg-bar  w-1/2  ml-6 rounded-[1rem] relative  shadow-3xl  p-4">
               {" "}

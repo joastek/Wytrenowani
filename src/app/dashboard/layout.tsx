@@ -1,6 +1,6 @@
 "use client";
 
-import { SidebarProvider } from "@/components/Dashboard/SideBarContext";
+import { SidebarProvider } from "@/providers/SideBarContext";
 import { Provider } from "react-redux";
 import { createClient } from "@supabase/supabase-js";
 import { SessionContextProvider } from "@supabase/auth-helpers-react";
@@ -11,7 +11,10 @@ import { AdapterDayjs } from "@mui/x-date-pickers/AdapterDayjs";
 import store from "@/store/store";
 import Sidebar from "@/components/Dashboard/Sidebar";
 import AccountSidebar from "@/components/Dashboard/AccountSidebar";
-
+import { useUser } from "../hooks/useUser";
+import ToasterProvider from "@/providers/ToasterProvider";
+import LoginButtons from "@/components/LoginPage/LoginButtons";
+import LoginPage from "@/components/LoginPage/Main";
 const theme = createTheme({
   components: {
     MuiFormControl: {
@@ -78,33 +81,42 @@ const theme = createTheme({
     },
   },
 });
-const supabase = createClient(
-  `${process.env.NEXT_PUBLIC_SUPABASE_BASE_URL}`,
-  `${process.env.NEXT_PUBLIC_SUPABASE_BASE_CODE}`
-);
+// const supabase = createClient(
+//   `${process.env.NEXT_PUBLIC_SUPABASE_BASE_URL}`,
+//   `${process.env.NEXT_PUBLIC_SUPABASE_BASE_CODE}`
+// );
 export default function DashboardLayout1({
   children,
 }: {
   children: React.ReactNode;
 }) {
+  const { user } = useUser();
   return (
     <>
-      <Provider store={store}>
-        <LocalizationProvider dateAdapter={AdapterDayjs}>
-          <ThemeProvider theme={theme}>
-            <SessionContextProvider supabaseClient={supabase}>
-              {" "}
-              <SidebarProvider>
-                <Sidebar />
+      {!user ? (
+        <>
+          <LoginPage />
+        </>
+      ) : (
+        <>
+          {" "}
+          <Provider store={store}>
+            <LocalizationProvider dateAdapter={AdapterDayjs}>
+              <ThemeProvider theme={theme}>
+                {/* <SessionContextProvider supabaseClient={supabase}> */}{" "}
+                <SidebarProvider>
+                  <Sidebar />
 
-                {children}
+                  {children}
 
-                <AccountSidebar />
-              </SidebarProvider>{" "}
-            </SessionContextProvider>
-          </ThemeProvider>{" "}
-        </LocalizationProvider>
-      </Provider>
+                  <AccountSidebar />
+                </SidebarProvider>{" "}
+                {/* </SessionContextProvider> */}
+              </ThemeProvider>{" "}
+            </LocalizationProvider>
+          </Provider>
+        </>
+      )}
     </>
   );
 }
