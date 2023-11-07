@@ -8,10 +8,7 @@ interface PagecontentProps {
   weight: Weight[];
   dltWeight: any;
 }
-export const PageContent: React.FC<PagecontentProps> = ({
-  weight,
-  dltWeight,
-}) => {
+export const PageContent: React.FC<PagecontentProps> = ({ weight }) => {
   if (weight.length === 0) {
     return <div> Brak pomiarów wagi</div>;
   }
@@ -20,15 +17,29 @@ export const PageContent: React.FC<PagecontentProps> = ({
     <>
       {" "}
       <div className="">
-        {weight.map((weight) => (
-          <>
-            <div key={weight.user_id} className="flex text-2xl">
-              <div>{weight.weight}</div>
-
-              <button className="ml-4">Delete</button>
-            </div>
-          </>
-        ))}
+        <>
+          <div className="flex text-2xl">
+            <table>
+              <thead>
+                <tr>
+                  <th>Waga</th>
+                  <th>Data</th>
+                </tr>
+              </thead>{" "}
+              {weight.map((weight) => (
+                <tbody className="m-6">
+                  <tr key={weight.user_id}>
+                    <th>{weight.weight}</th>
+                    <th> {weight.date}</th>
+                    <button>delete</button>
+                  </tr>
+                </tbody>
+              ))}
+            </table>
+            <div></div>
+            <div></div>
+          </div>
+        </>
       </div>
     </>
   );

@@ -143,6 +143,7 @@ export interface UserDetails {
   avatar_url?: string;
 }
 export interface Weight {
+  date: string;
   id: string;
   user_id: string;
   weight: string;

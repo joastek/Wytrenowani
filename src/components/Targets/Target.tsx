@@ -58,19 +58,33 @@ const Target = () => {
     setSelectedDiv(index);
   };
   ///////////
+  const test = new Date();
+  const options: Intl.DateTimeFormatOptions = {
+    year: "numeric",
+    month: "long",
+    day: "numeric",
+  };
+  const dateFormatter: Intl.DateTimeFormat = new Intl.DateTimeFormat(
+    "pl-PL",
+    options
+  );
+  const formattedDate: string = dateFormatter.format(test);
   const { user } = useUser();
   const [isLoading, setIsLoading] = useState(false);
   const { register, handleSubmit, reset } = useForm<FieldValues>({
     defaultValues: {
       weight: "",
+      date: formattedDate,
     },
   });
+
   const onSubmit: SubmitHandler<FieldValues> = async (values) => {
     const { error: supabaseError } = await supabaseClient
       .from("weight")
       .insert({
         user_id: user!.id,
         weight: values.weight,
+        date: values.date,
       });
     if (supabaseError) {
       return toast.error(supabaseError.message);
@@ -89,7 +103,7 @@ const Target = () => {
           </h1>
           <h2 className="text-[1rem]">
             Potrzebujemy tych informacji aby obliczyć twój poziom tkankę
-            tłuszczową oraz całkowitą przemianę materii
+            tłuszczową oraz całkowitą przemianę materii{" "}
           </h2>
 
           <div className="flex">
@@ -97,10 +111,6 @@ const Target = () => {
               <div>
                 {" "}
                 <form onSubmit={handleSubmit(onSubmit)}>
-                  <input></input>{" "}
-                  <Button disabled={isLoading} type="submit">
-                    Create
-                  </Button>
                   <TextField
                     disabled={isLoading}
                     {...register("weight", { required: true })}
@@ -126,12 +136,6 @@ const Target = () => {
                   />
                 </form>
                 <TextField
-                  // sx={{
-                  //   color: "#000000",
-                  //   border: "2px white solid",
-                  //   borderRadius: "1rem",
-                  //   bgcolor: deepOrange[800],
-                  // }}
                   color="primary"
                   type="number"
                   id="outlined-basic"
@@ -205,7 +209,11 @@ const Target = () => {
                   handleUpdateClick();
                 }}
               />
+              <Button disabled={isLoading} type="submit" className="text-xl">
+                Zapisz swoją wagę !
+              </Button>
             </div>
+            <div> </div>
             <div className="w-1/3 ">
               {divs.map((item) => (
                 <motion.div
