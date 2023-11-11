@@ -5,6 +5,7 @@ import { createClientComponentClient } from "@supabase/auth-helpers-nextjs";
 import { cookies } from "next/headers";
 import { Weight } from "@/types/type";
 import { PageContent } from "./components/PageFileComponent";
+import Chart from "@/components/Dashboard/Chart";
 
 export const revalidate = 0;
 

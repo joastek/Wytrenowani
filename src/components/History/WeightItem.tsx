@@ -25,7 +25,7 @@ const WeightItem: React.FC<WeightItemProps> = ({ data, key }) => {
     if (data) {
       console.log(data);
     }
-
+    console.log("Test");
     router.refresh();
   };
 

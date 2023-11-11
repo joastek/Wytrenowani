@@ -1,85 +1,18 @@
-"use client";
-
-import { useState, useEffect } from "react";
-import { RootState } from "@/types/type";
-import {
-  CircularProgressbarWithChildren,
-  buildStyles,
-  CircularProgressbar,
-} from "react-circular-progressbar";
-import { useSelector, useDispatch } from "react-redux";
-import { getLocation, fetchCurrentWeather } from "../API/weatherAPI";
-import { WeatherState } from "@/types/type";
-import {
-  setCurrLocation,
-  setCurrentWeather,
-} from "@/slice/Dashboard/weatherData";
-// import AuthAndCalendarManagement from "../../components/API/googleAPI";
-import Image from "next/image";
 import WaterFill from "@/components/Dashboard/WaterFill";
 import NumberOfSteps from "@/components/Dashboard/NumberOfSteps";
 import "@/styles/DashboardWave.css";
 import "@/styles/theme.css";
 import MotivationalQuotes from "@/components/Dashboard/MotivationalQuotes";
 import "react-circular-progressbar/dist/styles.css";
-import { FaWind, FaTemperatureLow } from "react-icons/fa";
-import { BsFillDropletFill } from "react-icons/bs";
 import { BiRefresh } from "react-icons/bi";
-import { Button } from "@mui/material";
-import { Auth } from "@supabase/auth-ui-react";
+import ProgressBar from "@/components/Dashboard/ProgressBar";
+import getWeight from "@/actions/getWeight";
+import Chart from "@/components/Dashboard/Chart";
+import WeatherBox from "@/components/Dashboard/WeatherBox";
+////
 
-const dashboard = () => {
-  const dispatch = useDispatch();
-  const { totalProtein, totalCarbo, totalFat, totalCalories } = useSelector(
-    (state: any) => state.nutriensSum
-  );
-
-  const { calories, result, mass } = useSelector(
-    (state: RootState) => state.bmiCalculator
-  );
-  const currentWeather = useSelector(
-    (state: WeatherState) => state.weather.currentWeather
-  );
-  const currLocation = useSelector(
-    (state: WeatherState) => state.weather.currLocation
-  );
-  const percentage = 66;
-  ///glass of water
-  useEffect(() => {
-    const loadData = async () => {
-      try {
-        // Pobierz lokalizację
-        const locationData = await getLocation();
-        dispatch(setCurrLocation(locationData));
-
-        // Pobierz aktualną pogodę na podstawie lokalizacji
-        const weatherData = await fetchCurrentWeather(
-          locationData.latitude,
-          locationData.longitude
-        );
-        dispatch(setCurrentWeather(weatherData));
-      } catch (error) {
-        console.error("Error fetching data:", error);
-      }
-    };
-
-    // Wywołaj funkcję loadData po załadowaniu komponentu
-    loadData();
-  }, [dispatch]);
-  const { user } = Auth.useUser();
-  console.log(user);
-  const handleCurrentWeatherClick = async () => {
-    try {
-      const weatherData = await fetchCurrentWeather(
-        currLocation.latitude,
-        currLocation.longitude
-      );
-      dispatch(setCurrentWeather(weatherData));
-    } catch (error) {
-      console.error("Error fetching current weather:", error);
-    }
-  };
-  // console.log(handleCurrentWeatherClick);
+const dashboard = async () => {
+  const weight = await getWeight();
   return (
     <>
       <div className="flex justify-center   w-full  ">
@@ -91,72 +24,16 @@ const dashboard = () => {
             </div>
           </div>{" "}
           <div className="w-[20rem] max-h-[17rem]  bg-[#293556] rounded-[1rem] mt-6 justify-center flex flex-row text-center shadow-3xl">
-            <CircularProgressbar
-              value={totalCalories}
-              maxValue={calories}
-              text={`  ${totalCalories}/${calories} kcal`}
-              className="p-6 max-w-[20rem] max-h-[16rem]"
-              styles={buildStyles({
-                textColor: "white",
-                textSize: "0.7rem",
-                pathColor: "#EDB90C",
-                trailColor: "#000",
-              })}
-            />
+            <ProgressBar />
           </div>
           <div className="w-[27rem] weather_box  ml-6 mt-6  rounded-[1rem]  shadow-3xl p-2 flex justify-center text-center relative">
             {" "}
-            <button
-              // onClick={handleCurrentWeatherClick}
-              className="absolute left-4 top-4"
-            >
+            <button className="absolute left-4 top-4">
               <BiRefresh className=" w-[2rem] h-[2rem]" />
             </button>
-            {/* Wyświetlanie danych pogodowych */}
-            {currentWeather && (
-              <>
-                <div className=" flex-col w-3/4">
-                  <h2>{currLocation.city} </h2>
-                  <h4> {currentWeather.name}</h4>
-                  <Image
-                    src={`/icons/${currentWeather.weather[0].icon}.png`}
-                    alt="weather"
-                    className=" justify-center flex mx-auto"
-                    width={80}
-                    height={80}
-                  />
-                  <p className="text-[5rem] ml-8 mt-[-5%] text-contrast">
-                    {(currentWeather.main.temp - 273.15).toFixed(0)}
-                    <sup>o</sup>
-                  </p>{" "}
-                  <p className="mt-[-5%] text-sm">
-                    {currentWeather.weather[0].description}{" "}
-                  </p>
-                </div>
-                <div className="flex flex-col w-1/4 h-full">
-                  <div className="flex flex-col justify-center h-1/3 border-b border-white">
-                    <FaWind className="justify-center flex mx-auto w-[1.7rem] h-[1.7rem]" />{" "}
-                    <p className="text-sm mt-2 text-gray">Wiatr</p>
-                    <p className="text-sm text-gray">
-                      {currentWeather.wind.speed} m/s
-                    </p>
-                  </div>
-                  <div className="flex flex-col justify-center h-1/3   border-b border-white mt-2">
-                    <BsFillDropletFill className="justify-center flex mx-auto  w-[1.7rem] h-[1.7rem]" />{" "}
-                    <p className="text-sm mt-2 text-gray">Wilgotność</p>
-                    <p className="text-sm text-gray">
-                      {currentWeather.main.humidity}%
-                    </p>
-                  </div>
-                  <div className="flex flex-col justify-center h-1/3 mt-2 ">
-                    <FaTemperatureLow className="justify-center flex ml-[40%]  w-[1.7rem] h-[1.7rem] " />{" "}
-                    <p className="text-sm mt-2 text-gray">Odczuwalne </p>
-                    <p className="text-sm text-gray">3.4 m/s</p>
-                  </div>
-                </div>
-              </>
-            )}
-            2424
+            <div className="  ">
+              <WeatherBox />
+            </div>
           </div>
           <div className="w-[20rem] block ml-6 mt-6">
             <div className="h-[7.75rem] bg-bgcontrastpurple flex p-4  rounded-[1rem]  shadow-3xl ">
@@ -170,9 +47,7 @@ const dashboard = () => {
           <div className="flex h-[17rem] w-full mt-6  ">
             {" "}
             <div className=" bg-bar  w-1/2 rounded-[1rem] relative  shadow-3xl p-4">
-              {" "}
-              wwdddddddddddddddddddddddddddddddddddddddddddddddddddddd
-              {/* <Notes /> */}
+              <Chart weight={weight} />
             </div>{" "}
             <div className=" bg-bar  w-1/2  ml-6 rounded-[1rem] relative  shadow-3xl  p-4">
               {" "}
