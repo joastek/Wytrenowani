@@ -1,7 +1,7 @@
 import "@/styles/globals.css";
 import type { Metadata } from "next";
 import { Poppins } from "next/font/google";
-import Providers from "@/providers/provider";
+// import Providers from "@/providers/provider";
 import SupabaseProvider from "../providers/SupaBaseProvider";
 import UserProvider from "@/providers/useProvider";
 import ModalProvider from "@/providers/ModalProvider";
@@ -28,29 +28,29 @@ export default function RootLayout({
         {" "}
         <meta charSet="UTF-8" />
       </head>
-
-      <Providers>
-        <body className={inter.className}>
-          {" "}
-          <div className="gradient-bg  ">
-            <div className="gradients-container  dark:bg-secondary">
-              <div className="g1"></div>
-              <div className="g2"></div>
-              <div className="g3"></div>
-              <div className="g4"></div>
-              <div className="g5"></div>
-              <div className="interactive"></div>
-            </div>{" "}
+      {/* 
+      <Providers> */}
+      <body className={inter.className}>
+        {" "}
+        <div className="gradient-bg  ">
+          <div className="gradients-container  dark:bg-secondary">
+            <div className="g1"></div>
+            <div className="g2"></div>
+            <div className="g3"></div>
+            <div className="g4"></div>
+            <div className="g5"></div>
+            <div className="interactive"></div>
           </div>{" "}
-          <ToasterProvider />
-          <SupabaseProvider>
-            <UserProvider>
-              <ModalProvider />
-              {children}
-            </UserProvider>
-          </SupabaseProvider>
-        </body>
-      </Providers>
+        </div>{" "}
+        <ToasterProvider />
+        <SupabaseProvider>
+          <UserProvider>
+            <ModalProvider />
+            {children}
+          </UserProvider>
+        </SupabaseProvider>
+      </body>
+      {/* </Providers> */}
     </html>
   );
 }

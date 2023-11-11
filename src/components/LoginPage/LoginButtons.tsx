@@ -24,8 +24,6 @@ const LoginButtons = () => {
     const authChangeHandler = async (event: any) => {
       if (event === "SIGNED_IN") {
         router.push("/dashboard");
-      } else if (event === "SIGNED_OUT") {
-        router.push("/");
       }
     };
 
