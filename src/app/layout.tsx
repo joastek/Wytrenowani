@@ -6,7 +6,7 @@ import SupabaseProvider from "../providers/SupaBaseProvider";
 import UserProvider from "@/providers/useProvider";
 
 import ToasterProvider from "@/providers/ToasterProvider";
-
+export const dynamic = "force-dynamic";
 const inter = Poppins({
   subsets: ["latin"],
   weight: ["400"],
