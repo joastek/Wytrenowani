@@ -15,10 +15,26 @@ interface PagecontentProps {
   weight: Weight[];
 }
 const Chart: React.FC<PagecontentProps> = ({ weight }) => {
-  const data = weight.map((weightItem) => ({
-    name: weightItem.date, // Replace 'name' with the date from 'weightItem'
-    waga: weightItem.weight, // Assuming 'uv' represents weight in your context
-  }));
+  if (weight.length === 0) {
+    return (
+      <div className="w-full h-full flex justify-center items-center text-center text-2xl">
+        {" "}
+        Brak pomiarów wagi
+      </div>
+    );
+  }
+  const data = weight
+    .slice()
+    .reverse()
+    .map((weightItem) => ({
+      name: weightItem.date, // Replace 'name' with the date from 'weightItem'
+      waga: weightItem.weight, // Assuming 'uv' represents weight in your context
+      // pv: weightItem.date,
+    }));
+  const maxYWeight = Math.max(...weight.map((item) => item.weight));
+  const minYWeight = Math.min(...weight.map((item) => item.weight));
+  const maxYValue = Math.floor(maxYWeight * 1.05);
+  const minYValue = Math.floor(minYWeight * 0.95);
   return (
     <>
       <div className="flex justify-center items-center  flex-col">
@@ -40,7 +56,7 @@ const Chart: React.FC<PagecontentProps> = ({ weight }) => {
             </linearGradient>
           </defs>
           <XAxis dataKey="name" />
-          <YAxis />
+          <YAxis domain={[minYValue, maxYValue]} />
           <CartesianGrid strokeDasharray="3 3" />
           <Tooltip />
           <Area
@@ -50,13 +66,13 @@ const Chart: React.FC<PagecontentProps> = ({ weight }) => {
             fillOpacity={1}
             fill="url(#colorUv)"
           />
-          <Area
+          {/* <Area
             type="monotone"
-            dataKey="pv"
+            dataKey="name"
             stroke="#82ca9d"
             fillOpacity={1}
             fill="url(#colorPv)"
-          />
+          /> */}
         </AreaChart>
       </div>
     </>

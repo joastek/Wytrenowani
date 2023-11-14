@@ -82,7 +82,7 @@ const WeatherBox = () => {
               </p>
             </div>
             <div className="flex flex-col justify-center h-1/3 mt-2 ">
-              <FaTemperatureLow className="justify-center flex ml-[40%]  w-[1.7rem] h-[1.7rem] " />{" "}
+              <FaTemperatureLow className="justify-center flex ml-[40%]  w-[1.9rem] h-[1.7rem] " />{" "}
               <p className="text-sm mt-2 text-gray">Odczuwalne </p>
               <p className="text-sm text-gray">3.4 m/s</p>
             </div>{" "}

@@ -4,7 +4,7 @@ import { Poppins } from "next/font/google";
 // import Providers from "@/providers/provider";
 import SupabaseProvider from "../providers/SupaBaseProvider";
 import UserProvider from "@/providers/useProvider";
-import ModalProvider from "@/providers/ModalProvider";
+
 import ToasterProvider from "@/providers/ToasterProvider";
 
 const inter = Poppins({
@@ -44,10 +44,7 @@ export default function RootLayout({
         </div>{" "}
         <ToasterProvider />
         <SupabaseProvider>
-          <UserProvider>
-            <ModalProvider />
-            {children}
-          </UserProvider>
+          <UserProvider>{children}</UserProvider>
         </SupabaseProvider>
       </body>
       {/* </Providers> */}

@@ -17,10 +17,10 @@ module.exports = {
       colors: {
         secondary: "#B397FD",
         third: "#722796",
-        bar: "#20223780",
+        bar: "#011870",
         gray: "#d3d3d3",
         contrast: "#EDB90C",
-        contrastblack: "#293556",
+        contrastblack: "#011870",
         bgcontrastpurple: "#440099",
         grey: "#adb5bd",
       },

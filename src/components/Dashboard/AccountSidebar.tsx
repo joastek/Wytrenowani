@@ -44,7 +44,7 @@ const AccountSidebar = () => {
       <div className="flex items-center flex-grow">
         {" "}
         {/* Zmieniamy to na flex-grow */}
-        <Navigation />
+        {/* <Navigation /> */}
       </div>
       {user ? (
         <>

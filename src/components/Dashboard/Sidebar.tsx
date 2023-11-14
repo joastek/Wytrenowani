@@ -8,7 +8,9 @@ import { AiOutlineHome, AiOutlineArrowLeft } from "react-icons/ai";
 import { SidebarContext } from "../../providers/SideBarContext";
 import { GiWeightLiftingUp } from "react-icons/gi";
 import { GiMeal } from "react-icons/gi";
-import { FiTarget } from "react-icons/fi";
+import { BsFillPersonFill } from "react-icons/bs";
+import { GoHistory } from "react-icons/Go";
+import { ImBook } from "react-icons/Im";
 interface SidebarItem {
   name: string;
   href: string;
@@ -24,7 +26,7 @@ export default function Sidebar() {
     {
       name: "Cele",
       href: "/dashboard/Targets",
-      icon: FiTarget,
+      icon: BsFillPersonFill,
     },
     {
       name: "Kalkulator",
@@ -44,7 +46,12 @@ export default function Sidebar() {
     {
       name: "Historia",
       href: "/dashboard/History",
-      icon: GiWeightLiftingUp,
+      icon: GoHistory,
+    },
+    {
+      name: "Wiedza",
+      href: "/dashboard/Knowledge",
+      icon: ImBook,
     },
   ];
   const { isCollapsedSidebar, toggleSidebarcollapse } =
@@ -52,7 +59,7 @@ export default function Sidebar() {
   return (
     <>
       <div className=" fixed ease-out    h-full flex z-[100]">
-        <div className="m-6 bg-contrastblack  z-[999] rounded-[1rem] ">
+        <div className="m-6 bg-bar  z-[999] rounded-[1rem] ">
           <button className="btn">
             <AiOutlineArrowLeft
               className="h-12 w-12"

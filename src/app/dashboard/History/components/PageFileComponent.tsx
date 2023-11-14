@@ -15,8 +15,8 @@ export const PageContent: React.FC<PagecontentProps> = ({ weight }) => {
 
   return (
     <>
-      <div className="flex text-2xl">
-        <table>
+      <div className="flex text-2xl w-[70rem] ">
+        <table className="w-full border-solid border-black ">
           <thead>
             <tr>
               <th>Waga</th>
@@ -28,7 +28,6 @@ export const PageContent: React.FC<PagecontentProps> = ({ weight }) => {
             <WeightItem data={weightItem} key={weightItem.user_id} />
           ))}
         </table>
-        <Chart weight={weight} />
       </div>
     </>
   );

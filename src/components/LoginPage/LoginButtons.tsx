@@ -9,7 +9,7 @@ import {
   // Import predefined theme
   ThemeSupa,
 } from "@supabase/auth-ui-shared";
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import { useRouter } from "next/navigation";
 
 import {
@@ -20,15 +20,22 @@ const LoginButtons = () => {
   const supabaseClient = useSupabaseClient();
   const { session } = useSessionContext();
   const router = useRouter();
+  const [firstLogin, setFirstLogin] = useState(false);
   useEffect(() => {
     const authChangeHandler = async (event: any) => {
-      if (event === "SIGNED_IN") {
-        router.push("/dashboard");
+      if (event === "SIGNED_IN" && !firstLogin) {
+        setFirstLogin(true);
       }
     };
 
     supabaseClient.auth.onAuthStateChange(authChangeHandler);
-  }, [router]);
+  }, [supabaseClient]);
+
+  useEffect(() => {
+    if (firstLogin) {
+      router.push("/dashboard");
+    }
+  }, [firstLogin, router]);
 
   return (
     <>
@@ -40,12 +47,12 @@ const LoginButtons = () => {
             supabaseClient={supabaseClient}
             appearance={{ theme: ThemeSupa }}
             theme="dark"
-            providers={["google", "facebook", "github"]}
+            providers={["github"]}
           />
         </div>
         <div>
           {" "}
-          <Link href="/dashboard">
+          {/* <Link href="/dashboard">
             {" "}
             <Button
               variant="outlined"
@@ -53,7 +60,7 @@ const LoginButtons = () => {
             >
               Zaloguj jako gość
             </Button>
-          </Link>
+          </Link> */}
         </div>
       </div>
     </>

@@ -4,6 +4,7 @@ import { useSessionContext } from "@supabase/auth-helpers-react";
 import { useRouter } from "next/navigation";
 import { useUser } from "@/app/hooks/useUser";
 import DeleteIcon from "@mui/icons-material/Delete";
+import { Varela_Round } from "next/font/google";
 interface WeightItemProps {
   data: Weight;
   key: string; // dltWeight jako funkcja przyjmująca wagę jako argument
@@ -34,7 +35,7 @@ const WeightItem: React.FC<WeightItemProps> = ({ data, key }) => {
       {" "}
       <tbody className="m-6">
         <tr key={data.user_id}>
-          <th>{data.weight}</th>
+          <th>{data.weight} kg</th>
           <th>{data.date}</th>
           <th onClick={() => delteFunction(data.id)}>
             <DeleteIcon />
@@ -46,3 +47,6 @@ const WeightItem: React.FC<WeightItemProps> = ({ data, key }) => {
 };
 
 export default WeightItem;
+function _createInst() {
+  throw new Error("Function not implemented.");
+}

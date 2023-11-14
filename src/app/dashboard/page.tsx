@@ -23,7 +23,7 @@ const dashboard = async () => {
               <div className="box-inner"></div>
             </div>
           </div>{" "}
-          <div className="w-[20rem] max-h-[17rem]  bg-[#293556] rounded-[1rem] mt-6 justify-center flex flex-row text-center shadow-3xl">
+          <div className="w-[20rem] max-h-[17rem]  bg-contrastblack rounded-[1rem] mt-6 justify-center flex flex-row text-center shadow-3xl">
             <ProgressBar />
           </div>
           <div className="w-[27rem] weather_box  ml-6 mt-6  rounded-[1rem]  shadow-3xl p-2 flex justify-center text-center relative">
@@ -31,9 +31,7 @@ const dashboard = async () => {
             <button className="absolute left-4 top-4">
               <BiRefresh className=" w-[2rem] h-[2rem]" />
             </button>
-            <div className="  ">
-              <WeatherBox />
-            </div>
+            <WeatherBox />
           </div>
           <div className="w-[20rem] block ml-6 mt-6">
             <div className="h-[7.75rem] bg-bgcontrastpurple flex p-4  rounded-[1rem]  shadow-3xl ">
