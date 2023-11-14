@@ -9,8 +9,8 @@ import { SidebarContext } from "../../providers/SideBarContext";
 import { GiWeightLiftingUp } from "react-icons/gi";
 import { GiMeal } from "react-icons/gi";
 import { BsFillPersonFill } from "react-icons/bs";
-import { GoHistory } from "react-icons/Go";
-import { ImBook } from "react-icons/Im";
+import { GoHistory } from "react-icons/go";
+import { ImBook } from "react-icons/im";
 interface SidebarItem {
   name: string;
   href: string;

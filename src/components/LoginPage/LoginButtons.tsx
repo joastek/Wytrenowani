@@ -1,7 +1,6 @@
 "use client";
 import Link from "next/link";
-import Button from "@mui/material/Button";
-import Stack from "@mui/material/Stack";
+
 import { createClient } from "@supabase/supabase-js";
 import { Auth } from "@supabase/auth-ui-react";
 
