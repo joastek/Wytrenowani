@@ -1,11 +1,11 @@
-import WaterFill from "@/components/Dashboard/WaterFill";
-import NumberOfSteps from "@/components/Dashboard/NumberOfSteps";
+import WaterFill from "@/components/ProgressBars/WaterFill";
+import NumberOfSteps from "@/components/ProgressBars/NumberOfSteps";
 import "@/styles/DashboardWave.css";
 import "@/styles/theme.css";
 import MotivationalQuotes from "@/components/Dashboard/MotivationalQuotes";
 import "react-circular-progressbar/dist/styles.css";
 import { BiRefresh } from "react-icons/bi";
-import ProgressBar from "@/components/Dashboard/ProgressBar";
+import CaloriesBar from "@/components/ProgressBars/Calories";
 import getWeight from "@/actions/getWeight";
 import Chart from "@/components/Dashboard/Chart";
 import WeatherBox from "@/components/Dashboard/WeatherBox";
@@ -16,7 +16,7 @@ const dashboard = async () => {
   return (
     <>
       <div className="flex justify-center   w-full  ">
-        <div className="flex  flex-wrap max-w-[70rem] mt-28  ml-28">
+        <div className="flex  flex-wrap max-w-[70rem] mt-28  sm-28 md:max-w-[40rem]">
           <div className="bg-bar w-[70rem] h-[17rem]  rounded-[1rem] relative  shadow-3xl">
             <div className="box">
               <MotivationalQuotes />
@@ -24,7 +24,7 @@ const dashboard = async () => {
             </div>
           </div>{" "}
           <div className="w-[20rem] max-h-[17rem]  bg-contrastblack rounded-[1rem] mt-6 justify-center flex flex-row text-center shadow-3xl">
-            <ProgressBar />
+            <CaloriesBar />
           </div>
           <div className="w-[27rem] weather_box  ml-6 mt-6  rounded-[1rem]  shadow-3xl p-2 flex justify-center text-center relative">
             {" "}

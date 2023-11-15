@@ -13,6 +13,7 @@ const History = async () => {
   const weight = await getWeight();
   return (
     <div className="flex justify-center items-center  flex-col">
+      dwddwwwd
       <PageContent weight={weight} />
     </div>
   );

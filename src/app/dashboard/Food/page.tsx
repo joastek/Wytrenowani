@@ -1,40 +1,22 @@
-"use client";
-import { useSelector } from "react-redux";
-import { RootState } from "@/types/type";
-import { useState, useEffect } from "react";
 import Breakfast from "@/components/Food/SetBreakfastMeal";
 import Dinner from "@/components/Food/SetDinnerMeal";
 import Lunch from "@/components/Food/SetLunchMeal";
-import { CircularProgressbar, buildStyles } from "react-circular-progressbar";
-import "react-circular-progressbar/dist/styles.css";
+import CaloriesBar from "@/components/ProgressBars/Calories";
+import ProteinBar from "@/components/ProgressBars/Protein";
+import CarboBar from "@/components/ProgressBars/Carbo";
+import FatBar from "@/components/ProgressBars/Fat";
+import translate from "google-translate-api-x";
 
-const Food = () => {
-  const { totalProtein, totalCarbo, totalFat, totalCalories } = useSelector(
-    (state: any) => state.nutriensSum
-  );
-
-  const { calories, result, mass } = useSelector(
-    (state: RootState) => state.bmiCalculator
-  );
-
-  ///nutriens circles
-  const Protein = Math.ceil(1.8 * mass);
-  const Fat = Math.ceil(0.6 * mass);
-  const ProteinGrammeToCalories = Protein * 4;
-  const FatGrammeToCalories = Fat * 9;
-  const Carbo = Math.ceil(
-    (calories - ProteinGrammeToCalories - FatGrammeToCalories) / 4
-  );
-
-  const percentage = 66;
-
+const Food = async () => {
+  const res = await translate("jabłko", { to: "en" });
+  console.log(res.text); //=> I speak English
   return (
     <>
-      {/* <div className="flex   justify-center flex-row  ">
+      <div className="flex   justify-center flex-row  ">
         <div className="w-1/2 flex  justify-end mt-28  max-h-[50rem]">
-          <table className="   w-full bg-bar rounded-[2rem] max-w-[70rem]   shadow-3xl">
+          <table className="   w-full bg-bar rounded-[1rem] max-w-[70rem]   shadow-3xl">
             <thead className="">
-              <tr className="flex m-6 p-4 rounded-[2rem] border-[0.4rem] border-secondary text-lg ">
+              <tr className="flex m-6 p-4 rounded-[1rem] border-[0.4rem] border-bgcontrastpurple text-lg ">
                 <th style={{ width: "40%" }} className="font-light">
                   <h2>Produkt</h2>
                 </th>
@@ -54,8 +36,9 @@ const Food = () => {
             </thead>
 
             <tbody>
-              <div className=" overflow-y-auto border-[0.4rem] border-secondary  max-h-[50rem]  p-4 m-6 rounded-[2rem]">
-                <Breakfast />
+              <div className=" overflow-y-auto border-[0.4rem] border-bgcontrastpurple  max-h-[50rem]   m-6 rounded-[1rem]">
+                {res.text}
+                <Breakfast res={res.text} />
                 <Dinner />
                 <Lunch />
               </div>
@@ -65,62 +48,26 @@ const Food = () => {
 
         <div className="flex flex-col  w-1/2    mt-28   rounded-lg ml-6  max-w-[30rem] max-h-[52rem]">
           <div className="w-1/2 flex flex-col h-1/3 items-center bg-bar p-6 mr-5    rounded-[2rem]  shadow-3xl">
-            <h3 className="mb-4">Suma kcal :</h3>
-            <CircularProgressbar
-              value={totalCalories}
-              maxValue={calories}
-              text={` \n ${totalCalories}/${calories} kcal`}
-              styles={buildStyles({
-                textColor: "white",
-                textSize: "0.7rem",
-                pathColor: `rgb(87, 204, 153, ${percentage / 100})`,
-              })}
-            />
+            <h3 className="mb-4">Suma kcal:</h3>
+            <CaloriesBar />
           </div>
 
           <div className=" w-1/2 max-h-[2/3] items-center justify-center flex flex-col bg-bar  rounded-[2rem] mt-6 p-6  shadow-3xl">
             <div className="h-1/3 w-[8rem]  flex flex-col  items-center  mb-6">
-              <h4 className="">Suma białka :</h4>
-              <CircularProgressbar
-                value={totalProtein}
-                maxValue={Protein}
-                text={` \n ${totalProtein}/${Protein} kcal`}
-                styles={buildStyles({
-                  textColor: "white",
-                  textSize: "0.6rem",
-                  pathColor: `rgb(18, 113, 255, ${percentage / 100}`,
-                })}
-              />{" "}
+              <h4 className="">Suma białka:</h4>
+              <ProteinBar />
             </div>{" "}
             <div className=" h-1/3 w-[8rem]  flex flex-col  items-center  mb-6">
-              <h4 className=" text-center">Suma węglowodanów : {totalCarbo}</h4>
-              <CircularProgressbar
-                value={totalCarbo}
-                maxValue={Carbo}
-                text={` \n ${totalCarbo}/${Carbo} kcal`}
-                styles={buildStyles({
-                  textColor: "white",
-                  textSize: "0.6rem",
-                  pathColor: `rgb(221, 74, 255, ${percentage / 100}`,
-                })}
-              />
+              <h4 className=" text-center">Suma węglowodanów: </h4>
+              <CarboBar />
             </div>
             <div className=" h-1/3 w-[8rem]  flex flex-col  items-center mb-6">
-              <h4 className="mt-4">Suma tłuszczy :</h4>
-              <CircularProgressbar
-                value={totalFat}
-                maxValue={Fat}
-                text={` \n ${totalFat}/${Fat} kcal`}
-                styles={buildStyles({
-                  textColor: "white",
-                  textSize: "0.6rem",
-                  pathColor: `rgb(200, 50, 50, ${percentage / 100}`,
-                })}
-              />
+              <h4 className="mt-4">Suma tłuszczy:</h4>
+              <FatBar />
             </div>
           </div>
         </div>
-      </div> */}
+      </div>
     </>
   );
 };

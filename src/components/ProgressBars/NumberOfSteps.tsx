@@ -21,7 +21,7 @@ const NumberOfSteps = () => {
 
   return (
     <>
-      <div className="bg-black h-4 rounded-[0.4rem]  relative w-full border-solid border-2 border-white ">
+      <div className="bg-black h-4 rounded-[0.4rem]  relative w-full border-solid border-2 border-white  ">
         <motion.div
           initial={{ width: 0 }} // Ustaw początkową szerokość na 0 i left na 0
           animate={{

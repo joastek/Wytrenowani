@@ -7,7 +7,7 @@ import {
 } from "react-circular-progressbar";
 import { useSelector } from "react-redux";
 import { RootState } from "@/types/type";
-const ProgressBar = () => {
+const CaloriesBar = () => {
   const { totalProtein, totalCarbo, totalFat, totalCalories } = useSelector(
     (state: any) => state.nutriensSum
   );
@@ -33,4 +33,4 @@ const ProgressBar = () => {
   );
 };
 
-export default ProgressBar;
+export default CaloriesBar;

@@ -34,6 +34,7 @@
     "dayjs": "^1.11.10",
     "eslint-config-next": "^14.0.2",
     "framer-motion": "^10.16.5",
+    "google-translate-api-x": "^10.6.7",
     "luxon": "^3.4.4",
     "million": "^2.6.4",
     "next": "^14.0.2",

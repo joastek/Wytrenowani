@@ -1,3 +1,4 @@
+"use client";
 import React, { useState, useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { motion } from "framer-motion";
@@ -21,8 +22,12 @@ import {
   deleteNutriens,
 } from "@/slice/FoodCalculator/NutrientsSum";
 import { breakfastState, breakfastSet } from "@/types/type";
+import translate from "google-translate-api-x";
 
-const Breakfast = () => {
+interface FoodProps {
+  res: string;
+}
+const Breakfast: React.FC<FoodProps> = ({ res }) => {
   const dispatch = useDispatch();
   const FoodSet = useSelector(
     (state: breakfastState) => state.breakfastSet.value
@@ -120,144 +125,171 @@ const Breakfast = () => {
   const handleAmountOfNutrien = (event: any) => {
     dispatch(setwriteAmountOfNutrien(event.target.value));
   };
+  const [currentTranslation, setCurrentTranslation] = useState<string>(res);
+  const [newText, setNewText] = useState<string>("");
+
+  const handleTextChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+    setNewText(event.target.value);
+  };
+
+  const handleButtonClick = async () => {
+    // Aktualizuj tłumaczenie po naciśnięciu przycisku
+    const newTranslation = await translate(newText, { to: "en" });
+    setCurrentTranslation(newTranslation.text);
+    setNewText("");
+  };
 
   return (
     <>
-      <div className="m-6 rounded-lg border-[0.2rem] border-secondary text-lg h-[20rem] ">
-        <tr className="bg-third flex justify-end rounded-t-[0.4rem] h-[20%] relative">
-          <a className="absolute left-0 p-4 z-0">Śniadanie</a>
+      <h2>Śniadanie</h2>
+      <p>Tłumaczenie jabłka: {res}</p>
+      <TextField
+        label="Nowy tekst"
+        variant="outlined"
+        value={newText}
+        onChange={handleTextChange}
+      />
+      <Button variant="contained" color="primary" onClick={handleButtonClick}>
+        Zatwierdź
+      </Button>
+      {addNewBreakfast && (
+        <>
+          <div
+            className="  bg-transparent backdrop-blur-md w-full h-full absolute top-0 left-0 z-0"
+            onClick={() => {
+              handleAddNewBreakfast();
+            }}
+          ></div>{" "}
+          <motion.td
+            colSpan={5}
+            className="max-w-[70rem]  z-[100]  absolute m-auto bg-bgcontrastpurple p-12 rounded-[1rem] shadow-3xl"
+          >
+            <h3 className=" z-[100] w-full justify-center mx-auto mb-5 text-center ">
+              Dodaj produkt
+            </h3>
 
-          <motion.div
-            layout
-            className="justify-center items-center flex parent m-2 bg-third"
+            <div className="flex">
+              <div className="w-1/2 flex flex-col p-6 bg-contrastblack rounded-[1rem]">
+                <p className="text-2xl mb-4">
+                  {" "}
+                  Wyszukaj składnik z naszej bazy
+                </p>{" "}
+                <TextField
+                  className="mb-6"
+                  label="Nazwa składnika"
+                  variant="outlined"
+                  onChange={handleNameOfNutrienChange}
+                  value={writeNameOfNutrien}
+                />
+                <TextField
+                  label="Ilość (g)"
+                  variant="outlined"
+                  onChange={handleAmountOfNutrien}
+                  value={writeAmountOfNutrien}
+                />
+                <Button
+                  variant="contained"
+                  onClick={() => {
+                    handleAddNewBreakfast(), handleGetNutriens();
+                  }}
+                  className="m-2 h-14"
+                >
+                  <AddIcon />
+                </Button>
+              </div>{" "}
+              <p className=" m-auto justify-center text-center  text-xl mx-4">
+                lub
+              </p>
+              <div className="w-1/2 p-6 bg-contrastblack rounded-[1rem]">
+                <p className="text-2xl mb-4"> Wprowadź składnik ręcznie</p>{" "}
+                <TextField
+                  id="outlined-basic"
+                  label="Produkt"
+                  variant="outlined"
+                  onChange={(event) => {
+                    dispatch(setFoodName(event.target.value));
+                  }}
+                  className="w-36 m-2"
+                />
+                <TextField
+                  type="number"
+                  id="outlined-basic"
+                  label="Białko"
+                  variant="outlined"
+                  onChange={(event) => {
+                    dispatch(setProtein(event.target.value));
+                  }}
+                  className="w-36 m-2"
+                />
+                <TextField
+                  type="number"
+                  id="outlined-basic"
+                  label="Węglodowany"
+                  variant="outlined"
+                  onChange={(event) => {
+                    dispatch(setCarbo(event.target.value));
+                  }}
+                  className="w-36 m-2"
+                />
+                <TextField
+                  type="number"
+                  id="outlined-basic"
+                  label="Tłuszcze"
+                  variant="outlined"
+                  onChange={(event) => {
+                    dispatch(setFat(event.target.value));
+                  }}
+                  className="w-36 m-2"
+                />
+                <TextField
+                  type="number"
+                  id="outlined-basic"
+                  label="Kcal"
+                  variant="outlined"
+                  onChange={(event) => {
+                    dispatch(setCalories(event.target.value));
+                  }}
+                  className="w-36 m-2"
+                />{" "}
+                <TextField
+                  type="number"
+                  id="outlined-basic"
+                  label="ilość(g)"
+                  variant="outlined"
+                  onChange={(event) => {
+                    dispatch(setCalories(event.target.value));
+                  }}
+                  className="w-36 m-2"
+                />{" "}
+                <Button
+                  variant="contained"
+                  onClick={() => {
+                    handleAddNewBreakfast();
+                    handleAddFood(FoodSet.id);
+                  }}
+                  className="m-2 h-14 w-full"
+                >
+                  <AddIcon />
+                </Button>{" "}
+              </div>
+            </div>
+          </motion.td>{" "}
+        </>
+      )}
+      <div className="m-6 rounded-lg border-[0.2rem] border-bgcontrastpurple text-lg h-[20rem]  ">
+        <tr className="bg-bgcontrastpurple flex justify-end rounded-t-[0.4rem] h-[20%] relative z-[0]">
+          <a className="absolute left-0 p-4  z-[-5]">Śniadanie</a>
+
+          <div
+            className="justify-center items-center flex  m-2 "
             data-isOpen={addNewBreakfast}
-            style={{
-              borderRadius: "0.2rem",
-              boxShadow: "0px 10px 30px rgba(0,0,0,0.5)",
-            }}
-            transition={{
-              layout: { duration: 1, type: "spring" },
-            }}
           >
             {!addNewBreakfast && (
-              <motion.button
-                layout="position"
-                onClick={handleAddNewBreakfast}
-                className="m-4"
-              >
+              <button onClick={handleAddNewBreakfast} className="m-4">
                 <AddIcon />
-              </motion.button>
+              </button>
             )}
-
-            {addNewBreakfast && (
-              <>
-                {" "}
-                <div className="w-[40rem]">
-                  <motion.div
-                    className="fixed top-0 left-0 z-10 bg-transparent"
-                    onClick={() => {
-                      handleAddNewBreakfast(), handleGetNutriens();
-                    }}
-                  ></motion.div>
-                  <motion.td
-                    colSpan={5}
-                    className="w-full bg-third z-50  "
-                    initial={{ opacity: 0 }}
-                    animate={{ opacity: 1 }}
-                    transition={{ duration: 1 }}
-                  >
-                    {" "}
-                    <h3 className="m-4">Dodaj produkt</h3>
-                    <div className="w-1/2">
-                      {" "}
-                      <TextField
-                        label="Nazwa składnika"
-                        variant="outlined"
-                        onChange={handleNameOfNutrienChange}
-                        value={writeNameOfNutrien}
-                      />
-                      <TextField
-                        label="Ilość (g)"
-                        variant="outlined"
-                        onChange={handleAmountOfNutrien}
-                        value={writeAmountOfNutrien}
-                      />
-                      <Button
-                        variant="contained"
-                        onClick={() => {
-                          handleAddNewBreakfast(), handleGetNutriens();
-                        }}
-                        className="m-2 h-14"
-                      >
-                        <AddIcon />
-                      </Button>
-                    </div>
-                    <div className="w-1/2">
-                      <TextField
-                        id="outlined-basic"
-                        label="Produkt"
-                        variant="outlined"
-                        onChange={(event) => {
-                          dispatch(setFoodName(event.target.value));
-                        }}
-                        className="w-36 m-2"
-                      />
-                      <TextField
-                        type="number"
-                        id="outlined-basic"
-                        label="Białko"
-                        variant="outlined"
-                        onChange={(event) => {
-                          dispatch(setProtein(event.target.value));
-                        }}
-                        className="w-36 m-2"
-                      />
-                      <TextField
-                        type="number"
-                        id="outlined-basic"
-                        label="Węglodowany"
-                        variant="outlined"
-                        onChange={(event) => {
-                          dispatch(setCarbo(event.target.value));
-                        }}
-                        className="w-36 m-2"
-                      />
-                      <TextField
-                        type="number"
-                        id="outlined-basic"
-                        label="Tłuszcze"
-                        variant="outlined"
-                        onChange={(event) => {
-                          dispatch(setFat(event.target.value));
-                        }}
-                        className="w-36 m-2"
-                      />
-                      <TextField
-                        type="number"
-                        id="outlined-basic"
-                        label="Kcal"
-                        variant="outlined"
-                        onChange={(event) => {
-                          dispatch(setCalories(event.target.value));
-                        }}
-                        className="w-36 m-2"
-                      />{" "}
-                      <Button
-                        variant="contained"
-                        onClick={() => {
-                          handleAddNewBreakfast();
-                          handleAddFood(FoodSet.id);
-                        }}
-                        className="m-2 h-14"
-                      >
-                        <AddIcon />
-                      </Button>{" "}
-                    </div>
-                  </motion.td>{" "}
-                </div>{" "}
-              </>
-            )}
-          </motion.div>
+          </div>
         </tr>
         {FoodSet.map((foodBreakfast: any, index: number) => {
           return (
