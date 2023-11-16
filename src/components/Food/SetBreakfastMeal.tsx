@@ -27,7 +27,22 @@ import translate from "google-translate-api-x";
 interface FoodProps {
   res: string;
 }
-const Breakfast: React.FC<FoodProps> = ({ res }) => {
+const Breakfast = () => {
+  const [inputText, setInputText] = useState("Ik spreek Engels");
+  const [translatedText, setTranslatedText] = useState("");
+
+  const handleInputChange = (event: any) => {
+    setInputText(event.target.value);
+  };
+
+  const translateText = async () => {
+    try {
+      const res = await translate(inputText, { to: "en" });
+      console.log(res.text);
+    } catch (error) {
+      console.error("Wystąpił błąd podczas żądania do API tłumaczeń:", error);
+    }
+  };
   const dispatch = useDispatch();
   const FoodSet = useSelector(
     (state: breakfastState) => state.breakfastSet.value
@@ -125,33 +140,18 @@ const Breakfast: React.FC<FoodProps> = ({ res }) => {
   const handleAmountOfNutrien = (event: any) => {
     dispatch(setwriteAmountOfNutrien(event.target.value));
   };
-  const [currentTranslation, setCurrentTranslation] = useState<string>(res);
-  const [newText, setNewText] = useState<string>("");
-
-  const handleTextChange = (event: React.ChangeEvent<HTMLInputElement>) => {
-    setNewText(event.target.value);
-  };
-
-  const handleButtonClick = async () => {
-    // Aktualizuj tłumaczenie po naciśnięciu przycisku
-    const newTranslation = await translate(newText, { to: "en" });
-    setCurrentTranslation(newTranslation.text);
-    setNewText("");
-  };
 
   return (
     <>
-      <h2>Śniadanie</h2>
-      <p>Tłumaczenie jabłka: {res}</p>
-      <TextField
-        label="Nowy tekst"
-        variant="outlined"
-        value={newText}
-        onChange={handleTextChange}
-      />
-      <Button variant="contained" color="primary" onClick={handleButtonClick}>
-        Zatwierdź
-      </Button>
+      <div>
+        <input
+          type="text"
+          value={inputText}
+          onChange={handleInputChange}
+          placeholder="Enter text to translate"
+        />
+        <button onClick={translateText}>Translate</button>
+      </div>
       {addNewBreakfast && (
         <>
           <div

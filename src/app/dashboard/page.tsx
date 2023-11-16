@@ -9,10 +9,10 @@ import CaloriesBar from "@/components/ProgressBars/Calories";
 import getWeight from "@/actions/getWeight";
 import Chart from "@/components/Dashboard/Chart";
 import WeatherBox from "@/components/Dashboard/WeatherBox";
-////
 
 const dashboard = async () => {
   const weight = await getWeight();
+
   return (
     <>
       <div className="flex justify-center   w-full  ">

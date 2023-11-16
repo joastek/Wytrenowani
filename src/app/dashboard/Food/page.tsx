@@ -6,13 +6,20 @@ import ProteinBar from "@/components/ProgressBars/Protein";
 import CarboBar from "@/components/ProgressBars/Carbo";
 import FatBar from "@/components/ProgressBars/Fat";
 import translate from "google-translate-api-x";
-
+import getTranslate from "@/components/Dashboard/getTranslate";
 const Food = async () => {
-  const res = await translate("jabłko", { to: "en" });
-  console.log(res.text); //=> I speak English
+  const res = await translate("Ik spreek Engels", { to: "en" });
+  console.log(res.text);
+  const translateText = async () => {
+    const res = await translate("Ik spreek Engels", { to: "en" });
+    console.log(res.text);
+  };
+  translateText();
   return (
     <>
       <div className="flex   justify-center flex-row  ">
+        {res.text}
+
         <div className="w-1/2 flex  justify-end mt-28  max-h-[50rem]">
           <table className="   w-full bg-bar rounded-[1rem] max-w-[70rem]   shadow-3xl">
             <thead className="">
@@ -37,15 +44,13 @@ const Food = async () => {
 
             <tbody>
               <div className=" overflow-y-auto border-[0.4rem] border-bgcontrastpurple  max-h-[50rem]   m-6 rounded-[1rem]">
-                {res.text}
-                <Breakfast res={res.text} />
+                <Breakfast />
                 <Dinner />
                 <Lunch />
               </div>
             </tbody>
           </table>
         </div>
-
         <div className="flex flex-col  w-1/2    mt-28   rounded-lg ml-6  max-w-[30rem] max-h-[52rem]">
           <div className="w-1/2 flex flex-col h-1/3 items-center bg-bar p-6 mr-5    rounded-[2rem]  shadow-3xl">
             <h3 className="mb-4">Suma kcal:</h3>
