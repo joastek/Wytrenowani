@@ -12,6 +12,14 @@ import LocalDiningIcon from "@mui/icons-material/LocalDining";
 import PersonIcon from "@mui/icons-material/Person";
 import RestoreIcon from "@mui/icons-material/Restore";
 import AutoStoriesIcon from "@mui/icons-material/AutoStories";
+import React from "react";
+import {
+  Backdrop,
+  Box,
+  SpeedDial,
+  SpeedDialAction,
+  SpeedDialIcon,
+} from "@mui/material";
 
 interface SidebarItem {
   name: string;
@@ -56,38 +64,155 @@ export default function Sidebar() {
       icon: AutoStoriesIcon,
     },
   ];
+
+  const actions = [
+    {
+      icon: (
+        <Link href="/dashboard">
+          <HomeIcon />
+        </Link>
+      ),
+      name: (
+        <>
+          <Link href="/dashboard">Strona główna</Link>
+        </>
+      ),
+      href: "/dashboard",
+    },
+    {
+      icon: (
+        <Link href="/dashboard/Targets">
+          <PersonIcon />
+        </Link>
+      ),
+      name: (
+        <>
+          <Link href="/dashboard/Targets">Cele</Link>
+        </>
+      ),
+    },
+    {
+      icon: (
+        <Link href="/dashboard/calculator">
+          {" "}
+          <LocalDiningIcon />
+        </Link>
+      ),
+      name: (
+        <>
+          <Link href="/dashboard/calculator">Kalorie</Link>
+        </>
+      ),
+    },
+    {
+      icon: (
+        <Link href="/dashboard/TrainingPlan">
+          <FitnessCenterIcon />
+        </Link>
+      ),
+      name: (
+        <>
+          <Link href="/dashboard/TrainingPlan">Trening</Link>
+        </>
+      ),
+    },
+    {
+      icon: (
+        <Link href="/dashboard/History">
+          <RestoreIcon />
+        </Link>
+      ),
+      name: (
+        <>
+          <Link href="/dashboard/History">Historia</Link>
+        </>
+      ),
+    },
+    {
+      icon: (
+        <Link href="/dashboard/Knowledge">
+          <AutoStoriesIcon />
+        </Link>
+      ),
+      name: (
+        <>
+          <Link href="/dashboard/Knowledge">Wiedza</Link>
+        </>
+      ),
+    },
+  ];
+  const [open, setOpen] = React.useState(false);
+  const handleOpen = () => setOpen(true);
+  const handleClose = () => setOpen(false);
   const { isCollapsedSidebar, toggleSidebarcollapse } =
     useContext(SidebarContext);
+  const isSmallScreen = window.innerWidth <= 1000;
   return (
     <>
       <div className=" fixed ease-out    h-full flex z-[100]">
-        <div className=" bg-bar  z-[999] rounded-[1rem] ">
-          <button className="btn">
-            <KeyboardDoubleArrowLeftIcon
-              className="h-12 w-12"
-              onClick={toggleSidebarcollapse}
-            />
-          </button>{" "}
-          <aside className="sidebar  flex" data-collapse={isCollapsedSidebar}>
-            <ul>
-              {sidebarItems.map(({ name, href, icon: Icon }) => (
-                <li
-                  className="text-xl my-6 text-center flex items-center"
-                  key={name}
-                >
-                  <Link
-                    href={href}
-                    className=" flex items-center"
-                    data-collapse={isCollapsedSidebar}
-                  >
-                    <Icon className=" w-8 my-2" />
-                    <div className="sidebar__name justify-center">{name}</div>
-                  </Link>
-                </li>
-              ))}
-            </ul>
-          </aside>
-        </div>
+        {isSmallScreen ? (
+          <>
+            {" "}
+            <Box sx={{ position: "relative", ml: 3, mt: 3, height: 120 }}>
+              <Backdrop open={open} />
+              <SpeedDial
+                ariaLabel="SpeedDial tooltip example"
+                icon={<SpeedDialIcon sx={{ color: "white" }} />}
+                onClose={handleClose}
+                onOpen={handleOpen}
+                open={open}
+                direction="down"
+              >
+                {actions.map((action) => (
+                  <SpeedDialAction
+                    key={action.href}
+                    icon={action.icon}
+                    tooltipTitle={action.name}
+                    tooltipOpen
+                    tooltipPlacement="right"
+                    onClick={handleClose}
+                  />
+                ))}
+              </SpeedDial>
+            </Box>
+          </>
+        ) : (
+          <>
+            {" "}
+            <div className=" bg-bar  z-[999] rounded-[1rem] ">
+              <button className="btn">
+                <KeyboardDoubleArrowLeftIcon
+                  className="h-12 w-12"
+                  onClick={toggleSidebarcollapse}
+                />
+              </button>{" "}
+              <aside
+                className="sidebar  flex"
+                data-collapse={isCollapsedSidebar}
+              >
+                <ul>
+                  {sidebarItems.map(({ name, href, icon: Icon }) => (
+                    <li
+                      className="text-xl my-6 text-center flex items-center"
+                      key={name}
+                    >
+                      <Link
+                        href={href}
+                        className=" flex items-center"
+                        data-collapse={isCollapsedSidebar}
+                      >
+                        <Icon className=" w-8 my-2" />
+                        <div className="sidebar__name justify-center">
+                          {name}
+                        </div>
+                      </Link>
+                    </li>
+                  ))}
+                </ul>
+              </aside>
+            </div>
+          </>
+        )}
       </div>
     </>
   );

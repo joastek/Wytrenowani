@@ -10,6 +10,7 @@ import {
   AreaChart,
   Area,
   Tooltip,
+  ResponsiveContainer,
 } from "recharts";
 interface PagecontentProps {
   weight: Weight[];
@@ -37,11 +38,11 @@ const Chart: React.FC<PagecontentProps> = ({ weight }) => {
   const minYValue = Math.floor(minYWeight * 0.95);
   return (
     <>
-      <div className="flex justify-center items-center  flex-col">
-        {" "}
+      <ResponsiveContainer width="100%" height={240}>
         <AreaChart
-          width={530}
-          height={250}
+          width={560}
+          height={160}
+          className="w-16 h-16"
           data={data}
           margin={{ top: 10, right: 30, left: 0, bottom: 0 }}
         >
@@ -74,7 +75,7 @@ const Chart: React.FC<PagecontentProps> = ({ weight }) => {
             fill="url(#colorPv)"
           /> */}
         </AreaChart>
-      </div>
+      </ResponsiveContainer>
     </>
   );
 };

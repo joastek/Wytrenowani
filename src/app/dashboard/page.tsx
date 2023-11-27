@@ -18,7 +18,7 @@ const dashboard = async () => {
     <>
       <div className="container text-white ">
         <div className="columns mx-1 ">
-          <div className="column is-full  mt-24 box-inner bg-bar ">
+          <div className="column is-full  mt-12 box-inner bg-bar ">
             <div className="h-[15rem]  ">
               <MotivationalQuotes />
             </div>
@@ -52,9 +52,9 @@ const dashboard = async () => {
           </div>
           <div className="column">
             {" "}
-            <div className=" bg-bar  rounded-[1rem]   shadow-3xl">
+            {/* <div className=" bg-bar  rounded-[1rem]   shadow-3xl">
               <Chart weight={weight} />
-            </div>
+            </div> */}
           </div>
         </div>
       </div>

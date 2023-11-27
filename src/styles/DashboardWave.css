@@ -10,18 +10,7 @@
   );
   border-radius: 1rem;
 }
-/* .box:before {
-  position: absolute;
-  content: "";
-  width: calc(100% + 30px);
-  height: calc(100% + 30px);
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%) scale(0.7);
-  filter: blur(0);
-  opacity: 1;
-  transition: all 450ms cubic-bezier(0.23, 1, 0.32, 1);
-} */
+
 .box:hover:before {
   transform: translate(-50%, -50%) scale(1);
   filter: blur(50px);

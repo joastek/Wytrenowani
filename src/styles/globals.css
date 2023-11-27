@@ -87,7 +87,7 @@ h4 {
   z-index: -1;
   background: linear-gradient(40deg, rgb(108, 0, 162), rgb(1, 24, 112));
   width: 100%;
-  height: 100%;
+  height: 180vw;
   position: absolute;
   overflow: hidden;
   top: 0;
@@ -96,7 +96,7 @@ h4 {
 .gradients-container {
   filter: url(#goo) blur(40px);
   width: 100%;
-  height: 100%;
+  height: 180vw;
 }
 
 .g1 {

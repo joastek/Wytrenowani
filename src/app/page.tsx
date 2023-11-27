@@ -9,28 +9,21 @@ export default function Home() {
   return (
     <>
       {" "}
-      <div className="  flex  w-full  text-white  dark:bg-secondary h-screen">
-        {/* <div className=" absolute  right-0 top-0   flex justify-center items-center mr-12">
-          {" "}
-          <Navigation />
-        </div> */}
-
-        <div className="container mt-28 ">
-          <div className="column text-8xl flex m-auto text-center justify-center">
-            Wy
-            <Image src={Logo} alt="Logo" />
-            <div className="text-secondary">ren</div>
-            owani
-          </div>
-          <div className="block text-2xl text-center">
-            Twój trener,dietetyk i notatnik - w jednym
-          </div>
-          <div
-            className="column is-5 m-auto
- bg-bar  rounded-[1rem] shadow-3xl"
-          >
-            <LoginButtons />
-          </div>
+      <div className="container mt-28  p-4">
+        <div className=" text-8xl sm:text-5xl flex m-auto justify-center text-center ">
+          Wy
+          <Image src={Logo} alt="Logo" />
+          <div className="text-secondary">ren</div>
+          owani
+        </div>
+        <div className="block text-2xl text-center sm:text-xl">
+          Twój trener,dietetyk i notatnik - w jednym
+        </div>
+        <div
+          className="column is-5 m-auto
+ bg-bgcontrastpurple  rounded-[1rem] shadow-3xl"
+        >
+          <LoginButtons />
         </div>
       </div>
     </>
