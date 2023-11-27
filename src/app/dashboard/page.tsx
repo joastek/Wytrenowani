@@ -57,50 +57,6 @@ const dashboard = async () => {
             </div>
           </div>
         </div>
-        {/* <div className="   ">
-          <div className=" columns   bg-bar h-[17rem]  rounded-[1rem] relative  shadow-3xl ">
-            <MotivationalQuotes />
-            <div className="box-inner is-6"></div>
-          </div>{" "}
-          <div className="columns   is-variable">
-            <div className=" weather_box    rounded-[1rem]  shadow-3xl  relative">
-              {" "}
-              <button className="absolute left-4 top-4">
-                <BiRefresh className=" w-[2rem] h-[2rem]" />
-              </button>
-              <WeatherBox />
-            </div>
-            <div className="column  bg-contrastblack rounded-[1rem]   shadow-3xl">
-              <div className=" weather_box    rounded-[1rem]  shadow-3xl  relative">
-                {" "}
-                <button className="absolute left-4 top-4">
-                  <BiRefresh className=" w-[2rem] h-[2rem]" />
-                </button>
-                <WeatherBox />
-              </div>
-            </div>
-
-            <div className="  column ">
-              <div className=" bg-bgcontrastpurple    rounded-[1rem]  shadow-3xl ">
-                <WaterFill />
-              </div>
-              <div className=" bg-bgcontrastpurple   rounded-[1rem]  shadow-3xl">
-                {" "}
-                <NumberOfSteps />
-              </div>
-            </div>
-          </div>
-          <div className="columns   ">
-            {" "}
-            <div className="column bg-bar  rounded-[1rem] relative  shadow-3xl ">
-           c
-            </div>{" "}
-            <div className="column bg-bar  rounded-[1rem] relative  shadow-3xl  ">
-              {" "}
-              dwadwad
-            </div>
-          </div>
-        </div> */}
       </div>
     </>
   );

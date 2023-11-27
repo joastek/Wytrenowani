@@ -40,7 +40,12 @@ const LoginButtons = () => {
     <>
       {" "}
       <div className="w-full flex p-16 flex-col justify-center items-center">
-        <div className=" m-6">
+        <div className=" m-2">
+          <p className="m-auto text-3xl text-center justify-center flex">
+            {" "}
+            Zaloguj się
+          </p>
+
           <Auth
             magicLink
             supabaseClient={supabaseClient}

@@ -10,13 +10,13 @@ export default function Home() {
     <>
       {" "}
       <div className="  flex  w-full  text-white  dark:bg-secondary h-screen">
-        <div className=" absolute  right-0 top-0   flex justify-center items-center mr-12">
+        {/* <div className=" absolute  right-0 top-0   flex justify-center items-center mr-12">
           {" "}
           <Navigation />
-        </div>
+        </div> */}
 
-        <div className="m-auto ">
-          <div className="text-8xl flex">
+        <div className="container mt-28 ">
+          <div className="column text-8xl flex m-auto text-center justify-center">
             Wy
             <Image src={Logo} alt="Logo" />
             <div className="text-secondary">ren</div>
@@ -25,7 +25,12 @@ export default function Home() {
           <div className="block text-2xl text-center">
             Twój trener,dietetyk i notatnik - w jednym
           </div>
-          <LoginButtons />
+          <div
+            className="column is-5 m-auto
+ bg-bar  rounded-[1rem] shadow-3xl"
+          >
+            <LoginButtons />
+          </div>
         </div>
       </div>
     </>

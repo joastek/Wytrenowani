@@ -33,7 +33,7 @@ export default function RootLayout({
       <body className={inter.className}>
         {" "}
         <div className="gradient-bg  ">
-          <div className="gradients-container  dark:bg-secondary">
+          <div className="gradients-container  ">
             <div className="g1"></div>
           </div>{" "}
         </div>{" "}
