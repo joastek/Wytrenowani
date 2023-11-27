@@ -6,20 +6,14 @@ import ProteinBar from "@/components/ProgressBars/Protein";
 import CarboBar from "@/components/ProgressBars/Carbo";
 import FatBar from "@/components/ProgressBars/Fat";
 import translate from "google-translate-api-x";
-import getTranslate from "@/components/Dashboard/getTranslate";
+
 const Food = async () => {
-  const res = await translate("Ik spreek Engels", { to: "en" });
-  console.log(res.text);
-  const translateText = async () => {
-    const res = await translate("Ik spreek Engels", { to: "en" });
-    console.log(res.text);
-  };
-  translateText();
+  const res = await translate("jabłko", { to: "en" });
+
   return (
     <>
       <div className="flex   justify-center flex-row  ">
         {res.text}
-
         <div className="w-1/2 flex  justify-end mt-28  max-h-[50rem]">
           <table className="   w-full bg-bar rounded-[1rem] max-w-[70rem]   shadow-3xl">
             <thead className="">

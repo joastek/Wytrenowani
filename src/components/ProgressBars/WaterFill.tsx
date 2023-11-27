@@ -11,8 +11,6 @@ import CheckIcon from "@mui/icons-material/Check";
 import Button from "@mui/material/Button";
 import TextField from "@mui/material/TextField";
 const WaterFill = () => {
-  // const [maxFillLevel, setMaxFillLevel] = useState(9);
-
   const [newMaxFillLevel, setNewMaxFillLevel] = useState("");
   const [isEditing, setIsEditing] = useState(true);
   const maxFillLevel = useSelector(
@@ -38,28 +36,16 @@ const WaterFill = () => {
   };
 
   // };
-  const handleUpdateClick = () => {
-    const newMaxFillLevelValue = parseInt(newMaxFillLevel, 10);
 
-    if (!isNaN(newMaxFillLevelValue) && newMaxFillLevelValue > 0) {
-      dispatch(updateTargetFillLevel(newMaxFillLevelValue));
-      dispatch(updateAnimationLevels(-50));
-      dispatch(updateFillLevels(0));
-    }
-  };
-  const handleEditClick = () => {
-    setIsEditing((prev) => !prev); // Po kliknięciu "Edytuj" przestaw isEditing na true
-  };
   return (
     <>
-      {" "}
-      <div className="water w-1/4  ">
-        <div
-          className="wave "
-          style={{ bottom: `${fillLevel - fillLevels}%` }}
-        />
-      </div>
-      <div className="w-3/4 ml-4   ">
+      <div className="flex">
+        <div className="water   ">
+          <div
+            className="wave "
+            style={{ bottom: `${fillLevel - fillLevels}%` }}
+          />
+        </div>
         <div className="flex  text-base space-x-2">
           <div> {fillLevels}</div>
 
@@ -76,18 +62,17 @@ const WaterFill = () => {
             )}{" "}
             szklanek
           </div>
-        </div>
-        <div className="h-full flex  justify-center items-end p-6 ">
-          {" "}
-          <Button
-            onClick={handleAddClick}
-            className="rounded-[5rem] w-6 h-6 mr-6 items-center flex"
-            disableRipple
-          >
+          <div className="h-full flex  justify-center items-end p-2 ">
             {" "}
-            +250ml
-          </Button>
-          {/* <Button
+            <Button
+              onClick={handleAddClick}
+              className="rounded-[5rem] w-6 h-6 mr-6 items-center flex"
+              disableRipple
+            >
+              {" "}
+              +250ml
+            </Button>
+            {/* <Button
             onClick={() => {
               handleEditClick(), handleUpdateClick();
             }}
@@ -102,6 +87,7 @@ const WaterFill = () => {
               <CheckIcon />
             )}
           </Button> */}
+          </div>
         </div>
       </div>
     </>

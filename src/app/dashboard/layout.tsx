@@ -14,7 +14,8 @@ import AccountSidebar from "@/components/Dashboard/AccountSidebar";
 import { useUser } from "../hooks/useUser";
 import ToasterProvider from "@/providers/ToasterProvider";
 import LoginButtons from "@/components/LoginPage/LoginButtons";
-import LoginPage from "@/components/LoginPage/Main";
+
+import Home from "../page";
 const theme = createTheme({
   components: {
     MuiFormControl: {
@@ -95,7 +96,7 @@ export default function DashboardLayout1({
     <>
       {!user ? (
         <>
-          <LoginPage />
+          <Home />
         </>
       ) : (
         <>
@@ -103,7 +104,8 @@ export default function DashboardLayout1({
           <Provider store={store}>
             <LocalizationProvider dateAdapter={AdapterDayjs}>
               <ThemeProvider theme={theme}>
-                {/* <SessionContextProvider supabaseClient={supabase}> */}{" "}
+                {/* <SessionContextProvider supabaseClient={supabase}>
+                  {" "} */}
                 <SidebarProvider>
                   <Sidebar />
 

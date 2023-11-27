@@ -46,8 +46,8 @@ const WeatherBox = () => {
   return (
     <>
       {currentWeather && (
-        <div className="flex w-full">
-          <div className="w-3/4 justify-center text-center">
+        <div className="columns">
+          <div className="column is-three-fifths is-offset-2">
             {" "}
             <h2>{currLocation.city} </h2>
             <h4> {currentWeather.name}</h4>

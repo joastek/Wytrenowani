@@ -82,8 +82,10 @@ const Calculator: React.FC = () => {
           <div
             className={`bg-bar rounded-lg w-[${
               result * 2
-            }rem] justify-center items-center relative p-6  shadow-3xl  mt-28`}
+            }rem] justify-center items-center relative p-6  shadow-3xl  mt-28 h-[12rem]`}
           >
+            {" "}
+            <h2> Wskaźnik poziomu zatłuszczenia:</h2>
             <div className="bg-black h-6 rounded-lg mt-10 relative w-full  shadow-3xl">
               <div className="absolute left-0 top-[120%] text-lg">0%</div>
               <div className="absolute left-[20%] top-[120%] text-lg">8%</div>
@@ -115,7 +117,9 @@ const Calculator: React.FC = () => {
               BMI * 2
             }rem] justify-center items-center relative p-6  shadow-3xl mt-12`}
           >
-            <div className="bg-black h-6 rounded-lg mt-10 relative w-full  shadow-3xl">
+            {" "}
+            <h2> Wskaźnik BMI:</h2>
+            <div className="bg-black h-6 rounded-lg mt-4 relative w-full  shadow-3xl">
               <div className="absolute left-0 top-[120%] text-lg">0</div>
               <div className="absolute left-[32%] top-[120%] text-lg">16</div>
 

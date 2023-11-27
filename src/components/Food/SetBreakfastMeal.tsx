@@ -23,26 +23,24 @@ import {
 } from "@/slice/FoodCalculator/NutrientsSum";
 import { breakfastState, breakfastSet } from "@/types/type";
 import translate from "google-translate-api-x";
+import { getTranslate } from "@/actions/getTranslate";
 
 interface FoodProps {
-  res: string;
+  rest: string;
 }
 const Breakfast = () => {
-  const [inputText, setInputText] = useState("Ik spreek Engels");
+  const [inputText, setInputText] = useState("");
   const [translatedText, setTranslatedText] = useState("");
 
-  const handleInputChange = (event: any) => {
-    setInputText(event.target.value);
-  };
-
-  const translateText = async () => {
+  const handleTranslate = async () => {
     try {
-      const res = await translate(inputText, { to: "en" });
-      console.log(res.text);
+      const result = await translate("jabłko", { to: "en" });
+      setTranslatedText(result.text);
     } catch (error) {
-      console.error("Wystąpił błąd podczas żądania do API tłumaczeń:", error);
+      console.error("Error fetching data:", error);
     }
   };
+
   const dispatch = useDispatch();
   const FoodSet = useSelector(
     (state: breakfastState) => state.breakfastSet.value
@@ -144,13 +142,21 @@ const Breakfast = () => {
   return (
     <>
       <div>
-        <input
-          type="text"
-          value={inputText}
-          onChange={handleInputChange}
-          placeholder="Enter text to translate"
-        />
-        <button onClick={translateText}>Translate</button>
+        {" "}
+        <div className="flex justify-center flex-row ">
+          <input
+            type="text"
+            value={inputText}
+            onChange={(e) => setInputText(e.target.value)}
+            placeholder="Enter text to translate"
+          />
+          <button onClick={handleTranslate}>Translate</button>
+          <div className="w-1/2 flex justify-end mt-28 max-h-[50rem]">
+            wttt
+            {translatedText}
+            {/* Rest of your code */}
+          </div>
+        </div>
       </div>
       {addNewBreakfast && (
         <>

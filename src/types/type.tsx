@@ -148,3 +148,10 @@ export interface Weight {
   user_id: string;
   weight: number;
 }
+export interface Blog {
+  name: string;
+  id: string;
+
+  description: string;
+  link:string;
+}

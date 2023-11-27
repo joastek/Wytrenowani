@@ -3,55 +3,57 @@ import "@/styles/globals.css";
 import Link from "next/link";
 import { useContext } from "react";
 import { IconType } from "react-icons";
-import { BsCalculator } from "react-icons/bs";
-import { AiOutlineHome, AiOutlineArrowLeft } from "react-icons/ai";
+import CalculateIcon from "@mui/icons-material/Calculate";
+import HomeIcon from "@mui/icons-material/Home";
+import KeyboardDoubleArrowLeftIcon from "@mui/icons-material/KeyboardDoubleArrowLeft";
 import { SidebarContext } from "../../providers/SideBarContext";
-import { GiWeightLiftingUp } from "react-icons/gi";
-import { GiMeal } from "react-icons/gi";
-import { BsFillPersonFill } from "react-icons/bs";
-import { GoHistory } from "react-icons/go";
-import { ImBook } from "react-icons/im";
+import FitnessCenterIcon from "@mui/icons-material/FitnessCenter";
+import LocalDiningIcon from "@mui/icons-material/LocalDining";
+import PersonIcon from "@mui/icons-material/Person";
+import RestoreIcon from "@mui/icons-material/Restore";
+import AutoStoriesIcon from "@mui/icons-material/AutoStories";
+
 interface SidebarItem {
   name: string;
   href: string;
-  icon: IconType;
+  icon: any;
 }
 export default function Sidebar() {
   const sidebarItems: SidebarItem[] = [
     {
       name: "Strona główna",
       href: "/dashboard",
-      icon: AiOutlineHome,
+      icon: HomeIcon,
     },
     {
       name: "Cele",
       href: "/dashboard/Targets",
-      icon: BsFillPersonFill,
+      icon: PersonIcon,
     },
     {
       name: "Kalkulator",
       href: "/dashboard/calculator",
-      icon: BsCalculator,
+      icon: CalculateIcon,
     },
     {
       name: "Jedzenie",
       href: "/dashboard/Food",
-      icon: GiMeal,
+      icon: LocalDiningIcon,
     },
     {
       name: "Trening",
       href: "/dashboard/TrainingPlan",
-      icon: GiWeightLiftingUp,
+      icon: FitnessCenterIcon,
     },
     {
       name: "Historia",
       href: "/dashboard/History",
-      icon: GoHistory,
+      icon: RestoreIcon,
     },
     {
       name: "Wiedza",
       href: "/dashboard/Knowledge",
-      icon: ImBook,
+      icon: AutoStoriesIcon,
     },
   ];
   const { isCollapsedSidebar, toggleSidebarcollapse } =
@@ -59,9 +61,9 @@ export default function Sidebar() {
   return (
     <>
       <div className=" fixed ease-out    h-full flex z-[100]">
-        <div className="m-6 bg-bar  z-[999] rounded-[1rem] ">
+        <div className=" bg-bar  z-[999] rounded-[1rem] ">
           <button className="btn">
-            <AiOutlineArrowLeft
+            <KeyboardDoubleArrowLeftIcon
               className="h-12 w-12"
               onClick={toggleSidebarcollapse}
             />

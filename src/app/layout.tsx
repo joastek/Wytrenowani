@@ -1,4 +1,5 @@
 import "@/styles/globals.css";
+import "bulma/css/bulma.css";
 import type { Metadata } from "next";
 import { Poppins } from "next/font/google";
 // import Providers from "@/providers/provider";
@@ -28,18 +29,12 @@ export default function RootLayout({
         {" "}
         <meta charSet="UTF-8" />
       </head>
-      {/* 
-      <Providers> */}
+
       <body className={inter.className}>
         {" "}
         <div className="gradient-bg  ">
           <div className="gradients-container  dark:bg-secondary">
             <div className="g1"></div>
-            <div className="g2"></div>
-            <div className="g3"></div>
-            <div className="g4"></div>
-            <div className="g5"></div>
-            <div className="interactive"></div>
           </div>{" "}
         </div>{" "}
         <ToasterProvider />
@@ -47,7 +42,6 @@ export default function RootLayout({
           <UserProvider>{children}</UserProvider>
         </SupabaseProvider>
       </body>
-      {/* </Providers> */}
     </html>
   );
 }

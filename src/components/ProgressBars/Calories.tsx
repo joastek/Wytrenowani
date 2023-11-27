@@ -15,7 +15,7 @@ const CaloriesBar = () => {
     (state: RootState) => state.bmiCalculator
   );
   return (
-    <div>
+    <div className="container">
       {" "}
       <CircularProgressbar
         value={totalCalories}

@@ -40,12 +40,10 @@ const MotivationalQuotes = () => {
 
   return (
     <>
-      <h2 className="absolute top-[30%] left-[50%] translate-x-[-50%] translate-y-[-50%] z-50">
-        {quoteText}
-      </h2>
-      <p className="absolute top-[50%] left-[70%] translate-x-[-50%] translate-y-[-50%] z-50">
-        ~ {quoteAuthor}
-      </p>
+      <div className="flex flex-col  justify-center text-center my-auto mx-12 h-full">
+        <h2 className="">{quoteText}</h2>
+        <p className="justify-end text-end">~ {quoteAuthor}</p>
+      </div>
     </>
   );
 };

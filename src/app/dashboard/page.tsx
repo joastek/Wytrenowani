@@ -9,62 +9,110 @@ import CaloriesBar from "@/components/ProgressBars/Calories";
 import getWeight from "@/actions/getWeight";
 import Chart from "@/components/Dashboard/Chart";
 import WeatherBox from "@/components/Dashboard/WeatherBox";
+import Sidebar from "@/components/Dashboard/Sidebar";
 
 const dashboard = async () => {
   const weight = await getWeight();
 
   return (
     <>
-      <div className="flex justify-center   w-full  ">
-        <div className="flex  flex-wrap max-w-[70rem] mt-28  sm-28 md:max-w-[40rem]">
-          <div className="bg-bar w-[70rem] h-[17rem]  rounded-[1rem] relative  shadow-3xl">
-            <div className="box">
+      <div className="container text-white ">
+        <div className="columns mx-1 ">
+          <div className="column is-full  mt-24 box-inner bg-bar ">
+            <div className="h-[15rem]  ">
               <MotivationalQuotes />
-              <div className="box-inner"></div>
             </div>
-          </div>{" "}
-          <div className="w-[20rem] max-h-[17rem]  bg-contrastblack rounded-[1rem] mt-6 justify-center flex flex-row text-center shadow-3xl">
+          </div>
+        </div>
+        <div className="columns ">
+          <div className="column m-4 is-3 bg-bar  rounded-[1rem] shadow-3xl">
+            {" "}
             <CaloriesBar />
           </div>
-          <div className="w-[27rem] weather_box  ml-6 mt-6  rounded-[1rem]  shadow-3xl p-2 flex justify-center text-center relative">
+          <div className="column m-4 weather_box rounded-[1rem] shadow-3xl">
             {" "}
-            <button className="absolute left-4 top-4">
-              <BiRefresh className=" w-[2rem] h-[2rem]" />
-            </button>
             <WeatherBox />
           </div>
-          <div className="w-[20rem] block ml-6 mt-6">
-            <div className="h-[7.75rem] bg-bgcontrastpurple flex p-4  rounded-[1rem]  shadow-3xl ">
-              <WaterFill />
+          <div className="column   m-2 ">
+            <div className="   p-4 bg-bgcontrastpurple rounded-[1rem] shadow-3xl">
+              {" "}
+              <WaterFill />{" "}
             </div>
-            <div className="h-[7.75rem] bg-bgcontrastpurple mt-4 p-4 rounded-[1rem]  shadow-3xl">
+            <div className=" mt-4 bg-bgcontrastpurple rounded-[1rem] shadow-3xl ">
               {" "}
               <NumberOfSteps />
             </div>
           </div>
-          <div className="flex h-[17rem] w-full mt-6  ">
-            {" "}
-            <div className=" bg-bar  w-1/2 rounded-[1rem] relative  shadow-3xl p-4">
+        </div>
+        <div className="columns">
+          <div className="column">
+            <div className=" bg-bar  rounded-[1rem]   shadow-3xl">
               <Chart weight={weight} />
+            </div>
+          </div>
+          <div className="column">
+            {" "}
+            <div className=" bg-bar  rounded-[1rem]   shadow-3xl">
+              <Chart weight={weight} />
+            </div>
+          </div>
+        </div>
+        {/* <div className="   ">
+          <div className=" columns   bg-bar h-[17rem]  rounded-[1rem] relative  shadow-3xl ">
+            <MotivationalQuotes />
+            <div className="box-inner is-6"></div>
+          </div>{" "}
+          <div className="columns   is-variable">
+            <div className=" weather_box    rounded-[1rem]  shadow-3xl  relative">
+              {" "}
+              <button className="absolute left-4 top-4">
+                <BiRefresh className=" w-[2rem] h-[2rem]" />
+              </button>
+              <WeatherBox />
+            </div>
+            <div className="column  bg-contrastblack rounded-[1rem]   shadow-3xl">
+              <div className=" weather_box    rounded-[1rem]  shadow-3xl  relative">
+                {" "}
+                <button className="absolute left-4 top-4">
+                  <BiRefresh className=" w-[2rem] h-[2rem]" />
+                </button>
+                <WeatherBox />
+              </div>
+            </div>
+
+            <div className="  column ">
+              <div className=" bg-bgcontrastpurple    rounded-[1rem]  shadow-3xl ">
+                <WaterFill />
+              </div>
+              <div className=" bg-bgcontrastpurple   rounded-[1rem]  shadow-3xl">
+                {" "}
+                <NumberOfSteps />
+              </div>
+            </div>
+          </div>
+          <div className="columns   ">
+            {" "}
+            <div className="column bg-bar  rounded-[1rem] relative  shadow-3xl ">
+           c
             </div>{" "}
-            <div className=" bg-bar  w-1/2  ml-6 rounded-[1rem] relative  shadow-3xl  p-4">
+            <div className="column bg-bar  rounded-[1rem] relative  shadow-3xl  ">
               {" "}
               dwadwad
             </div>
           </div>
-        </div>
-        <div className="    mt-28 mr-8 justify-start">
-          {" "}
-          <div className="bg-bgcontrastpurple  max-w-[35rem] max-h-[3/4] rounded-[1rem] p-4 ml-6  shadow-3xl">
-            {/* <AuthAndCalendarManagement /> */}
-          </div>
-          <div className="bg-bgcontrastpurple  max-w-[35rem] max-h-[1/4] rounded-[1rem] p-4 ml-6  mt-4  shadow-3xl">
-            {/* <AuthAndCalendarManagement /> */}
-          </div>
-        </div>
+        </div> */}
       </div>
     </>
   );
 };
 
 export default dashboard;
+<div className="    mt-28 mr-8 justify-start">
+  {" "}
+  <div className="bg-bgcontrastpurple  max-w-[35rem] max-h-[3/4] rounded-[1rem] p-4 ml-6  shadow-3xl">
+    {/* <AuthAndCalendarManagement /> */}
+  </div>
+  <div className="bg-bgcontrastpurple  max-w-[35rem] max-h-[1/4] rounded-[1rem] p-4 ml-6  mt-4  shadow-3xl">
+    {/* <AuthAndCalendarManagement /> */}
+  </div>
+</div>;
