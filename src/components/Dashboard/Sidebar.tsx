@@ -1,7 +1,7 @@
 "use client";
 import "@/styles/globals.css";
 import Link from "next/link";
-import { useContext } from "react";
+import { useContext, useState } from "react";
 import { IconType } from "react-icons";
 import CalculateIcon from "@mui/icons-material/Calculate";
 import HomeIcon from "@mui/icons-material/Home";
@@ -147,72 +147,65 @@ export default function Sidebar() {
   const { isCollapsedSidebar, toggleSidebarcollapse } =
     useContext(SidebarContext);
   const isSmallScreen = window.innerWidth <= 1000;
+  const [isNavbarOpened, setIsNavbarOpened] = useState(false);
   return (
     <>
-      <div className=" fixed ease-out    h-full flex z-[100]">
-        {isSmallScreen ? (
-          <>
-            {" "}
-            <Box sx={{ position: "relative", ml: 3, mt: 3, height: 120 }}>
-              <Backdrop open={open} />
-              <SpeedDial
-                ariaLabel="SpeedDial tooltip example"
-                icon={<SpeedDialIcon sx={{ color: "white" }} />}
-                onClose={handleClose}
-                onOpen={handleOpen}
-                open={open}
-                direction="down"
-              >
-                {actions.map((action) => (
-                  <SpeedDialAction
-                    key={action.href}
-                    icon={action.icon}
-                    tooltipTitle={action.name}
-                    tooltipOpen
-                    tooltipPlacement="right"
-                    onClick={handleClose}
-                  />
-                ))}
-              </SpeedDial>
-            </Box>
-          </>
-        ) : (
-          <>
-            {" "}
-            <div className=" bg-bar  z-[999] rounded-[1rem] ">
-              <button className="btn">
-                <KeyboardDoubleArrowLeftIcon
-                  className="h-12 w-12"
-                  onClick={toggleSidebarcollapse}
+      <div className=" fixed ease-out    h-full flex z-[100] text-white">
+        <div className={`hamburger ${isNavbarOpened ? "is-active" : ""}`}>
+          <Box sx={{ position: "relative", ml: 3, mt: 3, height: 120 }}>
+            <Backdrop open={open} />
+            <SpeedDial
+              ariaLabel="SpeedDial tooltip example"
+              icon={<SpeedDialIcon sx={{ color: "white" }} />}
+              onClose={handleClose}
+              onOpen={handleOpen}
+              open={open}
+              direction="down"
+            >
+              {actions.map((action) => (
+                <SpeedDialAction
+                  key={action.href}
+                  icon={action.icon}
+                  tooltipTitle={action.name}
+                  tooltipOpen
+                  tooltipPlacement="right"
+                  onClick={handleClose}
                 />
-              </button>{" "}
-              <aside
-                className="sidebar  flex"
-                data-collapse={isCollapsedSidebar}
-              >
-                <ul>
-                  {sidebarItems.map(({ name, href, icon: Icon }) => (
-                    <li
-                      className="text-xl my-6 text-center flex items-center"
-                      key={name}
-                    >
-                      <Link
-                        href={href}
-                        className=" flex items-center"
-                        data-collapse={isCollapsedSidebar}
-                      >
-                        <Icon className=" w-8 my-2" />
-                        <div className="sidebar__name justify-center">
-                          {name}
-                        </div>
-                      </Link>
-                    </li>
-                  ))}
-                </ul>
-              </aside>
-            </div>
-          </>
-        )}
+              ))}
+            </SpeedDial>
+          </Box>{" "}
+        </div>
+        <div
+          className={`  bg-contrast  rounded-[1rem] accountNavBar ${
+            isNavbarOpened ? "is-active" : ""
+          }`}
+        >
+          <button className="btn">
+            <KeyboardDoubleArrowLeftIcon
+              className="h-12 w-12"
+              onClick={toggleSidebarcollapse}
+            />
+          </button>{" "}
+          <aside className="sidebar  flex" data-collapse={isCollapsedSidebar}>
+            <ul>
+              {sidebarItems.map(({ name, href, icon: Icon }) => (
+                <li
+                  className="text-xl my-6 text-center flex items-center"
+                  key={name}
+                >
+                  <Link
+                    href={href}
+                    className=" flex items-center"
+                    data-collapse={isCollapsedSidebar}
+                  >
+                    <Icon className=" w-8 my-2" />
+                    <div className="sidebar__name justify-center">{name}</div>
+                  </Link>
+                </li>
+              ))}
+            </ul>
+          </aside>
+        </div>
       </div>
     </>
   );

@@ -46,8 +46,8 @@ const WeatherBox = () => {
   return (
     <>
       {currentWeather && (
-        <div className="columns">
-          <div className="column is-three-fifths is-offset-2">
+        <div className="columns is-mobile">
+          <div className="column is-three-fifths is-offset-2 ">
             {" "}
             <h2>{currLocation.city} </h2>
             <h4> {currentWeather.name}</h4>
@@ -66,7 +66,7 @@ const WeatherBox = () => {
               {currentWeather.weather[0].description}{" "}
             </p>
           </div>
-          <div className="flex flex-col w-1/4 h-full">
+          <div className="column  h-full">
             <div className="flex flex-col justify-center h-1/3 border-b border-white">
               <FaWind className="justify-center flex mx-auto w-[1.7rem] h-[1.7rem]" />{" "}
               <p className="text-sm mt-2 text-gray">Wiatr</p>

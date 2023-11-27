@@ -25,22 +25,21 @@
     --background-end-rgb: 0, 0, 0;
   }
 }
-*,
-body {
-  box-sizing: border-box;
-  padding: 0;
-  margin: 0;
-}
+
 body * {
   @apply transition-colors duration-500;
 }
 body {
+  box-sizing: border-box;
+  padding: 0;
+  margin: 0;
   background-repeat: no-repeat;
   @apply transition-colors duration-500;
   margin: 0;
   font-size: 62.5%;
   color: white;
   transition: background;
+  background: linear-gradient(40deg, rgb(108, 0, 162), rgb(1, 24, 112));
 }
 h2 {
   font-size: 1.6rem;
@@ -50,6 +49,12 @@ h3 {
 }
 h4 {
   font-size: 1.1rem;
+}
+.gradient-bg {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(40deg, rgb(108, 0, 162), rgb(1, 24, 112));
 }
 .sidebar {
   width: 17rem;
@@ -83,16 +88,6 @@ h4 {
   font-size: 1.1rem;
 }
 
-.gradient-bg {
-  z-index: -1;
-  background: linear-gradient(40deg, rgb(108, 0, 162), rgb(1, 24, 112));
-  width: 100%;
-  height: 180vw;
-  position: absolute;
-  overflow: hidden;
-  top: 0;
-  left: 0;
-}
 .gradients-container {
   filter: url(#goo) blur(40px);
   width: 100%;
@@ -266,4 +261,55 @@ tr:nth-child(even) {
   100% {
     transform: translate(-50%, -75%) rotate(360deg);
   }
+}
+@media (max-width: 767px) {
+  .accountNavBar {
+    display: none;
+  }
+}
+@media (min-width: 767px) {
+  .hamburger {
+    display: none;
+  }
+}
+table {
+  border-radius: 6px;
+}
+
+.styled-table {
+  border-collapse: collapse;
+  margin: 25px 0;
+  font-size: 0.9em;
+  font-family: sans-serif;
+  border-radius: 6px;
+  box-shadow: 0 0 20px rgba(0, 0, 0, 0.15);
+}
+.styled-table thead tr {
+  background-color: #edb90c;
+  color: #ffffff;
+  text-align: left;
+}
+.styled-table th,
+.styled-table td {
+  padding: 12px 15px;
+}
+.styled-table tbody tr {
+  border-radius: 6px;
+  border: 2px solid #dddddd;
+  border-bottom: 2px solid #edb90c;
+  height: 40px;
+}
+
+.styled-table tbody tr:nth-of-type(even) {
+  background-color: #edb90c;
+  height: 40px;
+}
+
+.styled-table tbody tr:last-of-type {
+  border-bottom: 2px solid #edb90c;
+  height: 4rem;
+}
+.styled-table tbody tr.active-row {
+  font-weight: bold;
+  color: #edb90c;
 }

@@ -17,19 +17,19 @@ const dashboard = async () => {
   return (
     <>
       <div className="container text-white ">
-        <div className="columns mx-1 ">
-          <div className="column is-full  mt-12 box-inner bg-bar ">
+        <div className="columns mx-1 pt-12">
+          <div className="column is-full   box-inner bg-bar ">
             <div className="h-[15rem]  ">
               <MotivationalQuotes />
             </div>
           </div>
         </div>
         <div className="columns ">
-          <div className="column m-4 is-3 bg-bar  rounded-[1rem] shadow-3xl">
+          <div className="column is-3 bg-bar  rounded-[1rem] shadow-3xl m-4 ">
             {" "}
             <CaloriesBar />
           </div>
-          <div className="column m-4 weather_box rounded-[1rem] shadow-3xl">
+          <div className="column m-4  weather_box rounded-[1rem] shadow-3xl">
             {" "}
             <WeatherBox />
           </div>
@@ -38,7 +38,7 @@ const dashboard = async () => {
               {" "}
               <WaterFill />{" "}
             </div>
-            <div className=" mt-4 bg-bgcontrastpurple rounded-[1rem] shadow-3xl ">
+            <div className=" p-4 mt-4 bg-bgcontrastpurple rounded-[1rem] shadow-3xl ">
               {" "}
               <NumberOfSteps />
             </div>

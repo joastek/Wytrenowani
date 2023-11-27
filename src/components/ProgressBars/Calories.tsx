@@ -15,13 +15,13 @@ const CaloriesBar = () => {
     (state: RootState) => state.bmiCalculator
   );
   return (
-    <div className="container">
+    <div className=" ">
       {" "}
       <CircularProgressbar
         value={totalCalories}
         maxValue={calories}
         text={`  ${totalCalories}/${calories} kcal`}
-        className="p-6 max-w-[20rem] max-h-[16rem]"
+        className="p-6 max-w-[20rem] max-h-[16rem] "
         styles={buildStyles({
           textColor: "white",
           textSize: "0.7rem",

@@ -63,7 +63,7 @@ const Targets = () => {
   const test = new Date();
   const options: Intl.DateTimeFormatOptions = {
     year: "numeric",
-    month: "long",
+    month: "numeric",
     day: "numeric",
   };
   const dateFormatter: Intl.DateTimeFormat = new Intl.DateTimeFormat(

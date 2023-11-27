@@ -9,21 +9,23 @@ export default function Home() {
   return (
     <>
       {" "}
-      <div className="container mt-28  p-4">
-        <div className=" text-8xl sm:text-5xl flex m-auto justify-center text-center ">
-          Wy
-          <Image src={Logo} alt="Logo" />
-          <div className="text-secondary">ren</div>
-          owani
-        </div>
-        <div className="block text-2xl text-center sm:text-xl">
-          Twój trener,dietetyk i notatnik - w jednym
-        </div>
-        <div
-          className="column is-5 m-auto
- bg-bgcontrastpurple  rounded-[1rem] shadow-3xl"
-        >
-          <LoginButtons />
+      <div className="mt-28">
+        <div className="container   p-4">
+          <div className=" font-black text-8xl sm:text-5xl flex m-auto justify-center text-center ">
+            Wy
+            <Image src={Logo} alt="Logo" />
+            <div className="text-secondary">ren</div>
+            owani
+          </div>
+          <div className="block text-2xl font-bold text-center sm:text-xl">
+            Twój trener,dietetyk i notatnik - w jednym
+          </div>
+          <div
+            className="column is-5 m-auto
+   "
+          >
+            <LoginButtons />
+          </div>
         </div>
       </div>
     </>

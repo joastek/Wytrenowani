@@ -1,16 +1,16 @@
 import "@/styles/globals.css";
 import "bulma/css/bulma.css";
 import type { Metadata } from "next";
-import { Poppins } from "next/font/google";
+import { Open_Sans } from "next/font/google";
 // import Providers from "@/providers/provider";
 import SupabaseProvider from "../providers/SupaBaseProvider";
 import UserProvider from "@/providers/useProvider";
 
 import ToasterProvider from "@/providers/ToasterProvider";
 export const dynamic = "force-dynamic";
-const inter = Poppins({
+const inter = Open_Sans({
   subsets: ["latin"],
-  weight: ["400"],
+  weight: ["500"],
 });
 
 export const metadata: Metadata = {
@@ -31,14 +31,11 @@ export default function RootLayout({
       </head>
 
       <body className={inter.className}>
-        {" "}
-        <div className="gradient-bg  ">
-          <div className="g1"></div>
+        <div className="gradient-bg text-white">
+          <SupabaseProvider>
+            <UserProvider>{children}</UserProvider>
+          </SupabaseProvider>
         </div>{" "}
-        {/* <ToasterProvider /> */}
-        <SupabaseProvider>
-          <UserProvider>{children}</UserProvider>
-        </SupabaseProvider>
       </body>
     </html>
   );

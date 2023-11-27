@@ -40,9 +40,9 @@ const MotivationalQuotes = () => {
 
   return (
     <>
-      <div className="flex flex-col  justify-center text-center my-auto mx-12 h-full">
-        <h2 className="">{quoteText}</h2>
-        <p className="justify-end text-end">~ {quoteAuthor}</p>
+      <div className="flex flex-col   justify-center text-center my-auto mx-12 h-full">
+        <h2 className="text-3xl font-extrabold">{quoteText}</h2>
+        <p className="justify-end text-end text-gray">~ {quoteAuthor}</p>
       </div>
     </>
   );

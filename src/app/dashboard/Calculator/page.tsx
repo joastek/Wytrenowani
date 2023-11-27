@@ -77,80 +77,78 @@ const Calculator: React.FC = () => {
 
   return (
     <>
-      <div className="flex justify-center items-center  flex-col   ">
-        <div className="w-[70rem] ">
-          <div
-            className={`bg-bar rounded-lg w-[${
-              result * 2
-            }rem] justify-center items-center relative p-6  shadow-3xl  mt-28 h-[12rem]`}
-          >
-            {" "}
-            <h2> Wskaźnik poziomu zatłuszczenia:</h2>
-            <div className="bg-black h-6 rounded-lg mt-10 relative w-full  shadow-3xl">
-              <div className="absolute left-0 top-[120%] text-lg">0%</div>
-              <div className="absolute left-[20%] top-[120%] text-lg">8%</div>
-              <div className="absolute left-[30%] top-[120%] text-lg">12%</div>
-              <div className="absolute left-[37.5%] top-[120%] text-lg">
-                15%
-              </div>
-              <div className="absolute left-[47.5%] top-[120%] text-lg">
-                19%
-              </div>
-              <div className="absolute left-[62.5%] top-[120%] text-lg">
-                25%
-              </div>
-              <div className="absolute right-0 top-[120%] text-lg">40%</div>
+      <div className="container sm:mx-4">
+        {" "}
+        <div
+          className={`bg-bar rounded-lg w-[${
+            result * 2
+          }rem] justify-center items-center relative p-6  shadow-3xl  mt-28 h-[12rem]`}
+        >
+          {" "}
+          <h2> Wskaźnik poziomu zatłuszczenia:</h2>
+          <div className="bg-black h-6 rounded-lg mt-10 relative w-full  shadow-3xl">
+            <div className="absolute left-0 top-[120%] text-lg">0%</div>
+            <div className="absolute left-[20%] top-[120%] text-lg">8%</div>
+            <div className="absolute left-[30%] top-[120%] text-lg">12%</div>
+            <div className="absolute left-[37.5%] top-[120%] text-lg">15%</div>
+            <div className="absolute left-[47.5%] top-[120%] text-lg">19%</div>
+            <div className="absolute left-[62.5%] top-[120%] text-lg">25%</div>
+            <div className="absolute right-0 top-[120%] text-lg">40%</div>
 
-              <motion.div
-                initial={{ width: 0 }}
-                animate={{ width: `${Math.min((result / 40) * 100, 100)}%` }}
-                transition={{ duration: 1.5, type: "tween" }}
-                style={{
-                  background: getProgressBarColorFAT(result),
-                }}
-                className="h-6 rounded-lg"
-              ></motion.div>
-            </div>{" "}
+            <motion.div
+              initial={{ width: 0 }}
+              animate={{ width: `${Math.min((result / 40) * 100, 100)}%` }}
+              transition={{ duration: 1.5, type: "tween" }}
+              style={{
+                background: getProgressBarColorFAT(result),
+              }}
+              className="h-6 rounded-lg"
+            ></motion.div>
+          </div>{" "}
+        </div>
+        <div
+          className={`bg-bar rounded-lg w-[${
+            BMI * 2
+          }rem] justify-center items-center relative p-6  shadow-3xl mt-8`}
+        >
+          {" "}
+          <h2> Wskaźnik BMI:</h2>
+          <div className="bg-black h-6 rounded-lg mt-4 relative w-full  shadow-3xl">
+            <div className="absolute left-0 top-[120%] text-lg">0</div>
+            <div className="absolute left-[32%] top-[120%] text-lg">16</div>
+
+            <div className="absolute left-[37%] top-[120%] text-lg">18,5</div>
+            <div className="absolute left-[50%] top-[120%] text-lg">25</div>
+            <div className="absolute left-[60%] top-[120%] text-lg">30</div>
+            <div className="absolute left-[70%] top-[120%] text-lg">35</div>
+            <div className="absolute left-[80%] top-[120%] text-lg">40</div>
+            <div className="absolute right-0 top-[120%] text-lg">50</div>
+
+            <motion.div
+              initial={{ width: 0 }}
+              animate={{ width: `${Math.min((BMI / 50) * 100, 100)}%` }}
+              transition={{ duration: 1.5, type: "tween" }}
+              style={{
+                background: getProgressBarColorBMI(BMI),
+              }}
+              className="h-6 rounded-lg mt-24"
+            ></motion.div>
           </div>
-          <div
-            className={`bg-bar rounded-lg w-[${
-              BMI * 2
-            }rem] justify-center items-center relative p-6  shadow-3xl mt-12`}
-          >
+        </div>
+        <div className="columns mt-4">
+          <div className="column">
             {" "}
-            <h2> Wskaźnik BMI:</h2>
-            <div className="bg-black h-6 rounded-lg mt-4 relative w-full  shadow-3xl">
-              <div className="absolute left-0 top-[120%] text-lg">0</div>
-              <div className="absolute left-[32%] top-[120%] text-lg">16</div>
-
-              <div className="absolute left-[37%] top-[120%] text-lg">18,5</div>
-              <div className="absolute left-[50%] top-[120%] text-lg">25</div>
-              <div className="absolute left-[60%] top-[120%] text-lg">30</div>
-              <div className="absolute left-[70%] top-[120%] text-lg">35</div>
-              <div className="absolute left-[80%] top-[120%] text-lg">40</div>
-              <div className="absolute right-0 top-[120%] text-lg">50</div>
-
-              <motion.div
-                initial={{ width: 0 }}
-                animate={{ width: `${Math.min((BMI / 50) * 100, 100)}%` }}
-                transition={{ duration: 1.5, type: "tween" }}
-                style={{
-                  background: getProgressBarColorBMI(BMI),
-                }}
-                className="h-6 rounded-lg mt-24"
-              ></motion.div>
-            </div>
-          </div>
-
-          <div className="  mt-5 flex items-stretch ">
-            <div className=" w-1/3  weather_box  rounded-lg  p-6  shadow-3xl">
+            <div className="   bg-bar  rounded-lg  p-6  shadow-3xl">
               <h3>Poziom tkanki tłuszczowej:</h3>
               <h2>{result}%</h2>
               <h3>BMI:</h3> <h2>{BMI}</h2>
               <br /> <h3>CPM:</h3>
               <h2>{calories} kcal</h2>
             </div>
-            <div className="w-2/3  weather_box  rounded-lg  p-6 ml-5  shadow-3xl">
+          </div>
+          <div className="column">
+            {" "}
+            <div className="  bg-bar  rounded-lg  p-6   shadow-3xl h-full">
               {" "}
               <h2> Opis BMI:</h2> <br />
               <div className="text-lg">
@@ -170,8 +168,11 @@ const Calculator: React.FC = () => {
               </div>
             </div>
           </div>
-          <div className=" mt-6 flex">
-            <div className="w-1/2 weather_box  rounded-lg  p-6  ">
+        </div>
+        <div className="columns">
+          <div className="column">
+            {" "}
+            <div className="bg-bar  rounded-lg  p-6 h-full ">
               {" "}
               <h2>Charakterystyka:</h2>
               <div className="text-lg">
@@ -192,7 +193,9 @@ const Calculator: React.FC = () => {
                   : null}
               </div>
             </div>{" "}
-            <div className="w-1/2 weather_box  rounded-lg  p-6 ml-5 ">
+          </div>
+          <div className="column">
+            <div className="bg-bar rounded-lg  p-6 h-full  ">
               {" "}
               <h2> Wskazania:</h2> <br />
               <div className="text-lg">

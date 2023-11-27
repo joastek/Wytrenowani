@@ -10,7 +10,7 @@ import {
 import { createClient } from "@supabase/supabase-js";
 import { useState, useEffect } from "react";
 import { useRouter } from "next/navigation";
-import  Button from "@mui/material/Button";
+import Button from "@mui/material/Button";
 import { useUser } from "@/app/hooks/useUser";
 import { toast } from "react-hot-toast";
 

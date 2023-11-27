@@ -35,11 +35,11 @@ const WeightItem: React.FC<WeightItemProps> = ({ data, key }) => {
       {" "}
       <tbody className="m-6">
         <tr key={data.user_id}>
-          <th>{data.weight} kg</th>
-          <th>{data.date}</th>
-          <th onClick={() => delteFunction(data.id)}>
-            <DeleteIcon />
-          </th>
+          <td className=" text-xl">{data.weight} kg</td>
+          <td className=" text-xl">{data.date}</td>
+          <td onClick={() => delteFunction(data.id)}>
+            <DeleteIcon className=" cursor-pointer" />
+          </td>
         </tr>
       </tbody>
     </>

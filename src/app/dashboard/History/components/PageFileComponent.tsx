@@ -15,13 +15,13 @@ export const PageContent: React.FC<PagecontentProps> = ({ weight }) => {
 
   return (
     <>
-      <div className="flex text-2xl w-[70rem] ">
-        <table className="w-full border-solid border-black ">
-          <thead>
-            <tr>
-              <th>Waga</th>
-              <th>Data</th>
-              <th>Usuń</th>
+      <div className="container ">
+        <table className=" styled-table w-full  rounded-md">
+          <thead className=" justify-center text-center bg-contrast  ">
+            <tr className="justify-center text-center">
+              <th className="text-white  text-2xl ">Waga</th>
+              <th className="text-white  text-2xl">Data</th>
+              <th className="text-white  text-2xl ">Usuń</th>
             </tr>
           </thead>{" "}
           {weight.map((weightItem) => (

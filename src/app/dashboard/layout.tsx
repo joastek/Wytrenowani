@@ -106,6 +106,7 @@ export default function DashboardLayout1({
               <ThemeProvider theme={theme}>
                 {/* <SessionContextProvider supabaseClient={supabase}>
                   {" "} */}
+                <ToasterProvider />
                 <SidebarProvider>
                   <Sidebar />
 
