@@ -26,7 +26,7 @@ import {
 import { useSupabaseClient } from "@supabase/auth-helpers-react";
 import { FieldValues, SubmitHandler, useForm } from "react-hook-form";
 import toast from "react-hot-toast";
-import { useUser } from "@/app/hooks/useUser";
+import { useUser } from "@/components/hooks/useUser";
 import Button from "@/components/Targets/Button";
 import { useRouter } from "next/navigation";
 const Targets = () => {
@@ -98,9 +98,9 @@ const Targets = () => {
 
   return (
     <>
-      <div className="flex justify-center ">
+      <div className="container">
         {" "}
-        <div className=" justify-center items-center relative  bg-bar m-6 p-6 rounded-lg  shadow-3xl  mt-28 ">
+        <div className=" justify-center rounded-[1rem] border-4 border-contrast shadow-3xl p-6 mt-28  sm:mx-6 ">
           <h1 className="text-[2rem]">
             Podaj swoją wagę, wzrost, wiek, płeć oraz określ poziom aktywności
           </h1>
@@ -109,7 +109,7 @@ const Targets = () => {
             tłuszczową oraz całkowitą przemianę materii{" "}
           </h2>
 
-          <div className="flex">
+          <div className="flex ">
             <div className="w-2/3 ">
               {" "}
               <form onSubmit={handleSubmit(onSubmit)}>
@@ -212,7 +212,11 @@ const Targets = () => {
                     handleUpdateClick();
                   }}
                 />
-                <Button disabled={isLoading} type="submit" className="text-xl">
+                <Button
+                  disabled={isLoading}
+                  type="submit"
+                  className="text-xl bg-contrast"
+                >
                   Zapisz swoją wagę !
                 </Button>{" "}
               </form>

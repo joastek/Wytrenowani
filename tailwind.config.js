@@ -35,7 +35,7 @@ module.exports = {
       colors: {
         secondary: "#B397FD",
         third: "#722796",
-        bar: "#011870",
+        bar: "#101820",
         gray: "#d3d3d3",
         contrast: "#EDB90C",
         contrastblack: "#011870",
@@ -43,7 +43,7 @@ module.exports = {
         grey: "#adb5bd",
       },
       boxShadow: {
-        "3xl": "2px 2px 12px 0 rgba(0, 0, 0, 0.58)",
+        "3xl": "2px 2px 12px 0 rgba(237, 185, 12, 0.4)",
       },
       fontSize: {
         sm: "0.8rem",

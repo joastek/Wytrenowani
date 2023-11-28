@@ -46,11 +46,11 @@ const WeatherBox = () => {
   return (
     <>
       {currentWeather && (
-        <div className="columns is-mobile">
-          <div className="column is-three-fifths is-offset-2 ">
+        <div className="columns is-mobile  h-full">
+          <div className="column is-three-fifths is-offset-4 m-auto justify-center text-center">
             {" "}
-            <h2>{currLocation.city} </h2>
-            <h4> {currentWeather.name}</h4>
+            <h2 className="text-lg">{currLocation.city} </h2>
+            <h4 className="text-lg"> {currentWeather.name}</h4>
             <Image
               src={`/icons/${currentWeather.weather[0].icon}.png`}
               alt="weather"
@@ -62,12 +62,12 @@ const WeatherBox = () => {
               {(currentWeather.main.temp - 273.15).toFixed(0)}
               <sup>o</sup>
             </p>{" "}
-            <p className="mt-[-5%] text-sm">
+            <p className="mt-[-5%] text-lg">
               {currentWeather.weather[0].description}{" "}
             </p>
           </div>
-          <div className="column  h-full">
-            <div className="flex flex-col justify-center h-1/3 border-b border-white">
+          <div className="column  h-full justify-center text-center">
+            <div className="flex flex-col justify-center text-center h-1/3 border-b border-white">
               <FaWind className="justify-center flex mx-auto w-[1.7rem] h-[1.7rem]" />{" "}
               <p className="text-sm mt-2 text-gray">Wiatr</p>
               <p className="text-sm text-gray">
@@ -84,7 +84,10 @@ const WeatherBox = () => {
             <div className="flex flex-col justify-center h-1/3 mt-2 ">
               <FaTemperatureLow className="justify-center flex ml-[40%]  w-[1.9rem] h-[1.7rem] " />{" "}
               <p className="text-sm mt-2 text-gray">Odczuwalne </p>
-              <p className="text-sm text-gray">3.4 m/s</p>
+              <p className="text-lg text-gray">
+                {(currentWeather.main.feels_like - 273.15).toFixed(0)}{" "}
+                <sup>o</sup>
+              </p>
             </div>{" "}
           </div>
         </div>

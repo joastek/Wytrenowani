@@ -2,7 +2,7 @@ import React from "react";
 import { Weight } from "@/types/type";
 import { useSessionContext } from "@supabase/auth-helpers-react";
 import { useRouter } from "next/navigation";
-import { useUser } from "@/app/hooks/useUser";
+import { useUser } from "@/components/hooks/useUser";
 import DeleteIcon from "@mui/icons-material/Delete";
 import { Varela_Round } from "next/font/google";
 interface WeightItemProps {

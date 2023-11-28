@@ -38,6 +38,9 @@ const Chart: React.FC<PagecontentProps> = ({ weight }) => {
   const minYValue = Math.floor(minYWeight * 0.95);
   return (
     <>
+      <h1 className="text-3xl justify-center text-center p-4 tracking-wider">
+        Historia Twojej wagi
+      </h1>
       <ResponsiveContainer width="100%" height={240}>
         <AreaChart
           width={560}
@@ -48,8 +51,8 @@ const Chart: React.FC<PagecontentProps> = ({ weight }) => {
         >
           <defs>
             <linearGradient id="colorUv" x1="0" y1="0" x2="0" y2="1">
-              <stop offset="5%" stopColor="#8884d8" stopOpacity={0.8} />
-              <stop offset="95%" stopColor="#8884d8" stopOpacity={0} />
+              <stop offset="5%" stopColor="#EDB90C" stopOpacity={0.8} />
+              <stop offset="95%" stopColor="#EDB90C" stopOpacity={0} />
             </linearGradient>
             <linearGradient id="colorPv" x1="0" y1="0" x2="0" y2="1">
               <stop offset="5%" stopColor="#82ca9d" stopOpacity={0.8} />
@@ -63,7 +66,7 @@ const Chart: React.FC<PagecontentProps> = ({ weight }) => {
           <Area
             type="monotone"
             dataKey="waga"
-            stroke="#8884d8"
+            stroke="#EDB90C"
             fillOpacity={1}
             fill="url(#colorUv)"
           />

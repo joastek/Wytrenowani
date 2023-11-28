@@ -22,29 +22,12 @@ import {
   deleteNutriens,
 } from "@/slice/FoodCalculator/NutrientsSum";
 import { breakfastState, breakfastSet } from "@/types/type";
-import translate from "google-translate-api-x";
-import { getTranslate } from "@/actions/getTranslate";
 
 interface FoodProps {
   rest: string;
 }
+
 const Breakfast = () => {
-  const [inputText, setInputText] = useState("");
-  const [translatedText, setTranslatedText] = useState("");
-
-  const handleTranslate = async () => {
-    try {
-      const result = await translate("jabłko", { to: "en" });
-      setTranslatedText(result.text);
-    } catch (error) {
-      console.error("Error fetching data:", error);
-    }
-  };
-
-  const dispatch = useDispatch();
-  const FoodSet = useSelector(
-    (state: breakfastState) => state.breakfastSet.value
-  );
   const {
     foodName,
     protein,
@@ -54,6 +37,51 @@ const Breakfast = () => {
     writeNameOfNutrien,
     writeAmountOfNutrien,
   } = useSelector((state: breakfastSet) => state.breakfastSet);
+  const axios = require("axios");
+  //c0f899fe3emshb10b3c849debb77p174190jsne3f1256f053f
+  const [textToTranslate, setTextToTranslate] = useState<string>("");
+  const [translatedResult, setTranslatedResult] = useState<any>("");
+
+  const translateText = async (text: string): Promise<string> => {
+    try {
+      const { data } = await axios.post(
+        "https://text-translator2.p.rapidapi.com/translate",
+        new URLSearchParams({
+          source_language: "pl",
+          target_language: "en",
+          text: text,
+        }),
+        {
+          headers: {
+            "content-type": "application/x-www-form-urlencoded",
+            "X-RapidAPI-Key":
+              "c0f899fe3emshb10b3c849debb77p174190jsne3f1256f053f",
+            "X-RapidAPI-Host": "text-translator2.p.rapidapi.com",
+          },
+        }
+      );
+
+      return data.data.translatedText;
+    } catch (error) {
+      console.error(error);
+      return "Translation failed";
+    }
+  };
+  const translateAndSetNutrientName = async (text: string) => {
+    const translatedText = await translateText(text);
+    dispatch(setwriteNameOfNutrien(translatedText || text));
+    setTranslatedResult(translatedText);
+  };
+
+  useEffect(() => {
+    if (textToTranslate) {
+      translateAndSetNutrientName(textToTranslate);
+    }
+  }, [textToTranslate]);
+  const dispatch = useDispatch();
+  const FoodSet = useSelector(
+    (state: breakfastState) => state.breakfastSet.value
+  );
 
   const [addNewBreakfast, setAddNewBreakfast] = useState(false);
 
@@ -127,12 +155,13 @@ const Breakfast = () => {
   };
 
   useEffect(() => {
-    setwriteNameOfNutrien(writeNameOfNutrien);
+    setwriteNameOfNutrien(textToTranslate);
     setwriteAmountOfNutrien(writeAmountOfNutrien);
-  }, [writeNameOfNutrien, writeAmountOfNutrien]);
+  }, [textToTranslate, writeAmountOfNutrien]);
 
   const handleNameOfNutrienChange = (event: any) => {
     dispatch(setwriteNameOfNutrien(event.target.value));
+    setTextToTranslate(event.target.value);
   };
 
   const handleAmountOfNutrien = (event: any) => {
@@ -141,43 +170,27 @@ const Breakfast = () => {
 
   return (
     <>
-      <div>
-        {" "}
-        <div className="flex justify-center flex-row ">
-          <input
-            type="text"
-            value={inputText}
-            onChange={(e) => setInputText(e.target.value)}
-            placeholder="Enter text to translate"
-          />
-          <button onClick={handleTranslate}>Translate</button>
-          <div className="w-1/2 flex justify-end mt-28 max-h-[50rem]">
-            wttt
-            {translatedText}
-            {/* Rest of your code */}
-          </div>
-        </div>
-      </div>
       {addNewBreakfast && (
         <>
           <div
-            className="  bg-transparent backdrop-blur-md w-full h-full absolute top-0 left-0 z-0"
+            className="  z-[99]  bg-transparent backdrop-blur-md w-full h-full absolute top-0 left-0 "
             onClick={() => {
               handleAddNewBreakfast();
             }}
           ></div>{" "}
           <motion.td
             colSpan={5}
-            className="max-w-[70rem]  z-[100]  absolute m-auto bg-bgcontrastpurple p-12 rounded-[1rem] shadow-3xl"
+            className="max-w-[70rem]  z-[100]  absolute m-auto bg-contrast p-12 rounded-[1rem] shadow-3xl"
           >
             <h3 className=" z-[100] w-full justify-center mx-auto mb-5 text-center ">
               Dodaj produkt
             </h3>
 
-            <div className="flex">
-              <div className="w-1/2 flex flex-col p-6 bg-contrastblack rounded-[1rem]">
+            <div className="flex sm:block">
+              <div className="w-1/2 sm:w-full flex flex-col p-6 bg-bar rounded-[1rem]">
                 <p className="text-2xl mb-4">
-                  {" "}
+                  {writeNameOfNutrien}
+                  {textToTranslate}
                   Wyszukaj składnik z naszej bazy
                 </p>{" "}
                 <TextField
@@ -185,7 +198,7 @@ const Breakfast = () => {
                   label="Nazwa składnika"
                   variant="outlined"
                   onChange={handleNameOfNutrienChange}
-                  value={writeNameOfNutrien}
+                  value={textToTranslate}
                 />
                 <TextField
                   label="Ilość (g)"
@@ -206,7 +219,7 @@ const Breakfast = () => {
               <p className=" m-auto justify-center text-center  text-xl mx-4">
                 lub
               </p>
-              <div className="w-1/2 p-6 bg-contrastblack rounded-[1rem]">
+              <div className="w-1/2 sm:w-full p-6 bg-contrastblack rounded-[1rem]">
                 <p className="text-2xl mb-4"> Wprowadź składnik ręcznie</p>{" "}
                 <TextField
                   id="outlined-basic"
@@ -282,9 +295,9 @@ const Breakfast = () => {
           </motion.td>{" "}
         </>
       )}
-      <div className="m-6 rounded-lg border-[0.2rem] border-bgcontrastpurple text-lg h-[20rem]  ">
-        <tr className="bg-bgcontrastpurple flex justify-end rounded-t-[0.4rem] h-[20%] relative z-[0]">
-          <a className="absolute left-0 p-4  z-[-5]">Śniadanie</a>
+      <div className="m-2 rounded-lg border-[0.2rem] border-contrast text-lg h-[20rem]  shadow-3xl">
+        <div className="bg-contrast flex justify-end rounded-t-[0.4rem] h-[20%] relative z-[0]">
+          <a className="absolute left-0 p-4  z-[-5] text-white">Śniadanie</a>
 
           <div
             className="justify-center items-center flex  m-2 "
@@ -296,7 +309,7 @@ const Breakfast = () => {
               </button>
             )}
           </div>
-        </tr>
+        </div>
         {FoodSet.map((foodBreakfast: any, index: number) => {
           return (
             <tr key={foodBreakfast.id} className="flex items-center">

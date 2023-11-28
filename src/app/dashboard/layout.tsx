@@ -11,16 +11,24 @@ import { AdapterDayjs } from "@mui/x-date-pickers/AdapterDayjs";
 import store from "@/store/store";
 import Sidebar from "@/components/Dashboard/Sidebar";
 import AccountSidebar from "@/components/Dashboard/AccountSidebar";
-import { useUser } from "../hooks/useUser";
+import { useUser } from "../../components/hooks/useUser";
 import ToasterProvider from "@/providers/ToasterProvider";
 import LoginButtons from "@/components/LoginPage/LoginButtons";
-
+import { blue } from "@mui/material/colors";
 import Home from "../page";
 const theme = createTheme({
+  palette: {
+    primary: {
+      light: blue[300],
+      main: blue[500],
+      dark: blue[700],
+    },
+  },
   components: {
     MuiFormControl: {
       styleOverrides: {
         root: {
+          "&.MuiSvgIcon-root": { color: "white" },
           "& label.Mui-focused": {
             color: "white",
           },
@@ -78,6 +86,11 @@ const theme = createTheme({
     MuiOutlinedInput: {
       styleOverrides: {
         root: {},
+      },
+    },
+    MuiButtonBase: {
+      styleOverrides: {
+        root: { color: "black" },
       },
     },
   },

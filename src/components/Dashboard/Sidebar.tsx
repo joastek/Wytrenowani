@@ -22,6 +22,7 @@ import {
 } from "@mui/material";
 
 interface SidebarItem {
+  id: number;
   name: string;
   href: string;
   icon: any;
@@ -29,36 +30,43 @@ interface SidebarItem {
 export default function Sidebar() {
   const sidebarItems: SidebarItem[] = [
     {
+      id: 1,
       name: "Strona główna",
       href: "/dashboard",
       icon: HomeIcon,
     },
     {
+      id: 2,
       name: "Cele",
       href: "/dashboard/Targets",
       icon: PersonIcon,
     },
     {
+      id: 3,
       name: "Kalkulator",
-      href: "/dashboard/calculator",
+      href: "/dashboard/Calculator",
       icon: CalculateIcon,
     },
     {
+      id: 4,
       name: "Jedzenie",
       href: "/dashboard/Food",
       icon: LocalDiningIcon,
     },
     {
+      id: 5,
       name: "Trening",
       href: "/dashboard/TrainingPlan",
       icon: FitnessCenterIcon,
     },
     {
+      id: 6,
       name: "Historia",
       href: "/dashboard/History",
       icon: RestoreIcon,
     },
     {
+      id: 7,
       name: "Wiedza",
       href: "/dashboard/Knowledge",
       icon: AutoStoriesIcon,
@@ -78,6 +86,7 @@ export default function Sidebar() {
         </>
       ),
       href: "/dashboard",
+      id: 1,
     },
     {
       icon: (
@@ -90,19 +99,21 @@ export default function Sidebar() {
           <Link href="/dashboard/Targets">Cele</Link>
         </>
       ),
+      id: 2,
     },
     {
       icon: (
-        <Link href="/dashboard/calculator">
+        <Link href="/dashboard/Calculator">
           {" "}
           <LocalDiningIcon />
         </Link>
       ),
       name: (
         <>
-          <Link href="/dashboard/calculator">Kalorie</Link>
+          <Link href="/dashboard/Calculator">Kalorie</Link>
         </>
       ),
+      id: 3,
     },
     {
       icon: (
@@ -115,6 +126,7 @@ export default function Sidebar() {
           <Link href="/dashboard/TrainingPlan">Trening</Link>
         </>
       ),
+      id: 4,
     },
     {
       icon: (
@@ -127,6 +139,7 @@ export default function Sidebar() {
           <Link href="/dashboard/History">Historia</Link>
         </>
       ),
+      id: 5,
     },
     {
       icon: (
@@ -139,6 +152,7 @@ export default function Sidebar() {
           <Link href="/dashboard/Knowledge">Wiedza</Link>
         </>
       ),
+      id: 6,
     },
   ];
   const [open, setOpen] = React.useState(false);
@@ -155,8 +169,25 @@ export default function Sidebar() {
           <Box sx={{ position: "relative", ml: 3, mt: 3, height: 120 }}>
             <Backdrop open={open} />
             <SpeedDial
+              sx={{
+                "& .MuiFab-primary": {
+                  color: "#101820",
+                  width: 70,
+                  height: 70,
+                  backgroundColor: "#EDB90C",
+                },
+              }}
               ariaLabel="SpeedDial tooltip example"
-              icon={<SpeedDialIcon sx={{ color: "white" }} />}
+              icon={
+                <SpeedDialIcon
+                  sx={{
+                    "&.MuiSvgIcon-root  ": {
+                      color: "red",
+                      background: "red",
+                    },
+                  }}
+                />
+              }
               onClose={handleClose}
               onOpen={handleOpen}
               open={open}
@@ -164,12 +195,20 @@ export default function Sidebar() {
             >
               {actions.map((action) => (
                 <SpeedDialAction
-                  key={action.href}
+                  key={action.id}
                   icon={action.icon}
                   tooltipTitle={action.name}
                   tooltipOpen
                   tooltipPlacement="right"
                   onClick={handleClose}
+                  sx={{
+                    "& .MuiSpeedDial-actions": {
+                      color: "#101820",
+                      width: 70,
+                      height: 70,
+                      backgroundColor: "#EDB90C",
+                    },
+                  }}
                 />
               ))}
             </SpeedDial>
@@ -188,12 +227,13 @@ export default function Sidebar() {
           </button>{" "}
           <aside className="sidebar  flex" data-collapse={isCollapsedSidebar}>
             <ul>
-              {sidebarItems.map(({ name, href, icon: Icon }) => (
+              {sidebarItems.map(({ id, name, href, icon: Icon }) => (
                 <li
                   className="text-xl my-6 text-center flex items-center"
-                  key={name}
+                  key={id}
                 >
                   <Link
+                    key={id}
                     href={href}
                     className=" flex items-center"
                     data-collapse={isCollapsedSidebar}

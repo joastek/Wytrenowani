@@ -11,7 +11,7 @@ import { createClient } from "@supabase/supabase-js";
 import { useState, useEffect } from "react";
 import { useRouter } from "next/navigation";
 import Button from "@mui/material/Button";
-import { useUser } from "@/app/hooks/useUser";
+import { useUser } from "@/components/hooks/useUser";
 import { toast } from "react-hot-toast";
 
 const AccountSidebar = () => {
@@ -40,7 +40,7 @@ const AccountSidebar = () => {
     }
   }
   return (
-    <div className="absolute right-0 top-0 flex flex-row mr-12 mt-6 px-4 rounded-[2rem] h-[4rem]">
+    <div className="fixed right-0 top-0 flex flex-row mr-5 mt-5 px-4 rounded-[2rem] h-[4rem]">
       <div className="flex items-center flex-grow">
         {" "}
         {/* Zmieniamy to na flex-grow */}
@@ -50,8 +50,17 @@ const AccountSidebar = () => {
         <>
           {" "}
           <Button
+            sx={{
+              "&.MuiButton-text ": {
+                borderRadius: 4,
+                color: "#101820",
+                width: 50,
+                height: 60,
+                background: "#EDB90C",
+              },
+            }}
             onClick={() => singOutUser()}
-            className="bg-bar rounded-[2rem] p-2 my-4 flex items-center justify-center w-[3.5rem] drop-shadow-2xl"
+            className="bg-bar rounded-[2rem] px-2 my-2 flex items-center justify-center w-[2.5rem] drop-shadow-2xl"
           >
             <LogoutIcon />
           </Button>

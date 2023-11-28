@@ -1,6 +1,6 @@
 export async function getNutriensFromAPI(
   amountOfNutrien: string,
-  nameOfNutrien: string
+  nameOfNutrien: void
 ) {
   const apiKey = "rTU4Ta3bWeja9oPWfA0LhQ==1lRq3dJcu6pA0IT4";
   const options = {

@@ -97,6 +97,7 @@ export interface WeatherData {
   main: {
     temp: number;
     humidity: string;
+    feels_like: number;
   };
   temp: number;
   weather: {
@@ -111,7 +112,7 @@ export interface WeatherData {
 
 export const initialWeatherData: WeatherData = {
   city: "",
-  main: { temp: 0, humidity: "" },
+  main: { temp: 0, humidity: "", feels_like: 0 },
   temp: 0,
   weather: [{ description: "", icon: "" }],
   wind: { speed: "" },
@@ -153,5 +154,5 @@ export interface Blog {
   id: string;
 
   description: string;
-  link:string;
+  link: string;
 }
