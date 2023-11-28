@@ -2,9 +2,6 @@
 
 import React from "react";
 import { Blog } from "@/types/type";
-
-import WeightItem from "@/components/History/WeightItem";
-import Chart from "@/components/Dashboard/Chart";
 import BlogItem from "@/components/Blog/BlogItem";
 interface PagecontentProps {
   blog: Blog[];

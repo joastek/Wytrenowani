@@ -6,7 +6,7 @@ import CaloriesBar from "@/components/ProgressBars/Calories";
 import ProteinBar from "@/components/ProgressBars/Protein";
 import CarboBar from "@/components/ProgressBars/Carbo";
 import FatBar from "@/components/ProgressBars/Fat";
-import translate from "google-translate-api-x";
+
 import { useState } from "react";
 
 const Food = () => {
