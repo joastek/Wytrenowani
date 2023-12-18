@@ -2,8 +2,6 @@
 import "@/styles/globals.css";
 import Link from "next/link";
 import { useContext, useState } from "react";
-import { IconType } from "react-icons";
-import CalculateIcon from "@mui/icons-material/Calculate";
 import HomeIcon from "@mui/icons-material/Home";
 import KeyboardDoubleArrowLeftIcon from "@mui/icons-material/KeyboardDoubleArrowLeft";
 import { SidebarContext } from "../../providers/SideBarContext";
@@ -41,32 +39,27 @@ export default function Sidebar() {
       href: "/dashboard/Targets",
       icon: PersonIcon,
     },
+
     {
       id: 3,
-      name: "Kalkulator",
-      href: "/dashboard/Calculator",
-      icon: CalculateIcon,
-    },
-    {
-      id: 4,
       name: "Jedzenie",
       href: "/dashboard/Food",
       icon: LocalDiningIcon,
     },
     {
-      id: 5,
+      id: 4,
       name: "Trening",
       href: "/dashboard/TrainingPlan",
       icon: FitnessCenterIcon,
     },
     {
-      id: 6,
+      id: 5,
       name: "Historia",
       href: "/dashboard/History",
       icon: RestoreIcon,
     },
     {
-      id: 7,
+      id: 6,
       name: "Wiedza",
       href: "/dashboard/Knowledge",
       icon: AutoStoriesIcon,

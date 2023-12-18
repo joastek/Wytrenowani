@@ -22,7 +22,7 @@ import {
   deleteNutriens,
 } from "@/slice/FoodCalculator/NutrientsSum";
 import { breakfastState, breakfastSet } from "@/types/type";
-
+import { translateText } from "@/app/API/TranslateAPI";
 interface FoodProps {
   rest: string;
 }
@@ -37,36 +37,10 @@ const Breakfast = () => {
     writeNameOfNutrien,
     writeAmountOfNutrien,
   } = useSelector((state: breakfastSet) => state.breakfastSet);
-  const axios = require("axios");
-  //c0f899fe3emshb10b3c849debb77p174190jsne3f1256f053f
+
   const [textToTranslate, setTextToTranslate] = useState<string>("");
   const [translatedResult, setTranslatedResult] = useState<any>("");
 
-  const translateText = async (text: string): Promise<string> => {
-    try {
-      const { data } = await axios.post(
-        "https://text-translator2.p.rapidapi.com/translate",
-        new URLSearchParams({
-          source_language: "pl",
-          target_language: "en",
-          text: text,
-        }),
-        {
-          headers: {
-            "content-type": "application/x-www-form-urlencoded",
-            "X-RapidAPI-Key":
-              "c0f899fe3emshb10b3c849debb77p174190jsne3f1256f053f",
-            "X-RapidAPI-Host": "text-translator2.p.rapidapi.com",
-          },
-        }
-      );
-
-      return data.data.translatedText;
-    } catch (error) {
-      console.error(error);
-      return "Translation failed";
-    }
-  };
   const translateAndSetNutrientName = async (text: string) => {
     const translatedText = await translateText(text);
     dispatch(setwriteNameOfNutrien(translatedText || text));
@@ -160,8 +134,9 @@ const Breakfast = () => {
   }, [textToTranslate, writeAmountOfNutrien]);
 
   const handleNameOfNutrienChange = (event: any) => {
-    dispatch(setwriteNameOfNutrien(event.target.value));
+    setwriteNameOfNutrien(textToTranslate);
     setTextToTranslate(event.target.value);
+    dispatch(setFoodName(textToTranslate)); // Pass textToTranslate instead of event.target.value
   };
 
   const handleAmountOfNutrien = (event: any) => {

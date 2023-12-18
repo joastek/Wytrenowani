@@ -38,7 +38,7 @@ const CardioActivity = ({ training, trainingSet }: any) => {
   return (
     <div
       key={training.id}
-      className=" w-[65rem]  m-auto bg-white  mb-[1rem] relative rounded-lg"
+      className=" w-[65rem]  m-auto bg-contrast  mb-[1rem] relative rounded-lg"
     >
       <div className="flex w-full  bg-green-500 rounded-t-lg">
         <div className="block">

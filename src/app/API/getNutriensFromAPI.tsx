@@ -2,7 +2,7 @@ export async function getNutriensFromAPI(
   amountOfNutrien: string,
   nameOfNutrien: void
 ) {
-  const apiKey = "rTU4Ta3bWeja9oPWfA0LhQ==1lRq3dJcu6pA0IT4";
+  const apiKey = process.env.NEXT_PUBLIC_NUTRIENS_KEY || "";
   const options = {
     method: "GET",
     headers: {
@@ -24,7 +24,7 @@ export async function getNutriensFromAPI(
   const carboNutrien = data[0].carbohydrates_total_g;
   const fatNutrien = data[0].fat_total_g;
   const caloriesNutrien = data[0].calories;
-  console.log(caloriesNutrien);
+
   return {
     caloriesNutrien,
     proteinNutrien,
@@ -32,4 +32,3 @@ export async function getNutriensFromAPI(
     fatNutrien,
   };
 }
-console.log("teeest");

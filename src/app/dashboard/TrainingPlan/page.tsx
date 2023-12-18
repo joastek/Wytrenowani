@@ -103,11 +103,11 @@ const TrainingPlan = () => {
                 className="fixed top-0 left-0 right-0 bottom-0 bg-black  backdrop-filter backdrop-blur-[2px] bg-opacity-30 z-50  shadow-3xl"
                 onClick={handleAddNewTraining}
               />
-              <div className=" absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-[50rem] h-[10rem] bg-black z-50 p-8 rounded-t-lg">
+              <div className=" bg-contrast absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-[50rem] h-[10rem] z-50 p-8 rounded-[1rem]">
                 {" "}
                 <TextField
                   id="outlined-basic"
-                  label="Nazwa"
+                  label="Nazwa treningu"
                   variant="outlined"
                   onChange={(event: any) => {
                     setName(event.target.value);

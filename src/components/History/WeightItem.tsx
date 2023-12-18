@@ -2,9 +2,9 @@ import React from "react";
 import { Weight } from "@/types/type";
 import { useSessionContext } from "@supabase/auth-helpers-react";
 import { useRouter } from "next/navigation";
-import { useUser } from "@/components/hooks/useUser";
+
 import DeleteIcon from "@mui/icons-material/Delete";
-import { Varela_Round } from "next/font/google";
+
 interface WeightItemProps {
   data: Weight;
   key: string; // dltWeight jako funkcja przyjmująca wagę jako argument
@@ -26,14 +26,14 @@ const WeightItem: React.FC<WeightItemProps> = ({ data, key }) => {
     if (data) {
       console.log(data);
     }
-    console.log("Test");
+
     router.refresh();
   };
 
   return (
     <>
       {" "}
-      <tbody className="m-6">
+      <tbody className="m-6  sm:m-2">
         <tr key={data.user_id}>
           <td className=" text-xl">{data.weight} kg</td>
           <td className=" text-xl">{data.date}</td>
@@ -47,6 +47,3 @@ const WeightItem: React.FC<WeightItemProps> = ({ data, key }) => {
 };
 
 export default WeightItem;
-function _createInst() {
-  throw new Error("Function not implemented.");
-}

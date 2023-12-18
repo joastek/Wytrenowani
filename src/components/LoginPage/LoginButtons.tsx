@@ -38,7 +38,16 @@ const LoginButtons = () => {
 
   return (
     <>
-      {" "}
+      <div className=" justify-start items-start flex flex-col bg-secondary text-xl rounded-[1rem] p-4 my-4">
+        <p className="text-2xl"> Konto demonstracyjne</p>{" "}
+        <p className="flex">
+          {" "}
+          <p className="font-bold "> login:{"\u00A0"} </p> test@gmail.com
+        </p>{" "}
+        <p className="flex">
+          <p className="font-bold "> hasło: {"\u00A0"}</p> test
+        </p>
+      </div>
       <div className="bg-contrast w-full flex p-16 flex-col justify-center items-center shadow-3xl rounded-[2rem]">
         <div className=" m-2 ">
           <p className="m-auto text-3xl text-center justify-center flex">

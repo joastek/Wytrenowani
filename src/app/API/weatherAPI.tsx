@@ -7,7 +7,7 @@ import {
 } from "@/types/type";
 
 const WEATHER_API_URL = "https://api.openweathermap.org/data/2.5";
-const WEATHER_API_KEY = "e1af2622031195f43d1d95b3c9b21403";
+const WEATHER_API_KEY = process.env.NEXT_PUBLIC_WEATHER_KEY;
 
 export const getLocation = async () => {
   try {
