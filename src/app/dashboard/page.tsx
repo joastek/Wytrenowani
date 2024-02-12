@@ -53,10 +53,9 @@ const dashboard = async () => {
               </div>
             </div>
             <div className="column">
-              {" "}
-              {/* <div className=" bg-bar  rounded-[1rem]   shadow-3xl">
-              <Chart weight={weight} />
-            </div> */}
+              <div className=" bg-bar  rounded-[1rem] border-4 border-contrast  shadow-3xl">
+                <Chart weight={weight} />
+              </div>
             </div>
           </div>
         </div>
